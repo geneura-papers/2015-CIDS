@@ -24,7 +24,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\author{P. de las Cuevas, A. M. Mora, Z. Chelly, J.J. Merelo, A.I. Esparcia-Alcázar}
+\author{P. de las Cuevas, Z. Chelly, A. M. Mora, J.J. Merelo, A.I. Esparcia-Alcázar}
 \authorrunning{P. de las Cuevas et al.}
 
 \institute{Department of Computer Architecture and Computer Technology, University of Granada, Spain. \\
@@ -581,6 +581,58 @@ The tree-based methods also yield several useful branches in this sense, but the
 % 
 % En este caso destacan los algoritmos \textit{J48}, muy cercano a \textit{Random Forest} en el procesamiento de ficheros aleatorios, y \textit{REP Tree}, que mejora a todos los demás al trabajar con datos secuenciales.
 % ***\\
+
+And now we see in \ref{tab_12featvs9feat} and \ref{tab_featselect} that our results are awesome and your argument is invalid.
+
+\begin{table}[htpb]
+\centering
+ \caption{\label{tab_12featvs9feat} Comparison between obtained accuracies for the initial data set, which had 12 features, and the resulting after applying Rough Set Theory Feature Selection, having 9 features.}
+{\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & 12 features & 9 features \\ 
+\hline
+Naïve Bayes & 92.30 & 92.19 \\ 
+\cline{1-1}
+JRip & 92.95 & 91.66 \\ 
+\cline{1-1}
+NNge & 97.18 & 97.13 \\ 
+\cline{1-1}
+PART & 97.41 & 97.27 \\ 
+\cline{1-1}
+J48 & 97.37 & 97.40 \\ 
+\cline{1-1}
+Random Forest & 97.60 & 97.57 \\
+\cline{1-1}
+REP Tree & 97.33 & 97.34 \\ 
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table*}[htpb]
+\centering
+ \caption{\label{tab_featselect} Percentage of correctly classified patterns for non-balanced data}
+{\small
+\begin{tabular}{|l|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
+\cline{2-5}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
+\hline
+J48 & 96.97 $\pm$ 0.17 & 87.83 & 97.09 $\pm$ 1.03 & 84.51 \\ 
+\cline{1-1}
+Random Forest & 97.68 $\pm$ 0.67 & 88.06 & 97.80 $\pm$ 1.17 & 83.71 \\ 
+\cline{1-1}
+REP Tree & 97.14 $\pm$ 0.10 & 87.79 & 97.18 $\pm$ 0.71 & 85.73 \\ 
+\cline{1-1}
+NNge & 96.27 $\pm$ 0.14 & 82.18 & 97.27 $\pm$ 1.57 & 80.94 \\ 
+\cline{1-1}
+PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\ 
+\hline
+\end{tabular}
+}
+\end{table*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
