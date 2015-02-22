@@ -69,7 +69,7 @@ In this paper, we demonstrate that high accuracies can be obtained with a proper
 
 %Change "Section _" for its reference. (Paloma)
 
-The rest of the paper is structured as follows. Next section describes the state of the art related to Data MIning (DM), Machine Learning (ML), and Computational Intelligence (CI) techniques applied to enterprise security. Also, related works about URL filtering will be reviewed. Data description is detailed in Section 3. Then, Section 4 describes the basic concepts of Rough Set Theory for feature selection which we have used for data pre-processing. Section 5 gives an overview of the followed methodology, as well as the improvements done after our first results obtained in \cite{ECTA}. Section 6 discusses the obtained rules which are different for every used classifier. Finally, conclusions and future trends are given in Section 7. 
+The rest of the paper is structured as follows. Next section describes the state of the art related to Data MIning (DM), Machine Learning (ML), and Computational Intelligence (CI) techniques applied to enterprise security. Also, related works about URL filtering will be reviewed. Data description is detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the basic concepts of Rough Set Theory for feature selection which we have used for data pre-processing. Section \ref{sec:methodology} gives an overview of the followed methodology, as well as the improvements done after our first results obtained in \cite{ECTA}. Section \ref{sec:rulesdiscussion} discusses the obtained rules which are different for every used classifier. Finally, conclusions and future trends are given in Section \ref{sec:conclusions}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -171,9 +171,14 @@ of all the employees in a medium-size Spanish company (80-100 people),
 obtaining 100000 patterns. We consider this dataset as quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day).
 Moreover, the results derived from the experiments (described in Section \ref{sec:results}) show that this quantity of data might be big enough, but a more accurate outcome would be given with, for instance, a 24 hours long log.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ROUGH SET FOR FEATURE SELECTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\section{Rough Set Theory for Feature Selection}
+\label{sec:featureselection}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METHODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\section{Methodology}
+\section{Followed Methodology}
 \label{sec:methodology}
 
 \noindent Before classification techniques are applied, a data preprocessing step has been performed. First, the raw dataset is labelled according a set of \textit{initial corporate security rules}, i.e. every pattern is assigned to a label indication if the corresponding URL request/access would be ALLOWED or DENIED considering these rules. This step is necessary in order to transform the problem into a classification one. However, in order to apply the rules they must be transformed from their initial format into another one that can be applied in our programs (a hash in Perl\footnote{A \textit{hash} in Perl is an object that represents a \textit{hash table}, which is a set of pairs key-value. Sometimes, the value can be another hash itself.}). This is described in Subsection \ref{subsec:ruleparsing}. 
@@ -370,8 +375,8 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\section{\uppercase{Experiments and Results}}
-\label{sec:results}
+\section{\uppercase{Discussion on the Obtained Rules}}
+\label{sec:rulesdiscussion}
 
 \noindent Several experiments have been conducted, once a subset of classification methods has been chosen in previous section.
 To this end, some training and test datasets have been created from
