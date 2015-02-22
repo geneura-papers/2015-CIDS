@@ -24,11 +24,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\author{P. de las Cuevas, Z. Chelly, A. M. Mora, J.J. Merelo, A.I. Esparcia-Alc√°zar}
+\author{P. de las Cuevas, Z. Chelly, A. M. Mora, J.J. Merelo, A.I. Esparcia-Alc·zar}
 \authorrunning{P. de las Cuevas et al.}
 
 \institute{Department of Computer Architecture and Computer Technology, University of Granada, Spain. \\
-Laboratoire de Recherche Op√©rationelle de D√©cision et de Contr√¥le de Processus, Institut Sup√©rieur de Gestion, Tunisia.\\
+Laboratoire de Recherche OpÈrationelle de DÈcision et de ContrÙle de Processus, Institut SupÈrieur de Gestion, Tunisia.\\
 S2 Grupo, Spain\\
  {\tt \{paloma,amorag,jmerelo\}@geneura.ugr.es, zeinebchelly@yahoo.fr, aesparcia@s2grupo.es}
 }
@@ -285,7 +285,7 @@ total.
 \subsection{Classification Methods}
 \label{subsec:methods}
 
-% R√°nking:
+% R·nking:
 % Undersampling:             |      80% entrenamiento - 20% test (random)
 %                            |
 % 1- J48 97'02%              |                      97'38%
@@ -310,7 +310,7 @@ total.
 
 In this way, a decision-tree algorithm is a group of conditions organised in a top-down recursive manner in a way that a class is assigned following a path of conditions, from the root of the tree to one of its leaves. Generally speaking, the possible classes to choose are mutually exclusive. Furthermore, these algorithms are also called ``divide-and-conquer'' algorithms. On the other hand, there are the ``separate-and-conquer'' algorithms, which work creating rules one at a time, then the instances covered by the created rule are removed and the next rule is generated from the remaining instances.
 
-A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. Na√Øve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
+A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. NaÔve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
 
 \begin{table}[htpb]
 \centering
@@ -320,7 +320,7 @@ A reference to each Weka classifier can be found at \cite{Frank2011}. Below are 
 \cline{2-3}
 \multicolumn{1}{l|}{} & Undersampling & Oversampling \\ 
 \hline
-Na√Øve Bayes & 91.12 & 91.77 \\ 
+NaÔve Bayes & 91.12 & 91.77 \\ 
 \hline
 Conjunctive Rule & 60.14 & 60.02 \\ 
 \cline{1-1}
@@ -425,16 +425,16 @@ one, as its results present robustness.
 For its part, results obtained from unbalanced data are shown in Table \ref{tabresults_balan}. Again the corresponding to the random partitions come from the mean of three blocks of experiments, and so are specified the standard deviations. The Table illustrates two segments of results, obtained from the undersampled data and from the oversampled data. For each one, the 90\%-10\% and 80\%-20\% divisions were also made.
 
 % ***
-% Se puede ver que todos los m√©todos obtienen un rendimiento similar en aciertos, siendo √©ste bastante alto. Si se mira la desviaci√≥n est√°ndard se ve que los resultados no son fortuitos, ya que √©sta es muy peque√±a.
+% Se puede ver que todos los mÈtodos obtienen un rendimiento similar en aciertos, siendo Èste bastante alto. Si se mira la desviaciÛn est·ndard se ve que los resultados no son fortuitos, ya que Èsta es muy pequeÒa.
 % 
-% Como era de esperar la divisi√≥n en 90\%-10\% mejora los resultados, aunque no mucho, por lo que habr√≠a que hacer una prueba con una divisi√≥n m√°s agresiva (trabajo futuro) para saber las capacidades de los m√©todos al trabajar con pocos datos de entrenamiento.
+% Como era de esperar la divisiÛn en 90\%-10\% mejora los resultados, aunque no mucho, por lo que habrÌa que hacer una prueba con una divisiÛn m·s agresiva (trabajo futuro) para saber las capacidades de los mÈtodos al trabajar con pocos datos de entrenamiento.
 % 
-% Respecto a los datos secuenciales sus resultados son peores, pero a√∫n as√≠ bastante buenos (> 85\%).
-% La bajada en aciertos se debe sin duda a la aparici√≥n de patrones totalmente nuevos a partir de determinada hora (puede que algo que se haga de forma programada cada d√≠a o determinados d√≠as), por lo que no hay patrones similares con los que entrenar y se falla al clasificar en el test.
+% Respecto a los datos secuenciales sus resultados son peores, pero a˙n asÌ bastante buenos (> 85\%).
+% La bajada en aciertos se debe sin duda a la apariciÛn de patrones totalmente nuevos a partir de determinada hora (puede que algo que se haga de forma programada cada dÌa o determinados dÌas), por lo que no hay patrones similares con los que entrenar y se falla al clasificar en el test.
 % 
-% Los aciertos son incluso menores (hay una bajada de 5-6 puntos) al hacer una divisi√≥n considerando m√°s patrones, contrariamente a lo esperado/logico, por lo que esto refuerza la teor√≠a de patrones que s√≥lo suceden a determinadas horas.
+% Los aciertos son incluso menores (hay una bajada de 5-6 puntos) al hacer una divisiÛn considerando m·s patrones, contrariamente a lo esperado/logico, por lo que esto refuerza la teorÌa de patrones que sÛlo suceden a determinadas horas.
 % 
-% Como t√©cnica destaca levemente \textit{Random Forest}, siendo la que mejores resultados obtiene en casi todos los casos, incluyendo las m√°s complejas particiones secuenciales. Aunque mirando la desviaci√≥n est√°ndar nos decantamos por \textit{REP Tree}, que obtiene resultados m√°s robustos.
+% Como tÈcnica destaca levemente \textit{Random Forest}, siendo la que mejores resultados obtiene en casi todos los casos, incluyendo las m·s complejas particiones secuenciales. Aunque mirando la desviaciÛn est·ndar nos decantamos por \textit{REP Tree}, que obtiene resultados m·s robustos.
 % ***
 % 
 % ***
@@ -566,20 +566,20 @@ The tree-based methods also yield several useful branches in this sense, but the
 % Como puede verse en la tabla...\\
 % 
 % A DESARROLLAR:\\
-% Si no est√° escrito deb√©is ponerlo en comentarios. - JJ 
+% Si no est· escrito debÈis ponerlo en comentarios. - JJ 
 
-% * Undersampling peor que Oversampling - l√≥gico porque se pueden perder patrones que pueden ser relevantes y en el otro se mantienen todos.\\
+% * Undersampling peor que Oversampling - lÛgico porque se pueden perder patrones que pueden ser relevantes y en el otro se mantienen todos.\\
 % 
-% * Resultados empeoran al usar las t√©cnicas de balanceo. La Justificaci√≥n ser√≠a algo como esto:\\
+% * Resultados empeoran al usar las tÈcnicas de balanceo. La JustificaciÛn serÌa algo como esto:\\
 % 
 % DON'T WORK PROPERLY:\\
 % Undersampling - Losses important information (key patterns).\\
 % Oversampling - Just duplication because there are several nominal values so it doesn't work as well as in other approaches which uses numerical computations for creating the new patterns to include in the minority class.\\
 % Sequential - Some kind of URL accesses are just performed at a time, which could not be included in the training set.\\
 % 
-% * Resultados secuenciales peor que aleatorios por lo explicado antes. Aqu√≠ incluso empeoran m√°s porque se pierde m√°s informaci√≥n que antes\\
+% * Resultados secuenciales peor que aleatorios por lo explicado antes. AquÌ incluso empeoran m·s porque se pierde m·s informaciÛn que antes\\
 % 
-% En este caso destacan los algoritmos \textit{J48}, muy cercano a \textit{Random Forest} en el procesamiento de ficheros aleatorios, y \textit{REP Tree}, que mejora a todos los dem√°s al trabajar con datos secuenciales.
+% En este caso destacan los algoritmos \textit{J48}, muy cercano a \textit{Random Forest} en el procesamiento de ficheros aleatorios, y \textit{REP Tree}, que mejora a todos los dem·s al trabajar con datos secuenciales.
 % ***\\
 
 And now we see in \ref{tab_12featvs9feat} and \ref{tab_featselect} that our results are awesome and your argument is invalid.
@@ -592,7 +592,7 @@ And now we see in \ref{tab_12featvs9feat} and \ref{tab_featselect} that our resu
 \cline{2-3}
 \multicolumn{1}{l|}{} & 12 features & 9 features \\ 
 \hline
-Na√Øve Bayes & 92.30 & 92.19 \\ 
+NaÔve Bayes & 92.30 & 92.19 \\ 
 \cline{1-1}
 JRip & 92.95 & 91.66 \\ 
 \cline{1-1}
@@ -652,14 +652,14 @@ The results show that classification accuracies are between 95\% and 97\%, even 
 In this way, we can conclude that the approach has been successful and it would be a useful tool in an enterprise.
 
 % ***
-% RESUMEN en un p√°rrafo de lo que se ha obtenido:
+% RESUMEN en un p·rrafo de lo que se ha obtenido:
 % - muy buenos porcentajes (en torno al 95-97\%) en general incluso en datos no balanceados
-% - el m√©todo pierde efectividad si se omiten algunos patrones que pueden no haber aparecido antes (datos secuenciales o undersampling) => hay que estudiarlo mejor en siguientes trabajos
+% - el mÈtodo pierde efectividad si se omiten algunos patrones que pueden no haber aparecido antes (datos secuenciales o undersampling) => hay que estudiarlo mejor en siguientes trabajos
 % 
-% Esto ten√≠ais que haberlo puesto antes que nada. - JJ
-% Antonio - yo creo que est√° bien as√≠. Las conclusiones suelen ser autocontenidas y yo las estructuro como un resumen del trabajo. ;)
+% Esto tenÌais que haberlo puesto antes que nada. - JJ
+% Antonio - yo creo que est· bien asÌ. Las conclusiones suelen ser autocontenidas y yo las estructuro como un resumen del trabajo. ;)
 % So we can conclude that...
-% *** la propuesta ha sido exitosa y podr√≠a ser, potencialmente, una buena herramienta de decisi√≥n en sistemas de seguridad ***
+% *** la propuesta ha sido exitosa y podrÌa ser, potencialmente, una buena herramienta de decisiÛn en sistemas de seguridad ***
 Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, maybe considering bigger data divisions, bigger data sets (from a whole day or working day), or adding some kind of `noise' to the dataset.
 So that, considering the good classification results obtained in this work, the next step could be the application of these methods in the real system from which data was gathered, counting with the opinion of expert CSOs, in order to know the real value of the proposal.
 The study of other classification methods could be another research branch, along with the implementation of a Genetic Programming approach, which could deal with the imbalance problem using a modification of the cost associated to misclassifying, could be done (as the authors did in \cite{cost_adjustment_07}).
