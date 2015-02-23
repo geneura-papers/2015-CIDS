@@ -98,7 +98,7 @@ Most of the time, employees have a misguided sense of security and
 believe that it is an IT problem, a purely technical issue, and they
 naively believe that an incident may never happen to them. %reference
                                 %for that - JJ
- Actually, the employees' Internet misuse is one of the main causes of
+ Actually, the employees' web misuse is one of the main causes of
  security breaches, %reference for that - JJ
  and so making them security-conscious has become a security
  challenge. The reality is that every department must be involved in
@@ -112,19 +112,70 @@ naively believe that an incident may never happen to them. %reference
 The basic idea behind these CSPs is usuarlly to include rules to
 either allow or deny employees' access to non-confident or
 non-certified web sites, which are referenced by their URLs in the
-current work. % in the current work or in general? References!!!!
- Moreover, several web pages might be also controlled for productivity or suitability reasons, given the fact that the employees who connect to these might have working purposes or not. Actually, some of the CSPs usually define sets of allowed or denied web pages or web sites that could be accessed by the company employees. These sets are usually included in two main lists; a white list (referring to ``permitted'') and a black list (referring to ``non-permitte''). Both lists, the white and the black, act as a good and useful control tools for those URLs included in them, as well as for the complementary. For instance, the URLs which are not included in a white list will automatically have a denial of access.
+current work. % in the current work or in general? References!!!! - JJ
+ Moreover, several web pages might be also controlled for productivity
+ or suitability reasons, given the fact that the employees who connect
+ to these might have working purposes or not. Actually, some of the
+ CSPs usually define sets of allowed or denied web pages or web sites
+ that could be accessed by the company employees. These sets are
+ usually included in two main lists; a white list (referring to
+ ``permitted'') and a black list (referring to
+ ``non-permitted''). Both lists, the white and the black, act as a
+ good and useful control tools for those URLs included in them, as
+ well as for the complementary. For instance, the URLs which are not
+ included in a white list will automatically have a denial of
+ access. % references!!! - JJ
 
-The aim of this paper is going beyond this traditional and simple decision making process. By using black and/or white lists, we either allow or deny users' requests/connection based, only, on the URLs provided in the lists. Thus, our aim is to define a tool for automatically making an allowance or a denial decision with respect to URLs that are, actually, not included in the aforementioned lists. This decision would be based on that one made for similar URL accesses (those with similar features), but instead of using, only, the URL strings included in the lists, we will consider other parameters, indeed, of the request/connection.
-For this reason, the problem has been mapped to a \textit{classification} problem in which we start from a set of unlabelled patterns that model the connection properties from a huge amount of \textit{actual}\footnote{Taken from a log file given by a volunteer Spanish company.} URL accesses, known as sessions. After that, we assign a label to many of them, considering a set of \textit{actual}\footnote{The set of rules has been written by the same company, with respect to its employees.} security rules (CSPs) defined by the Chief Security Officer (CSO) in the company.
+The aim of this paper is going beyond this traditional and simple
+decision making process. By using black and/or white lists, we either
+allow or deny users' requests/connection based, only, on the URLs
+provided in the lists; there is usually no mechanism for updating that
+list and even if there is, the only information available is the URL
+that can be easily overcome (using IPs, alternative URLs, proxies or
+many other ways). Thus, our aim is to define a tool for automatically
+making allow or a deny decisions with respect to URLs that are,
+actually, not included in the aforementioned lists. This decision
+would be based on that made for similar URL accesses (those with
+similar features), but instead of using only the URL strings
+included in the lists, we will consider other parameters of
+the request/connection. 
+For this reason, the problem has been mapped to a
+\textit{classification} problem in which we start from a set of
+unlabelled patterns that model the connection properties from a huge
+amount of \textit{actual}\footnote{Taken from a log file released to
+  us by a  Spanish company.} URL accesses, known as sessions. After
+that, we assign a label to many of them, considering a set of
+\textit{actual}\footnote{The set of rules has been written by the same
+  company, with respect to its employees.} security rules (CSPs)
+defined by the Chief Security Officer (CSO) in the company. % if you
+                                % have used this before, mention the
+                                % paper, the previous  one if possible - JJ
 
-In order to extract conclusions from the resulting studied dataset and to properly apply a classification algorithm, a pre-processing step is needed. In fact, to obtain an accurately trained classifier, there is need for extracting as much information as possible from the connections that the employees normally make throughout the workday. This translates into high computational requirements, which is why we use techniques for data reduction. More precisely, we aim to apply a feature selection technique to extract the most important features from the data at hand. Among the well known feature selection techniques proposed in literature, we propose to use Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
+In order to extract conclusions from the resulting studied dataset and
+to properly apply a classification algorithm, a pre-processing step is
+needed. In fact, to obtain an accurately trained classifier, there is
+a need to extract as much information as possible from the connections
+that the employees normally make throughout the workday. This
+translates into high computational requirements, which is why we
+introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection technique to extract the most important features from the data at hand. Among the well known feature selection techniques proposed in literature, we propose to use Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
  
-After pre-processing and based on the reduced dataset, we tend to apply several classification algorithms, testing them and selecting the most appropriate one. The selected classifier would be capable of dealing with our data while producing high accuracies and being lightweight in terms of running time. Moreover, as we want to further test the reliability of the results, in this work we propose different experimental setups based on different data partitions. These partitions are formed either by preserving the order of the data or by taking the patterns in a random way. Finally, given that the used data presents unbalance, we aim to apply balancing techniques \cite{imbalance_techniques_02}.
+After pre-processing and based on the reduced dataset, we will apply
+several classification algorithms, testing them and selecting the most
+appropriate one for this problem. The selected classifier should be
+capable of dealing with our data while producing high accuracies and
+being lightweight in terms of running time. Moreover, as we want to
+further test the reliability of the results, in this work we propose
+different experimental setups based on different data
+partitions. These partitions are formed either by preserving the order
+of the data or by taking the patterns in a random way. Finally, given
+that the used data presents unbalance, we aim to apply balancing
+techniques \cite{imbalance_techniques_02}. 
 
 
-In this paper, we will prove that high accuracies can be obtained with
+In this paper, we will try to prove that high accuracies can be obtained with
 a proper pre-processing of the data, reaching between 95\% and 97\% of
+% no spoiler!!! Leave that for the conclusion. Just say that you want
+% to improve accuracies obtained before - JJ
 correctly classified patterns. Indeed, among the obtained results, we
 demonstrated that it is possible to obtain useful rules, which are not
 based only on the URL string, for classifying new unknown URLs as
@@ -133,7 +184,7 @@ allowed or as denied.
 %Change "Section _" by its reference. (Paloma)
 
 The rest of the paper is structured as follows. Next section describes
-the state of the art related to Data MIning (DM), Machine Learning
+the state of the art related to Data Mining (DM), Machine Learning
 (ML), and Computational Intelligence (CI) techniques applied to
 enterprise security. %use always the same term, enterprise or
                      %corporate security. Synonyms (or
