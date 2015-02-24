@@ -663,33 +663,6 @@ JRip & 92.95 & 91.66 \\
 }
 \end{table}
 
-More results in \ref{tab_featselect} show that our results are awesome and your argument is invalid.
-% Antonio - I think that we should remove the joke.
-
-\begin{table*}[htpb]
-\centering
- \caption{\label{tab_featselect} Percentage of correctly classified patterns for non-balanced data}
-{\small
-\begin{tabular}{|l|c|c|c|c|}
-\cline{2-5}
-\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
-\cline{2-5}
-\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
-\hline
-J48 & 96.97 $\pm$ 0.17 & 87.83 & 97.09 $\pm$ 1.03 & 84.51 \\ 
-\cline{1-1}
-Random Forest & 97.68 $\pm$ 0.67 & 88.06 & 97.80 $\pm$ 1.17 & 83.71 \\ 
-\cline{1-1}
-REP Tree & 97.14 $\pm$ 0.10 & 87.79 & 97.18 $\pm$ 0.71 & 85.73 \\ 
-\cline{1-1}
-NNge & 96.27 $\pm$ 0.14 & 82.18 & 97.27 $\pm$ 1.57 & 80.94 \\ 
-\cline{1-1}
-PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\ 
-\hline
-\end{tabular}
-}
-\end{table*}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \section{\uppercase{Results}}
@@ -745,23 +718,6 @@ one, as its results present robustness.
 
 For its part, results obtained from unbalanced data are shown in Table \ref{tabresults_balan}. Again the corresponding to the random partitions come from the mean of three blocks of experiments, and so are specified the standard deviations. The Table illustrates two segments of results, obtained from the undersampled data and from the oversampled data. For each one, the 90\%-10\% and 80\%-20\% divisions were also made.
 
-% ***
-% Se puede ver que todos los métodos obtienen un rendimiento similar en aciertos, siendo éste bastante alto. Si se mira la desviación estándard se ve que los resultados no son fortuitos, ya que ésta es muy pequeña.
-% 
-% Como era de esperar la división en 90\%-10\% mejora los resultados, aunque no mucho, por lo que habría que hacer una prueba con una división más agresiva (trabajo futuro) para saber las capacidades de los métodos al trabajar con pocos datos de entrenamiento.
-% 
-% Respecto a los datos secuenciales sus resultados son peores, pero aún así bastante buenos (> 85\%).
-% La bajada en aciertos se debe sin duda a la aparición de patrones totalmente nuevos a partir de determinada hora (puede que algo que se haga de forma programada cada día o determinados días), por lo que no hay patrones similares con los que entrenar y se falla al clasificar en el test.
-% 
-% Los aciertos son incluso menores (hay una bajada de 5-6 puntos) al hacer una división considerando más patrones, contrariamente a lo esperado/logico, por lo que esto refuerza la teoría de patrones que sólo suceden a determinadas horas.
-% 
-% Como técnica destaca levemente \textit{Random Forest}, siendo la que mejores resultados obtiene en casi todos los casos, incluyendo las más complejas particiones secuenciales. Aunque mirando la desviación estándar nos decantamos por \textit{REP Tree}, que obtiene resultados más robustos.
-% ***
-% 
-% ***
-% Los resultados de los datos balanceados se muestran en la Tabla \ref{tabresults_balan}. Nuevamente los resultados de las particiones aleatorias se muestran en media de tres particiones.
-% ***
-
 \begin{table*}[htpb]
 \centering
  \caption{\label{tabresults_balan} Percentage of correctly classified patterns for balanced data (under- and oversampling)}
@@ -796,6 +752,37 @@ PART & 96.19 $\pm$ 0.14 & 85.16 & 96.82 $\pm$ 0.09 & 84.50 & 96.09 $\pm$ 0.10 & 
 In both cases it is noticeable that taking the data in a sequential way, instead of randomly, lower the results. It is clear that due to the fact that performing undersampling some patterns are lost while in the case of oversampling they all remain, \textit{undersampling results} are better. Then, in this case the algorithm with best performance is \textit{J48}, though \textit{Random Forest} follows its results very closely in random datasets processing, and \textit{REP Tree}, which is better than the rest when working with sequential data. Nevertheless, generally speaking and given the aforementioned reasons, performing data balancing methods yields worse results.
 
 Furthermore, we have found that for the data sets taken consecutively, the methods always classify worse the DENY labels, as they label them as ALLOW patterns. This is worth further study because it is the worst situation. It would be preferable to have a false positive in a DENY pattern, rather than a false negative and permit a request that is forbidden in the ISP.
+
+%%%%%%%%%%%%%%% HERE RESULTS AFTER REMOVAL OF DUPLICATED REQUESTS
+
+%%%%% From here, results after feature selection
+
+More results in \ref{tab_featselect} show that our results are awesome and your argument is invalid.
+% Antonio - I think that we should remove the joke.
+
+\begin{table*}[htpb]
+\centering
+ \caption{\label{tab_featselect} Percentage of correctly classified patterns for non-balanced data}
+{\small
+\begin{tabular}{|l|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
+\cline{2-5}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
+\hline
+J48 & 96.97 $\pm$ 0.17 & 87.83 & 97.09 $\pm$ 1.03 & 84.51 \\ 
+\cline{1-1}
+Random Forest & 97.68 $\pm$ 0.67 & 88.06 & 97.80 $\pm$ 1.17 & 83.71 \\ 
+\cline{1-1}
+REP Tree & 97.14 $\pm$ 0.10 & 87.79 & 97.18 $\pm$ 0.71 & 85.73 \\ 
+\cline{1-1}
+NNge & 96.27 $\pm$ 0.14 & 82.18 & 97.27 $\pm$ 1.57 & 80.94 \\ 
+\cline{1-1}
+PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\ 
+\hline
+\end{tabular}
+}
+\end{table*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RULES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -897,29 +884,6 @@ This could be a useful decision-aid tool for the CSO in a company, for instance.
 %http_reply_code = 200 AND
 %duration_milliseconds <= 72: allow (14.0)
 %
-
-
-
-% ***
-% Como puede verse en la tabla...\\
-% 
-% A DESARROLLAR:\\
-% Si no está escrito debéis ponerlo en comentarios. - JJ 
-
-% * Undersampling peor que Oversampling - lógico porque se pueden perder patrones que pueden ser relevantes y en el otro se mantienen todos.\\
-% 
-% * Resultados empeoran al usar las técnicas de balanceo. La Justificación sería algo como esto:\\
-% 
-% DON'T WORK PROPERLY:\\
-% Undersampling - Losses important information (key patterns).\\
-% Oversampling - Just duplication because there are several nominal values so it doesn't work as well as in other approaches which uses numerical computations for creating the new patterns to include in the minority class.\\
-% Sequential - Some kind of URL accesses are just performed at a time, which could not be included in the training set.\\
-% 
-% * Resultados secuenciales peor que aleatorios por lo explicado antes. Aquí incluso empeoran más porque se pierde más información que antes\\
-% 
-% En este caso destacan los algoritmos \textit{J48}, muy cercano a \textit{Random Forest} en el procesamiento de ficheros aleatorios, y \textit{REP Tree}, que mejora a todos los demás al trabajar con datos secuenciales.
-% ***\\
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
