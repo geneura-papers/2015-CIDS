@@ -199,13 +199,20 @@ corporate security. Also, related works about URL filtering will be reviewed. Da
 \noindent Our work tries to obtain a URL classification tool for
 enhancing the security in the client side, as at the end we want to
 get if a certain URL is secure or not, having as reference a set of
-rules (derived from a CSP) that allow or deny a set of known
-\textit{http} requests. For this, Data Mining (DM) and Machine
-Learning (ML) techniques have been applied. This section gives an
+rules (derived from a CSP) which allow or deny a set of known
+\textit{HTTP} requests. For this, different techniques belonging to Data Mining (DM), Machine
+Learning (ML), and Computational Intelligence, have been applied. This section gives an
 overview in a number of solutions given to protect the user, or the
 company, against unsecure situations. 
 
-Due to the nature of the data (URL accesses performed by humans), the used set of data is highly unbalanced \cite{imbalanced_data_05}. In order to deal with this problem there exist several methods in the
+% ------------------------------------------------------------------
+%
+\subsection{Data Analysis and preprocessing}
+\label{subsec:dataanalysis}
+
+Performing DM means that an analysis is performed over the database we have \cite{Frank2011}. In our case, this datbase is a log of URL connections. Leake \& Wilson \cite{wilson2001maintaining} present a vast review of works which study database maintenance, and the conclusion is that a database with good quality is decisive when trying to obtain good accuracies (this is also demonstrated in \cite{zeineb2014thesis}). We have made use of two techniques, namely balancing techniques and removal of redundant data.
+
+Due to the nature of the log of URL accesses performed by humans, the used set of data is highly unbalanced \cite{imbalanced_data_05}. In order to deal with this problem there exist several methods in the
 literature, but all of them are mainly grouped in three techniques
 \cite{imbalance_techniques_02}: 
 
@@ -222,22 +229,43 @@ The second has been so far the most widely used, following different approaches,
 The third option implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance by Alfaro-Cid et al. in \cite{cost_adjustment_07}, where they used a Genetic Programming (GP) approach in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
 However almost all the approaches deal with numerical (real, integer) data.
 
+For the preprocessing of the data, we have introduced another new technique from the original work performed in \cite{ECTA}. This is the transformation of the data set by means of Rough Sets, and is deeply explained in Section \ref{sec:featureselection}.
+
+Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to describe a large set of data accurately. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database are not needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important ones which nearly preserve  the same performance as the initial feature set.
+
+% ------------------------------------------------------------------
+%
+\subsection{URL classification}
+\label{subsec:urlclassification}
+
 One interesting point about URL classification is that the study of the distance between URLs may be based in the distance between two strings, but Blanco et al. \cite{Blanco2011} argues that the lexical distance between two URLs is not enough to classify them. In addition, the heuristic study of URLs for security purposes in the user side is not a novel practice. Also, the use of Blacklists (in this work, the \textit{denied} URLs) and Whitelists (\textit{allowed} URLs) are very extended practices. For instance, phishing is a problem of security that Sheng et al.  and Khonki et al. \cite{Khonji2011} tried to solve. The first work uses Blacklists as reference to avoid phishing attacks made by e-mail; the second one aims for an heuristic analysis of the URLs domain names and its ranks, in a way that a phished URL can be detected.
 
-Also, doing some web searching we have found that a lot of companies stands for the use of one between Blacklist and Whitelist \footnote{http://kevtownsend.wordpress.com/2011/08/24/whitelisting-vs-blacklisting/}. While whitelisting is the more restrictive solution and therefore the more secure, we think that the best solution is to use both, and for this reason the set of rules that we used covers a succession of either allowed and denied web sites.
+In addition, doing some web searching we have found that a lot of companies stands for the use of one between Blacklist and Whitelist \cite{whiteblack_list}. While whitelisting is the more restrictive solution and therefore the more secure, we think that the best solution is to use both, and for this reason the set of rules that we used covers a succession of either allowed and denied web sites.
 
-What refers to the used techniques, DM, as well as ML, has been used since long ago in many scientific fields,
-and given that research in computer security was growing since the
-eighties \cite{computer_security_80}, it was in the nineties
-when these techniques began to be applied to security issues
-\cite{Clifton1996}. 
+Then, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
 
-On the one hand, DM helped to develop new solutions to computer forensics \cite{DeVel2001}, being the researchers able to extract information from large files with events gathered from infected computers. Another important advance took place after the 9/11 events, when \textit{clustering techniques} and \textit{social network analysis} started to be performed in order to detect pontential crime networks \cite{Hsinchun2003}.
-On the other hand, and more focused on the user side like our approach, there exist some user-centric solutions to problems like user authentication in a personal device, who Greenstadt and Beal \cite{cognitive_security_08} proposed to address using collected user biometrics along with machine learning techniques.
- 
-Then, when a Information Security Policy (ISP) is going to be applied, P.G. Kelley et al. \cite{user-controllable_learning_08} found important to include the user in the machine learning process for refining the policy model. They called it \textit{user-controllable policy learning}. Another approach to the refinement of user's privacy policies has been described by Danezis in \cite{inferring_policies_socialnetworks_09}, for he uses ML techniques over the user's settings in a social network, being capable of restricting permissions to other people depending on their interaction with the user.
+Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in Blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
 
-In the same line, Lim et al. propose a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} that evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} take the same approach as Lim et al., but also bringing event correlation in. These two latter author's works are interesting for ours, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
+On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
+
+The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy. 
+
+Finally, Blanzieri and Bryl \cite{blanzieri2008} present a review on a variety of spam filtering methods, and compare them, reaching the conclusion of that they are successful in general, but yet insufficient. This is why we think that implementing a self-adaptive system such as the one we describe, can be good for other applications and not only URL classification.
+
+% ------------------------------------------------------------------
+%
+\subsection{Related works and contribution}
+\label{subsec:relatedworks}
+
+The works that we are interested in are those which scope is related with the users' information and behaviour, and the management (and adaptation) of Information or Corporate Security Policies (ISPs).
+
+In this line, the paper by Greenstadt and Beal \cite{cognitive_security_08} combined biometrics signals with ML methods in order to get a reliable user authentication in a computer system.
+P.G. Kelley et al. \cite{user-controllable_learning_08} presented a method named \textit{user-controllable policy learning} in which the user gives feedback to the system every time that a security policy is applied, so these policies can be refined according to that feedback to be more accurate with respect to the user's needs. This approach could be useful for a personal device, but our result go further and would be possible to have a global set of rules that can be adapted for all the users.
+On the other hand, policies could be created for enhancing user's privacy, as proposed by Danezis in \cite{inferring_policies_socialnetworks_09}, who defined a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment. The idea of inferring policies can be also considered after our results, but in the scope of the company, and focused on ISPs.
+
+In the same line, Lim et al. propose a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} take the same approach as Lim et al., but also bringing event correlation in. These two latter author's works are interesting for ours, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
+
+It is worth mentioning a tool developed in Perl language, by Evan Harris \cite{harris2003next}, takes the approach of ``greylisting'', and \textit{temporarily} rejects messages that comes from senders who are not in the blacklist or whitelist, so that the system does not know if it is a spam message. And, like in our approach, it works trying to have a minimal impact on the users.
 
 Finally, a system named MUSES (from Multiplatform Usable Endpoint
 Security System) \cite{MUSES_SAC_14} is being developed under the
@@ -246,7 +274,7 @@ event treatment on the user actions inside a company, DM techniques
 for applying the set of policies from the company ISP to the actions,
 allowing or denying them, and ML techniques for improving the set of
 rules derived from these policies, according to user's feedback and
-behaviour after the system decisions \cite{muses_sotics_13}.   
+behaviour after the system decisions \cite{muses_sotics_13}. The results of this work could be applied in this system, by changing the preprocessing step, due to the fact that the database is different. But overall, our conclusions can be scalated to such a system.   
 
 %Introduce next section - JJ
 
@@ -307,12 +335,10 @@ Moreover, the results derived from the experiments (described in Section \ref{se
 
 Data reduction is a main point of interest across a wide variety of fields. In fact, focusing on this step is crucial as it often presents a source of significant data loss. Many techniques were proposed in literature to achieve the task of data reduction and they can be categorized into two main heads; techniques that transform the original meaning of the features, called the ``transformation-based approaches", and the second category is a set of semantic-preserving techniques known as the ``selection-based approaches".
 
-Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to describe a large set of data accurately. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database are not needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important ones which nearly preserve  the same performance as the initial feature set.
-
-
 Yet, it is important to mention that most of the feature selection techniques, proposed in literature, suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough} can be used as such tool. In this Section, we briefly discuss the RST main concepts dedicated for feature selection.
 
 \subsection{Preliminaries of Rough Set Theory}
+
 Data are represented as a table where each row represents an object and where each column represents an attribute
 that can be measured for each object. Such table is called an ``Information System" (IS). Formally, an IS can be defined as a pair $IS = (U, A)$ where $U = \{x_1, x_2, \ldots, x_n\}$  is a non-empty, finite set of objects called the \emph{``universe"} and $A = \{a_1, a_2, \ldots, a_k\}$ is a non-empty, finite set of attributes. Each attribute or feature $a \in A $ is associated with a set $V_a$ of its value, called the \emph{domain} of $a$. We may partition the attribute set $A$ into two subsets $C$ and $D$, called   \emph{condition} and \emph{decision} attributes, respectively \cite{pawlak2008rough}.
 
@@ -337,7 +363,9 @@ POS_c(D) = \bigcup \overline{R}(X)
 \end{displaymath}
 
 The positive region $POS_c(D)$ is a set of objects  of $U$ that can be classified with certainty to classes $U/IND(D)$ employing attributes of $C$. In other words, the positive region $POS_c(D)$ indicates the union of all the equivalence classes defined by $IND(P)$ that each for sure can induce the decision class $D$.
+
 \subsection{Reduction Process}
+
 The aim of feature selection is to remove unnecessary features to the target concept. It is the process of finding a smaller set of attributes, than the original one, with the same or close classification power as the original set. Unnecessary features, in an information system, can be classified into irrelevant features  that do not affect the target concept in any way  and redundant (superfluous) features that do not add anything new to the target concept.
 
 RST for feature selection is based on the concept of  discovering dependencies between attributes. Intuitively, a set of attributes $Q$ depends totally on a set of attributes $P$, denoted $P \rightarrow Q$, if all attribute values from $Q$ can be uniquely determined by values of attributes from $P$. In particular, if there exists a functional dependency between values of $Q$ and $P$, then $Q$ depends totally on $P$. Dependency can be defined in the following way: For $P$, $Q  \subset A$, $Q$  depends on $P$ in a degree $k$ $(0 \leq k \leq 1)$,  denoted $P$ $\rightarrow_{k}$ $Q$, if $k = \gamma_{P}(Q) = |POS_{P}(Q)|/|U|$;  If k = 1 $Q$ depends totally on $P$, if $k < 1 $  $Q$ depends partially (in a degree k) on $P$, and if k = 0 $Q$ does not depend on $P$.
