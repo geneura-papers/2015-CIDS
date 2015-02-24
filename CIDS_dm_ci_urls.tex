@@ -282,6 +282,7 @@ behaviour after the system decisions \cite{muses_sotics_13}. The results of this
 %Introduce next section - JJ
 Next section describes the problem we aim to solve, in addition to the data from which the data sets are composed.
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PROBLEM DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
@@ -296,13 +297,13 @@ proxy application
 works as a proxy, but with the advantage of storing a cache of recent
 transactions so future requests may be answered without asking the
 origin server again \cite{DuaneWessels2004}.  
-Every pattern, namely a URL session has ten variables associated,
+Every pattern, namely a URL request has ten variables associated,
 which we describe in Table \ref{tabdata}, indicating if the variable
-is numeric or nominal/categorical. 
+is numeric or nominal/categorical. The table has, however, not only ten but eleven described variables. This is due to the fact that we decided to consider the `Content Type' of the requested webpage as a whole, but also its Main Content Type (MCT) separately. By adding more information through a new feature, we intended to see if more general rules could be obtained by the classifiers, given that there are less possible values for an MCT than for a whole `Content Type'.
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{tabdata} Independent Variables corresponding to a URL session (a connection to a URL for some time). The URLs are parsed as detailed in Subsection \ref{subsec:logparsing}.}
+ \caption{\label{tabdata} Independent Variables corresponding to a URL request through \textit{HTTP}. The URLs are parsed as detailed in Subsection \ref{subsec:logparsing}.}
 {\scriptsize
 \begin{tabular}{llll}
 \hline\noalign{\smallskip}
@@ -311,7 +312,8 @@ Variable name & Description & Type & Rank/Number of Values (if categorical)\\
 \texttt{http\_reply\_code} & Status of the server response & Categorical & 20 values\\
 \texttt{http\_method} & Desired action to be performed & Categorical & 6 values\\
 \texttt{duration\_milliseconds} & Session duration & Numerical & integer in [0,357170]\\
-\texttt{content\_type} & Media type of the entity-body sent to the recipient & Categorical & 11 values (main content), 85 values (whole content)\\
+\texttt{content\_type} & Media type of the entity-body sent to the recipient & Categorical & 85 values (whole content)\\
+\texttt{content\_type\_MCT} & \textbf{M}ain \textbf{C}ontent \textbf{T}ype of the media type. & Categorical & 11 values\\
 \texttt{server\_or\_cache\_address} & IP address & Categorical & 2343 values\\
 \texttt{time} & connection hour (in the day) & Date & 00:00:00 to 23:59:59\\
 \texttt{squid\_hierarchy} & It indicates how the next-hop cache was selected & Categorical & 3 values\\
@@ -330,8 +332,6 @@ These data were gathered along a period of two hours, from 8.30 to
 of all the employees in a medium-size Spanish company (80-100 people),
 obtaining 100000 patterns. We consider this dataset as quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day).
 Moreover, the results derived from the experiments (described in Section \ref{sec:results}) show that this quantity of data might be big enough, but a more accurate outcome would be given with, for instance, a 24 hours long log.
-
-% Antonio - Comment the new variable content_type_MCT
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ROUGH SET FOR FEATURE SELECTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
