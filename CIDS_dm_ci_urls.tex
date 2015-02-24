@@ -34,6 +34,7 @@
 Laboratoire de Recherche Opérationelle de Décision et de Contrôle de Processus, Institut Supérieur de Gestion, Tunisia.\\
 S2 Grupo, Spain\\
 % problem with letters here. You should probably either use LaTeX symbols for that or change to UTF8 - JJ
+% Ok, final version will be stored with the appropriate encoding - Paloma
  {\tt \{paloma,amorag,jmerelo\}@geneura.ugr.es, zeinebchelly@yahoo.fr, aesparcia@s2grupo.es}
 }
 
@@ -52,8 +53,7 @@ employees have with regard to the use of the Web. In this work we
 have focused on the latter problem, creating and improving a system
 able to detect anomalous and potentially unsecure situations that
 could be dangerous for a company. This system was initially conceived
-as a step beyond the use of self-updating % self updating? - JJ
-lists known as black/white
+as a step beyond the use of what are known as black/white
 lists. These lists contain URLs that are forbidden to access, or 
 dangerous (black lists), or URLs to which the access is permitted or
 allowed (white lists). Actually, there are websites with daily updated
@@ -65,13 +65,18 @@ can initially learn from the already known black/white lists, and
 then classify a new, unknown, URL connection either as ``should be
 allowed'' or ``should be denied''. This chapter describes the proposed
 system, as well as its results, and the improvements made by means of
-applying Rough Set Theory for feature selection. 
-%Some comment on the outcome. Does the proposed methodology work? - JJ
+applying Rough Set Theory for feature selection. We prove that high accuracies can be obtained with
+a proper pre-processing of the data, reaching between 95\% and 97\% of
+correctly classified patterns. Indeed, among the obtained results, we
+demonstrated that it is possible to obtain useful rules, which are not
+based only on the URL string, for classifying new unknown URLs as
+allowed or as denied.
 \end{abstract}
 
 
 %\textbf{Keywords.} 
 %
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \section{Introduction}
