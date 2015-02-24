@@ -524,8 +524,8 @@ PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\section{\uppercase{Discussion on the Obtained Rules}}
-\label{sec:rulesdiscussion}
+\section{\uppercase{Results}}
+\label{sec:results}
 
 \noindent Several experiments have been conducted, once a subset of classification methods has been chosen in previous section.
 To this end, some training and test datasets have been created from
@@ -628,6 +628,11 @@ PART & 96.19 $\pm$ 0.14 & 85.16 & 96.82 $\pm$ 0.09 & 84.50 & 96.09 $\pm$ 0.10 & 
 In both cases it is noticeable that taking the data in a sequential way, instead of randomly, lower the results. It is clear that due to the fact that performing undersampling some patterns are lost while in the case of oversampling they all remain, \textit{undersampling results} are better. Then, in this case the algorithm with best performance is \textit{J48}, though \textit{Random Forest} follows its results very closely in random datasets processing, and \textit{REP Tree}, which is better than the rest when working with sequential data. Nevertheless, generally speaking and given the aforementioned reasons, performing data balancing methods yields worse results.
 
 Furthermore, we have found that for the data sets taken consecutively, the methods always classify worse the DENY labels, as they label them as ALLOW patterns. This is worth further study because it is the worst situation. It would be preferable to have a false positive in a DENY pattern, rather than a false negative and permit a request that is forbidden in the ISP.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RULES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\section{\uppercase{Discussion on the Obtained Rules}}
+\label{sec:rulesdiscussion}
 
 Regarding the obtained rules/trees, we want to remark that the majority are based on the URL in order to discriminate between the two classes, however we also found several ones which consider variables/features different of this to make the decision. For instance:\\
 
