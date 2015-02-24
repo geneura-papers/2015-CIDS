@@ -498,6 +498,7 @@ total.
    & & \texttt{http\_reply\_code => xxx} \\
    & & \texttt{http\_method => xxx} \\
    & & \texttt{duration\_miliseconds => xxx} \\
+   & & \texttt{content\_type\_MCT => xxx} \\
    & & \texttt{content\_type => xxx} \\
    & & \texttt{server\_or\_cache\_address => xxx} \\
    & & \texttt{time => xxx} \\
@@ -516,32 +517,11 @@ total.
 \subsection{Classification Methods}
 \label{subsec:methods}
 
-% Ránking:
-% Undersampling:             |      80% entrenamiento - 20% test (random)
-%                            |
-% 1- J48 97'02%              |                      97'38%
-% 2- Random Forest 96'87%    |                      97'63%
-% 3- REP Tree 96'79%         |                      97'41%
-% 4- NNge 96'49%             |                      97'34%
-% 5- PART 96'45%             |                      96'85%
-%                            |
-% Oversampling:              |      90% entrenamiento - 10% test (random)
-%                            | 
-% 1- J48 98%                 |                      97'56%
-% 2- Random Forest 98'84%    |                      97'56%
-% 3- REP Tree 97'67%         |                      97'56%
-% 4- NNge 98'76%             |                      97'02%
-% 5- PART 97'54%             |                      97'21%
-%                            |
-
-
-\noindent As said in Section \ref{sec:problemDescription}, the data used for this work is not only numerical or nominal, thus, only classification algorithms that support both types of data have been considered. Weka has a great number of possible algorithms to work with, so we have conducted a preselection phase trying to choose those which would yield better results in the experiments. More specifically, we have focused on rule-based and decision-tree-based algorithms. 
-
-%It is important to point out that rules can become trees, but rules cannot always be derived from trees (for instance, a tree modelling a mathematical operation).
+\noindent Two reasons have been taken into account when deciding which classifiers would be admitted after what we call `a preselection phase'. On the one hand, our final goal, which is obtaining a set of rules able to classify unknown URL connection requests. To achieve that, we need classifiers based on decision trees, or rules, so that we can study their output in addition to their accuracy. On the other hand, as said in Section \ref{sec:problemDescription}, the features of the data used for this work are mainly categorical, but also numerical. Thus, among the classifiers based on trees or rules, they must also bear with these type of features. Consequently, we made a first selection over all the classifiers in Weka which complied with the requirements. The list, as well as a first set of experiments to see which five were better, can be seen at Table \ref{tabresults_todos}.
 
 In this way, a decision-tree algorithm is a group of conditions organised in a top-down recursive manner in a way that a class is assigned following a path of conditions, from the root of the tree to one of its leaves. Generally speaking, the possible classes to choose are mutually exclusive. Furthermore, these algorithms are also called ``divide-and-conquer'' algorithms. On the other hand, there are the ``separate-and-conquer'' algorithms, which work creating rules one at a time, then the instances covered by the created rule are removed and the next rule is generated from the remaining instances.
 
-A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. Naïve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
+A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. Na�ve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
 
 \begin{table}[htpb]
 \centering
