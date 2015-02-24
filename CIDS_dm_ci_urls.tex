@@ -601,6 +601,13 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 
 % ------------------------------------------------------------------
 %
+\subsection{Erasing redundant information}
+\label{subsec:duplicateddata}
+
+After having analised the log of connecting patterns, we studied the field \textit{squid\_hierarchy} and saw that had two possible values: \texttt{DIRECT} or \texttt{DEFAULT\_PARENT}. The Squid FAQ reference \citep{squid_logs}, and the Squid wiki \citep{squid_wiki} explain that, as a proxy, the connections are made, firstly to the Squid proxy, and then, if appropriate, the request continues to another server. These connections are registered in Squid the same way, with the same fields, with the exception of the client and server \ac{IP} addresses. From the point of view of classification, if one of these two entries happens to be in the training file, and the other in the testing file, it would mean that the second would be well classified because of all the attribute values that both have in common. However, this means also that the good percentages that we obtained may not be real, but faked. That is why the second step is about removing entries that we called ``repeated'' (in the explained sense). After the removal, a new set of files was created.
+
+% ------------------------------------------------------------------
+%
 \subsection{Performing feature selection}
 \label{subsec:featselresults}
 
@@ -754,6 +761,106 @@ In both cases it is noticeable that taking the data in a sequential way, instead
 Furthermore, we have found that for the data sets taken consecutively, the methods always classify worse the DENY labels, as they label them as ALLOW patterns. This is worth further study because it is the worst situation. It would be preferable to have a false positive in a DENY pattern, rather than a false negative and permit a request that is forbidden in the ISP.
 
 %%%%%%%%%%%%%%% HERE RESULTS AFTER REMOVAL OF DUPLICATED REQUESTS
+
+After performing the removal of duplicated requests, a whole new ranking of classification performance was created, in order to see if the new situation has some influence on the results. However, Table  \ref{tab:gobalrank_repurls} shows that the best results are from the same classifiers, with slightly difference when performing oversampling, where \textit{Random Tree} was better than \textit{REP Tree} but less than one point.
+
+\begin{table}[htpb]
+\centering
+{\small
+\begin{tabular}{|l|c|c|c|}
+\cline{2-4}
+\multicolumn{1}{l|}{} & Unbalanced & Undersampling & Oversampling \\
+\hline
+Naïve Bayes & 92.30 & 90.77 $\pm$ 0.06 & 91.77 \\
+\cline{1-1}
+Conjunctive Rule & 73.31 & 59.53 $\pm$ 0.15 & 60.02 \\
+\cline{1-1}
+Decision Table & 95.21 & 93.73 $\pm$ 0.18 & 90.29 \\
+\cline{1-1}
+DTNB & 95.55 & 94.75 $\pm$ 0.07 & 95.65 \\
+\cline{1-1}
+JRip & 92.95 & 89.64 $\pm$ 0.32 & 92.47 \\
+\cline{1-1}
+NNge & \textbf{97.18} & \textbf{96.33 $\pm$ 0.14} & \textbf{98.76} \\
+\cline{1-1}
+One R & 94.86 & 93.53 $\pm$ 0.04 & 93.70 \\
+\cline{1-1}
+PART & \textbf{97.41} & \textbf{96.32 $\pm$ 0.10} & \textbf{97.54} \\
+\cline{1-1}
+Ridor & 89.21 & 86.19 $\pm$ 0.79 & 89.87 \\
+\cline{1-1}
+Zero R & 68.14 & 51.68 $\pm$ 0.17 & 51.26 \\
+\cline{1-1}
+AD Tree & 85.23 & 78.01 $\pm$ 0.10 & 77.68 \\
+\cline{1-1}
+Decision Stump & 73.31 & 59.53 $\pm$ 0.15 & 60.02 \\
+\cline{1-1}
+J48 & \textbf{97.37} & \textbf{96.65 $\pm$ 0.04} & \textbf{98.00} \\
+\cline{1-1}
+LAD Tree & 86.87 & 80.24 $\pm$ 0.04 & 79.97 \\
+\cline{1-1}
+Random Forest & \textbf{97.57} & \textbf{96.75 $\pm$ 0.05} & \textbf{98.84} \\
+\cline{1-1}
+Random Tree & 96.11 & 95.45 $\pm$ 0.66 & \textbf{98.35} \\
+\cline{1-1}
+REP Tree & \textbf{97.32} & \textbf{96.38 $\pm$ 0.07} & 97.67 \\
+\hline
+\end{tabular}
+}
+\caption[Global classification methods ranking after the removal of entries that coul lead to missclassification.]{\label{tab:gobalrank_repurls} Results of all tested classification methods on unbalanced and balanced data, after the repeated requests have been removed. The best ones are marked in boldface.}
+\end{table}
+
+The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Naïve Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
+
+\begin{figure}[htb]
+\centering
+\subfloat[80\% for training, \%20 for testing, and 90\% for tranining, 10\% for testing]{
+\small
+\begin{tabular}{|l|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
+\cline{2-5}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
+\hline
+Naïve Bayes & 93.01 $\pm$ 0.32 & 82.61 & 93.09 $\pm$ 0.91 & 83.04 \\ 
+\cline{1-1}
+Random Forest & \textbf{96.97} $\pm$ \textbf{0.47} & \textbf{91.03} & \textbf{96.79} $\pm$ \textbf{0.97} & 80.60 \\ 
+\cline{1-1}
+J48 & 96.90 $\pm$ 0.26 & 87.78 & 96.50 $\pm$ 1.00 & 84.49 \\ 
+\cline{1-1}
+NNge & 96.21 $\pm$ 0.28 & 81.17 & 96.11 $\pm$ 1.13 & 81.92 \\ 
+\cline{1-1}
+REP Tree & \textbf{96.97} $\pm$ \textbf{0.40} & 87.75 & 96.62 $\pm$ 0.87 & \textbf{85.57} \\ 
+\cline{1-1}
+PART & 96.84 $\pm$ 0.18 & 86.68 & 96.55 $\pm$ 0.87 & 83.61 \\ 
+\hline
+\end{tabular}
+}
+
+\subfloat[60\% for tranining, 40\% for testing]{
+\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{60\% Training - 40\% Test} \\ 
+\cline{2-3}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential\\ 
+\hline
+Naïve Bayes & 92.76 $\pm$ 1.34 & 77.74 \\ 
+\cline{1-1}
+Random Forest & \textbf{96.45} $\pm$ \textbf{0.67} & 87.50 \\ 
+\cline{1-1}
+J48 & 96.44 $\pm$ 0.19 & 87.42 \\ 
+\cline{1-1}
+NNge & 95.98 $\pm$ 0.34 & 84.73 \\ 
+\cline{1-1}
+REP Tree & 96.41 $\pm$ 0.27 & \textbf{88.91} \\ 
+\cline{1-1}
+PART & 96.05 $\pm$ 0.45 & 81.29 \\ 
+\hline
+\end{tabular}
+}
+\caption[Correctly classified patterns for unbalanced data after the removal of entries that coul lead to missclassification.]{Percentage of correctly classified patterns for unbalanced data, after after the removal of entries that coul lead to missclassification.. (a) 80\% for training, \%20 for testing, and 90\% for tranining, 10\% for testing. (b) 60\% for tranining, 40\% for testing. Best results are marked in boldface. \label{tab:repurl_unb_traintest}}
+\end{figure}
 
 %%%%% From here, results after feature selection
 
