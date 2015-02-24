@@ -101,10 +101,9 @@ doing their job.
  
 Most of the time, employees have a misguided sense of security and
 believe that it is an IT problem, a purely technical issue, and they
-naively believe that an incident may never happen to them. %reference
-                                %for that - JJ
+naively believe that an incident may never happen to them. \cite{stanton2005analysis}
  Actually, the employees' web misuse is one of the main causes of
- security breaches, %reference for that - JJ
+ security breaches \cite{breivik2002abstract}, 
  and so making them security-conscious has become a security
  challenge. The reality is that every department must be involved in
  readiness planning and establishing security policies and procedures
@@ -112,12 +111,13 @@ naively believe that an incident may never happen to them. %reference
  of \textit{Corporate Security Policies} (CSPs) which basically are a
  set of security rules aiming at protecting company assets by defining
  permissions to be considered for every different action to be
- performed inside the security system. % references!!!! - JJ
+ performed inside the security system \cite{kaeo2003designing}.
  
 The basic idea behind these CSPs is usuarlly to include rules to
 either allow or deny employees' access to non-confident or
-non-certified web sites, which are referenced by their URLs in the
-current work. % in the current work or in general? References!!!! - JJ
+non-certified web sites, which are referenced by their URLs in this chapter.
+% in the current work or in general? References!!!! - JJ
+% Changed? - Paloma
  Moreover, several web pages might be also controlled for productivity
  or suitability reasons, given the fact that the employees who connect
  to these might have working purposes or not. Actually, some of the
@@ -129,7 +129,7 @@ current work. % in the current work or in general? References!!!! - JJ
  good and useful control tools for those URLs included in them, as
  well as for the complementary. For instance, the URLs which are not
  included in a white list will automatically have a denial of
- access. % references!!! - JJ
+ access \cite{ludl2007effectiveness}.
 
 The aim of this paper is going beyond this traditional and simple
 decision making process. By using black and/or white lists, we either
@@ -152,9 +152,7 @@ amount of \textit{actual}\footnote{Taken from a log file released to
 that, we assign a label to many of them, considering a set of
 \textit{actual}\footnote{The set of rules has been written by the same
   company, with respect to its employees.} security rules (CSPs)
-defined by the Chief Security Officer (CSO) in the company. % if you
-                                % have used this before, mention the
-                                % paper, the previous  one if possible - JJ
+defined by the Chief Security Officer (CSO) in the company. This was the approach followed in \cite{ECTA}, and which we extend in this chapter.
 
 In order to extract conclusions from the resulting studied dataset and
 to properly apply a classification algorithm, a pre-processing step is
@@ -177,33 +175,21 @@ that the used data presents unbalance, we aim to apply balancing
 techniques \cite{imbalance_techniques_02}. 
 
 
-In this paper, we will try to prove that high accuracies can be obtained with
-a proper pre-processing of the data, reaching between 95\% and 97\% of
-% no spoiler!!! Leave that for the conclusion. Just say that you want
-% to improve accuracies obtained before - JJ
-correctly classified patterns. Indeed, among the obtained results, we
-demonstrated that it is possible to obtain useful rules, which are not
-based only on the URL string, for classifying new unknown URLs as
-allowed or as denied. 
-
-%Change "Section _" by its reference. (Paloma)
+In this chapter, we want to improve the accuracies obtained in our previous work \cite{ECTA}, as well as see if the new incorporated method (namely Rough Sets) for feature selection yields to better rules.
 
 The rest of the paper is structured as follows. Next section describes
 the state of the art related to Data Mining (DM), Machine Learning
 (ML), and Computational Intelligence (CI) techniques applied to
-enterprise security. %use always the same term, enterprise or
-                     %corporate security. Synonyms (or
-                     %almost-synonyms) are not good in scientific
-                     %writing - JJ
- Also, related works about URL filtering will be reviewed. Data
- description is detailed in Section 3. Then, Section 4 describes the
+corporate security. Also, related works about URL filtering will be reviewed. Data
+ description is detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the
  basic concepts of Rough Set Theory for feature selection which we
- have used for data pre-processing. Section 5 gives an overview of the
+ have used for data pre-processing. Section \ref{sec:methodology} gives an overview of the
  followed methodology, as well as the improvements done after our
- first results obtained in \cite{ECTA}. Section 6 discusses the
+ first results. Results are detailed in Section \ref{sec:results}. Then, Section \ref{sec:rulesdiscussion}
+  discusses the
  obtained rules which are different for every used
  classifier. Finally, conclusions and future trends are given in
- Section 7.  
+ Section \ref{sec:conclusions}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
