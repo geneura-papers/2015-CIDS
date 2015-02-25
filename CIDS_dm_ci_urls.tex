@@ -31,7 +31,7 @@
 \authorrunning{P. de las Cuevas et al.}
 
 \institute{Department of Computer Architecture and Computer Technology, University of Granada, Spain. \\
-Laboratoire de Recherche Op�rationelle de D�cision et de Contr�le de Processus, Institut Sup�rieur de Gestion, Tunisia.\\
+Laboratoire de Recherche Op\'erationelle de D\'ecision et de Contr\^ole de Processus, Institut Sup\'erieur de Gestion, Tunisia.\\
 S2 Grupo, Spain\\
 % problem with letters here. You should probably either use LaTeX symbols for that or change to UTF8 - JJ
 % Ok, final version will be stored with the appropriate encoding - Paloma
@@ -45,33 +45,25 @@ S2 Grupo, Spain\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{abstract} 
-Corporate security is usually one of the matters in which companies
-invest more resources, since the loss of information directly translates into
-money loss; these losses might have an origin in external attacks or
-internal security failures, but an important part of the
-security breaches is related to the lack of awareness that the
-employees have with regard to the use of the Web. In this work we
-have focused on the latter problem, creating and improving a system
-able to detect anomalous and potentially unsecure situations that
-could be dangerous for a company. This system was initially conceived
-as a step beyond the use of what are known as black/white
-lists. These lists contain URLs that are forbidden to access, or 
-dangerous (black lists), or URLs to which the access is permitted or
-allowed (white lists). Actually, there are websites with daily updated
-information about new malicious URLs, so that one can update the set
-of denied/allowed connections. However and as the number of websites
-constantly grows, it is impossible for companies to know in advance if those websites
-are malicious or not. Thus, in this paper, we propose a system that
-can initially learn from the already known black/white lists, and
-then classify a new, unknown, URL connection either as ``should be
-allowed'' or ``should be denied''. This chapter describes the proposed
-system, as well as its results, and the improvements made by means of
-applying Rough Set Theory for feature selection. We prove that high accuracies can be obtained with
-a proper pre-processing of the data, reaching between 95\% and 97\% of
-correctly classified patterns. Indeed, among the obtained results, we
-demonstrated that it is possible to obtain useful rules, which are not
-based only on the URL string, for classifying new unknown URLs as
-allowed or as denied.
+Corporate security is usually one of the matters in which companies invest more resources, 
+since the loss of information directly translates into money loss; these losses might have 
+an origin in external attacks or internal security failures, but an important part of the 
+security breaches is related to the lack of awareness that the employees have with regard 
+to the use of the Web. In this work we have focused on the latter problem, creating and improving a system
+able to detect anomalous and potentially unsecure situations that could be dangerous for a company. 
+This system was initially conceived as a step beyond the use of what are known as black/white lists. 
+These lists contain URLs that are forbidden to access, or dangerous (black lists), or URLs to which 
+the access is permitted or allowed (white lists). Actually, there are websites with daily updated 
+information about new malicious URLs, so that one can update the set of denied/allowed connections. 
+However and as the number of websites constantly grows, it is impossible for companies to know 
+in advance if those websites are malicious or not. Thus, in this paper, we propose a system that 
+can initially learn from the already known black/white lists, and then classify a new, unknown, 
+URL connection either as ``should be allowed'' or ``should be denied''. This chapter describes the proposed system, 
+as well as its results, and the improvements made by means of an initial data pre-processing step based on applying 
+Rough Set Theory for feature selection. We proved that high accuracies can be obtained with a proper pre-processing 
+of the data, reaching between 96\% and 97\% of correctly classified patterns.
+Indeed, among the obtained results, we demonstrated that it is possible to obtain interesting rules which are not 
+based only on the URL string, for classifying new unknown URLs as allowed or as denied. 
 \end{abstract}
 
 
@@ -521,7 +513,7 @@ total.
 
 In this way, a decision-tree algorithm is a group of conditions organised in a top-down recursive manner in a way that a class is assigned following a path of conditions, from the root of the tree to one of its leaves. Generally speaking, the possible classes to choose are mutually exclusive. Furthermore, these algorithms are also called ``divide-and-conquer'' algorithms. On the other hand, there are the ``separate-and-conquer'' algorithms, which work creating rules one at a time, then the instances covered by the created rule are removed and the next rule is generated from the remaining instances.
 
-A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. Na�ve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
+A reference to each Weka classifier can be found at \cite{Frank2011}. Below are described the top five techniques, obtained from the best results (See Table \ref{tabresults_todos}) of the experiments done in this stage, along with more specific bibliography. Naïve Bayes method \cite{Bayesian_Classifier_97} has been included as a baseline, normally used in text categorization problems. According to the results, the five selected classifiers are much better than this method.
 
 \begin{table}[htpb]
 \centering
@@ -531,7 +523,7 @@ A reference to each Weka classifier can be found at \cite{Frank2011}. Below are 
 \cline{2-3}
 \multicolumn{1}{l|}{} & Undersampling & Oversampling \\ 
 \hline
-Na�ve Bayes & 91.12 & 91.77 \\ 
+Naïve Bayes & 91.12 & 91.77 \\ 
 \hline
 Conjunctive Rule & 60.14 & 60.02 \\ 
 \cline{1-1}
@@ -633,7 +625,7 @@ Now, if we focus on the results of the accuracies, which are in Table \ref{tab_1
 \cline{2-3}
 \multicolumn{1}{l|}{} & 12 features & 9 features \\ 
 \hline
-Na�ve Bayes & 92.30 & 92.19 \\ 
+Naïve Bayes & 92.30 & 92.19 \\ 
 \cline{1-1}
 J48 & 97.37 & 97.40 \\ 
 \cline{1-1}
@@ -757,7 +749,7 @@ After performing the removal of duplicated requests, a whole new ranking of clas
 \cline{2-4}
 \multicolumn{1}{l|}{} & Unbalanced & Undersampling & Oversampling \\
 \hline
-Na�ve Bayes & 92.30 & 90.77 $\pm$ 0.06 & 91.77 \\
+Naïve Bayes & 92.30 & 90.77 $\pm$ 0.06 & 91.77 \\
 \cline{1-1}
 Conjunctive Rule & 73.31 & 59.53 $\pm$ 0.15 & 60.02 \\
 \cline{1-1}
@@ -796,7 +788,7 @@ REP Tree & \textbf{97.32} & \textbf{96.38 $\pm$ 0.07} & 97.67 \\
 \caption[Global classification methods ranking after the removal of entries that could lead to missclassification.]{\label{tab:gobalrank_repurls} Results of all tested classification methods on unbalanced and balanced data, after the repeated requests have been removed. The best ones are marked in boldface.}
 \end{table}
 
-The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Na�ve Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
+The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Naïve Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
 \begin{figure}[htb]
 \centering
@@ -808,7 +800,7 @@ The process is again the same, and the results are displayed in Tables \ref{tab:
 \cline{2-5}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
 \hline
-Na�ve Bayes & 93.01 $\pm$ 0.32 & 82.61 & 93.09 $\pm$ 0.91 & 83.04 \\ 
+Naïve Bayes & 93.01 $\pm$ 0.32 & 82.61 & 93.09 $\pm$ 0.91 & 83.04 \\ 
 \cline{1-1}
 Random Forest & \textbf{96.97} $\pm$ \textbf{0.47} & \textbf{91.03} & \textbf{96.79} $\pm$ \textbf{0.97} & 80.60 \\ 
 \cline{1-1}
@@ -831,7 +823,7 @@ PART & 96.84 $\pm$ 0.18 & 86.68 & 96.55 $\pm$ 0.87 & 83.61 \\
 \cline{2-3}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential\\ 
 \hline
-Na�ve Bayes & 92.76 $\pm$ 1.34 & 77.74 \\ 
+Naïve Bayes & 92.76 $\pm$ 1.34 & 77.74 \\ 
 \cline{1-1}
 Random Forest & \textbf{96.45} $\pm$ \textbf{0.67} & 87.50 \\ 
 \cline{1-1}
@@ -1035,14 +1027,14 @@ The results show that classification accuracies are between 95\% and 97\%, even 
 In this way, we can conclude that the approach has been successful and it would be a useful tool in an enterprise.
 
 % ***
-% RESUMEN en un párrafo de lo que se ha obtenido:
+% RESUMEN en un pÃ¡rrafo de lo que se ha obtenido:
 % - muy buenos porcentajes (en torno al 95-97\%) en general incluso en datos no balanceados
-% - el método pierde efectividad si se omiten algunos patrones que pueden no haber aparecido antes (datos secuenciales o undersampling) => hay que estudiarlo mejor en siguientes trabajos
+% - el mÃ©todo pierde efectividad si se omiten algunos patrones que pueden no haber aparecido antes (datos secuenciales o undersampling) => hay que estudiarlo mejor en siguientes trabajos
 % 
-% Esto teníais que haberlo puesto antes que nada. - JJ
-% Antonio - yo creo que está bien así. Las conclusiones suelen ser autocontenidas y yo las estructuro como un resumen del trabajo. ;)
+% Esto tenÃ­ais que haberlo puesto antes que nada. - JJ
+% Antonio - yo creo que estÃ¡ bien asÃ­. Las conclusiones suelen ser autocontenidas y yo las estructuro como un resumen del trabajo. ;)
 % So we can conclude that...
-% *** la propuesta ha sido exitosa y podría ser, potencialmente, una buena herramienta de decisión en sistemas de seguridad ***
+% *** la propuesta ha sido exitosa y podrÃ­a ser, potencialmente, una buena herramienta de decisiÃ³n en sistemas de seguridad ***
 Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, maybe considering bigger data divisions, bigger data sets (from a whole day or working day), or adding some kind of `noise' to the dataset.
 So that, considering the good classification results obtained in this work, the next step could be the application of these methods in the real system from which data was gathered, counting with the opinion of expert CSOs, in order to know the real value of the proposal.
 The study of other classification methods could be another research branch, along with the implementation of a Genetic Programming approach, which could deal with the imbalance problem using a modification of the cost associated to misclassifying, could be done (as the authors did in \cite{cost_adjustment_07}).
