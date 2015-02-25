@@ -154,63 +154,46 @@ classifier. Finally, conclusions and future trends are given in Section \ref{sec
 \section{State of the Art}
 \label{sec:stateofart}
 
-\noindent Our work tries to obtain a URL classification tool for
-enhancing the security in the client side, as at the end we want to
-get if a certain URL is secure or not, having as reference a set of
-rules (derived from a CSP) which allow or deny a set of known
-\textit{HTTP} requests. For this, different techniques belonging to Data Mining (DM), Machine
-Learning (ML), and Computational Intelligence, have been applied. This section gives an
-overview in a number of solutions given to protect the user, or the
-company, against unsecure situations. 
+\noindent Our work tries to obtain a URL classification tool for enhancing the security in the client side, as at the end we want to get if a certain URL is secure or not, having as reference a set of rules (derived from a CSP) which allow or deny a set of known \textit{HTTP} requests. For this, different techniques belonging to Data Mining (DM), Machine Learning (ML), and Computational Intelligence, have been applied. This section gives  an overview in a number of solutions given to protect the user, or the company, against insecure situations. 
 
 % ------------------------------------------------------------------
-%
-\subsection{Data Analysis and preprocessing}
+\subsection{Data Analysis and pre-processing}
 \label{subsec:dataanalysis}
 
-Performing DM means that an analysis is performed over the database we have \cite{Frank2011}. In our case, this datbase is a log of URL connections. Leake \& Wilson \cite{wilson2001maintaining} present a vast review of works which study database maintenance, and the conclusion is that a database with good quality is decisive when trying to obtain good accuracies (this is also demonstrated in \cite{zeineb2014thesis}). We have made use of two techniques, namely balancing techniques and removal of redundant data.
+Performing DM means that an analysis is performed over the database we have \cite{Frank2011}. In our case, this database is a log of URL connections. Leake \& Wilson  \cite{wilson2001maintaining} present a vast review of works which study database maintenance, and the conclusion is that a database with good quality is decisive when trying to obtain good accuracies; a fact which was also demonstrated in \cite{zeineb2014thesis}. To analyse the data that we have at hand, we have based our work on two main processes. A process consisting of performing data pre-processing on the URL dataset and a process consisting of applying balancing techniques depending on the data at hand. 
 
-Due to the nature of the log of URL accesses performed by humans, the used set of data is highly unbalanced \cite{imbalanced_data_05}. In order to deal with this problem there exist several methods in the
-literature, but all of them are mainly grouped in three techniques
-\cite{imbalance_techniques_02}: 
+While performing data pre-processing, we have focused, first , on the kind/type of data included in the URL connections log file; the input file. We remarked that many URL strings are redundant in the dataset and thus we aimed to maintain the input file by eliminating the redundant strings. Actually, the quality of the dataset is very important to generate accurate results and to have the possibility to learn models from the presented data. Thus, maintaining it is an essential step. Many maintenance techniques were proposed in literature \cite{wilson2001maintaining} in order to guarantee the good quality of a given dataset.   Most of these techniques are based on updating a database by adding or deleting instances to optimize and reduce the initial database. 
+These policies include different operations such as: the outdated, redundant, or inconsistent instances may be deleted; groups of objects may be merged to eliminate redundancy and improve reasoning power; objects may be re-described to repair incoherencies; signs of corruption in the database have to be checked, and any abnormalities in the database which might signal a problem has to be controlled. A database which is not maintained can become sluggish and without accurate data users will make uninformed decisions. In this work, we have maintained the URL dataset that we have at hand by focusing on a specific kind of data that should be eliminated; which are the redundant URL strings. In Section \ref{subsec:duplicateddata}, we will explain in details the process that we have adopted to eliminated these redundant data.
+
+Still with the data pre-processing task, we have focused as a second step on the set of features presented in the URL connections log file. Thus we tried to select the most informative features from the initial feature set. At this point, we have introduced an extra technique, a data reduction technique, that was not included in our first work presented in \cite{ECTA}. 
+
+Actually, data reduction is a main point of interest across a wide variety of fields. In fact, focusing on this step is crucial as it often presents a source of significant data loss. Many techniques were proposed in literature to achieve the task of data reduction and they can be categorized into two main heads; techniques that transform the original meaning of the features, called the ``transformation-based approaches", and the second category is a set of semantic-preserving techniques known as the ``selection-based approaches".
+
+Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to accurately describe a large set of data. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database will not be needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important/informative ones which nearly preserve  the same performance as the initial feature set.
+
+Yet, it is important to mention that most of the feature selection techniques, proposed in literature, suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough}, which will be deeply explained in Section \ref{sec:featureselection}, can be used as such tool. 
+ 
+As previously stated and apart from applying a data pre-processing process, we aim to apply balancing techniques, depending on the distribution of patterns per class, in order to ensure the fairness of our results. This is due to the fact that using ``real data’’\footnote{Data which was gathered from the real world, and was not artificially generated.} may yield to highly unbalanced data sets \cite{imbalanced_data_05}. This is our case, as the log file includes a set of URL accesses performed by humans, and indeed we obtained an unbalanced dataset. In order to deal with this kind of data there exist several methods in literature known as balancing techniques \cite{imbalanced_data_05}. These methods can be categorized into three main groups \cite{imbalance_techniques_02}: 
 
 \begin{itemize}
-\item \textit{Undersampling the over-sized classes}: i.e. reduce the considered number of patterns for the classes with the majority.
-\item \textit{Oversampling the small classes}: i.e. introduce additional (normally synthetic) patterns in the classes with the minority.
-\item \textit{Modifying the cost associated to misclassifying the positive and the negative class} to compensate for the imbalance ratio of the two classes. For example, if the imbalance ratio is 1:10 in favour of the negative class, the penalty of misclassifying a positive example should be 10 times greater.
+\item \textit{Undersampling the over-sized classes}: This category aims at reducing the considered number of patterns for the classes with the majority.
+\item \textit{Oversampling the small classes}: This category aims at introducing additional (normally synthetic) patterns in the classes with the minority.
+\item \textit{Modifying the cost associated to misclassifying the positive and the negative class}: This category aims at compensating the unbalance in the ratio of the two classes. For example, if the imbalance ratio is 1:10 in favour of the negative class, the penalty of misclassifying a positive example should be 10 times greater.
 \end{itemize}
 
-The first option has been applied in some works, following a random undersampling approach \cite{random_undersampling_08}, but it has the problem of the loss of valuable information. 
+Techniques belonging to the first group have been applied to some works, following a random undersampling approach \cite{random_undersampling_08}. However, those techniques have the problem of the loss of valuable information. 
 
-The second has been so far the most widely used, following different approaches, such as SMOTE (Synthetic Minority Oversampling Technique) \cite{smote_02}, a method proposed by Chawla et al. for creating `artificial' samples for the minority class, in order to balance the amount of them with respect. However this technique is based in numerical computations, which consider different distance measures, in order to generate useful patterns  (i.e. realistic or similar to the existing ones).
+Techniques belonging to the second  group have been so far the most widely used, following different approaches, such as SMOTE (Synthetic Minority Oversampling Technique) \cite{smote_02} which is a method proposed by Chawla et al. for creating `artificial' samples for the minority class in order to balance the amount of them, with respect to the amount of samples in the majority class. However this technique is based on numerical computations, considering  different distance measures, in order to generate useful patterns  (i.e. realistic or similar to the existing ones).
 
-The third option implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance by Alfaro-Cid et al. in \cite{cost_adjustment_07}, where they used a Genetic Programming (GP) approach in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
+
+
+
+
+The third group implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance by Alfaro-Cid et al. in \cite{cost_adjustment_07}, where they used a Genetic Programming (GP) approach in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
 However almost all the approaches deal with numerical (real, integer) data.
 
-With regard to the redundance of the data, %Zeineb please add something here
-
-For the preprocessing of the data, we have introduced another new technique from the original work performed in \cite{ECTA}. This is the transformation of the data set by means of Rough Sets, and is deeply explained in Section \ref{sec:featureselection}.
-
-Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to describe a large set of data accurately. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database are not needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important ones which nearly preserve  the same performance as the initial feature set.
-
-% ------------------------------------------------------------------
-%
-\subsection{URL classification}
-\label{subsec:urlclassification}
-
-One interesting point about URL classification is that the study of the distance between URLs may be based in the distance between two strings, but Blanco et al. \cite{Blanco2011} argues that the lexical distance between two URLs is not enough to classify them. In addition, the heuristic study of URLs for security purposes in the user side is not a novel practice. Also, the use of Blacklists (in this work, the \textit{denied} URLs) and Whitelists (\textit{allowed} URLs) are very extended practices. For instance, phishing is a problem of security that Sheng et al.  and Khonki et al. \cite{Khonji2011} tried to solve. The first work uses Blacklists as reference to avoid phishing attacks made by e-mail; the second one aims for an heuristic analysis of the URLs domain names and its ranks, in a way that a phished URL can be detected.
-
-In addition, doing some web searching we have found that a lot of companies stands for the use of one between Blacklist and Whitelist \cite{whiteblack_list}. While whitelisting is the more restrictive solution and therefore the more secure, we think that the best solution is to use both, and for this reason the set of rules that we used covers a succession of either allowed and denied web sites.
-
-Then, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
-
-Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in Blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
-
-On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
-
-The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy. 
-
-Finally, Blanzieri and Bryl \cite{blanzieri2008} present a review on a variety of spam filtering methods, and compare them, reaching the conclusion of that they are successful in general, but yet insufficient. This is why we think that implementing a self-adaptive system such as the one we describe, can be good for other applications and not only URL classification.
+Details about the balancing techniques used in our work will be explained in Section \ref{sec:methodology}.
+ 
 
 % ------------------------------------------------------------------
 %
@@ -219,26 +202,18 @@ Finally, Blanzieri and Bryl \cite{blanzieri2008} present a review on a variety o
 
 The works that we are interested in are those which scope is related with the users' information and behaviour, and the management (and adaptation) of Information or Corporate Security Policies (ISPs).
 
-In this line, the paper by Greenstadt and Beal \cite{cognitive_security_08} combined biometrics signals with ML methods in order to get a reliable user authentication in a computer system.
-P.G. Kelley et al. \cite{user-controllable_learning_08} presented a method named \textit{user-controllable policy learning} in which the user gives feedback to the system every time that a security policy is applied, so these policies can be refined according to that feedback to be more accurate with respect to the user's needs. This approach could be useful for a personal device, but our result go further and would be possible to have a global set of rules that can be adapted for all the users.
-On the other hand, policies could be created for enhancing user's privacy, as proposed by Danezis in \cite{inferring_policies_socialnetworks_09}, who defined a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment. The idea of inferring policies can be also considered after our results, but in the scope of the company, and focused on ISPs.
+In this line, the paper proposed by Greenstadt and Beal \cite{cognitive_security_08} combined biometrics signals with ML methods in order to get a reliable user authentication in a computer system. P.G. Kelley et al. \cite{user-controllable_learning_08} presented a method named \textit{user-controllable policy learning} in which the user gives feedback to the system every time that a security policy is applied, so these policies can be refined according to that feedback to be more accurate with respect to the user's needs. 
 
-In the same line, Lim et al. propose a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} take the same approach as Lim et al., but also bringing event correlation in. These two latter author's works are interesting for ours, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
+On the other hand, policies could be created for enhancing user's privacy, as proposed by Danezis in \cite{inferring_policies_socialnetworks_09}, who defined a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment. The idea of inferring policies can be also considered after our results, given the fact that we are able to obtain new rules from the output of the classifiers, but in the scope of the company, and focused on ISPs.
 
-It is worth mentioning a tool developed in Perl language, by Evan Harris \cite{harris2003next}, takes the approach of ``greylisting'', and \textit{temporarily} rejects messages that comes from senders who are not in the blacklist or whitelist, so that the system does not know if it is a spam message. And, like in our approach, it works trying to have a minimal impact on the users.
+In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} took the same approach as Lim et al., but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
 
-Finally, a system named MUSES (from Multiplatform Usable Endpoint
-Security System) \cite{MUSES_SAC_14} is being developed under the
-European Seventh Framework Programme (FP7). This system will include
-event treatment on the user actions inside a company, DM techniques
-for applying the set of policies from the company ISP to the actions,
-allowing or denying them, and ML techniques for improving the set of
-rules derived from these policies, according to user's feedback and
-behaviour after the system decisions \cite{muses_sotics_13}. The results of this work could be applied in this system, by changing the preprocessing step, due to the fact that the database is different. But overall, our conclusions can be scalated to be included in such a system.   
+Furthermore, it is worth mentioning a tool developed in Perl language, by Evan Harris \cite{harris2003next}, taking the approach of ``greylisting'', and which \textit{temporarily} rejects messages that come from senders who are not in the black list or in the white list, so that the system does not know if it is a spam message or not. And, like in our approach, it works trying to have a minimal impact on the users.
+
+Finally, a system named MUSES (from Multiplatform Usable Endpoint Security System)  cite{MUSES_SAC_14} is being developed under the European Seventh Framework  programme (FP7). This system will include event treatment on the user actions inside a company, DM techniques for applying the set of policies from the company ISP to the actions, allowing or denying them, CI techniques for enhancing the system performance, and ML techniques for improving the set of rules derived from these policies, according to user's feedback and behaviour after the system decisions \cite{muses_sotics_13}. The results of this work could be applied in this system, by changing the pre-processing step, due to the fact that the database is different. But overall, our conclusions can be escalated to be included in such a system.   
 
 %Introduce next section - JJ
-Next Section describes the problem we aim to solve, in addition to the data from which the data sets are composed.
-
+In the next Section, we will describe the problem we aim to solve, in addition to the data from which the data sets are composed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PROBLEM DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
