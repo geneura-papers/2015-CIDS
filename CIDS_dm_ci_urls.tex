@@ -46,14 +46,11 @@ S2 Grupo, Spain\\
 \begin{abstract} 
 Corporate security is usually one of the matters in which companies invest more resources, since the loss of information directly translates into money loss; these losses might have an origin in external attacks or internal security failures, but an important part of the security breaches is related to the lack of awareness that the employees have with regard to the use of the Web. In this work we have focused on the latter problem, creating and improving a system
 able to detect anomalous and potentially insecure situations that could be dangerous for a company. This system was initially conceived as a step beyond the use of what are known as black/white lists. These lists contain URLs that are forbidden to access, or dangerous (black lists), or URLs to which the access is permitted or allowed (white lists). 
-Actually, there are websites with daily updated information about new malicious URLs, so that one can update the set of denied/allowed connections. However and as the number of websites constantly grows, and some of the updated websites only work by reports made by users, it is impossible for companies to know in advance if an unknown URL is malicious or not. 
-% Antonio - The abstract should be quite concise. I would move this paragraph to the introduction (or remove it). 
-Thus, in this paper, we propose a system that can initially learn from the already known black/white lists, and then classify a new, unknown, URL connection either as ``should be allowed'' or ``should be denied''. This system is described, as well as its results, and the improvements made by means of an initial data pre-processing 
+In this chapter, we propose a system that can initially learn from the already known black/white lists, and then classify a new, unknown, URL connection either as ``should be allowed'' or ``should be denied''. This system is described, as well as its results, and the improvements made by means of an initial data pre-processing 
 % Antonio - we have used the term 'preprocessing' in several places in the paper. Please fix it (here or there) to use always the same. ;)
+% We are changing the rest to pre-processing.
 step based on applying Rough Set Theory for feature selection. We prove that 
-% Antonio - please check the use of the same verbal tense
-high accuracies can be obtained with a proper pre-processing of the data, reaching between 96\% and 97\% of correctly classified patterns. 
-% Antonio - I would point that the FS improves the system because of the reduction in features, and thus in computational time, while the percentages in accuracy are almost the same (improved sometimes). I mean, the accuracies were very good even without the FS process. ;)
+high accuracies can be obtained with a proper pre-processing of the data, reaching between 96\% and 97\% of correctly classified patterns. We also demonstrate that including the use of Computational Intelligence techniques, such as the one used for feature selection, enhances the system performance, while the accuracies maintain their values.
 Indeed, among the obtained results, we demonstrate that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs access requests as allowed or as denied. 
 \end{abstract}
 % Antonio - I think that the asbtract is a bit long.
