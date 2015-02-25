@@ -45,9 +45,18 @@ S2 Grupo, Spain\\
 %
 \begin{abstract} 
 Corporate security is usually one of the matters in which companies invest more resources, since the loss of information directly translates into money loss; these losses might have an origin in external attacks or internal security failures, but an important part of the security breaches is related to the lack of awareness that the employees have with regard to the use of the Web. In this work we have focused on the latter problem, creating and improving a system
-able to detect anomalous and potentially insecure situations that could be dangerous for a company. This system was initially conceived as a step beyond the use of what are known as black/white lists. These lists contain URLs that are forbidden to access, or dangerous (black lists), or URLs to which the access is permitted or allowed (white lists). Actually, there are websites with daily updated information about new malicious URLs, so that one can update the set of denied/allowed connections. However and as the number of websites constantly grows, and some of the updated websites only work by reports made by users, it is impossible for companies to know in advance if an unknown URL is malicious or not. Thus, in this paper, we propose a system that can initially learn from the already known black/white lists, and then classify a new, unknown, URL connection either as ``should be allowed'' or ``should be denied''. This chapter describes the proposed system, as well as its results, and the improvements made by means of an initial data pre-processing step based on applying Rough Set Theory for feature selection. We proved that high accuracies can be obtained with a proper pre-processing of the data, reaching between 96\% and 97\% of correctly classified patterns. Indeed, among the obtained results, we demonstrated that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs as allowed or as denied. 
+able to detect anomalous and potentially insecure situations that could be dangerous for a company. This system was initially conceived as a step beyond the use of what are known as black/white lists. These lists contain URLs that are forbidden to access, or dangerous (black lists), or URLs to which the access is permitted or allowed (white lists). 
+Actually, there are websites with daily updated information about new malicious URLs, so that one can update the set of denied/allowed connections. However and as the number of websites constantly grows, and some of the updated websites only work by reports made by users, it is impossible for companies to know in advance if an unknown URL is malicious or not. 
+% Antonio - The abstract should be quite concise. I would move this paragraph to the introduction (or remove it). 
+Thus, in this paper, we propose a system that can initially learn from the already known black/white lists, and then classify a new, unknown, URL connection either as ``should be allowed'' or ``should be denied''. This system is described, as well as its results, and the improvements made by means of an initial data pre-processing 
+% Antonio - we have used the term 'preprocessing' in several places in the paper. Please fix it (here or there) to use always the same. ;)
+step based on applying Rough Set Theory for feature selection. We prove that 
+% Antonio - please check the use of the same verbal tense
+high accuracies can be obtained with a proper pre-processing of the data, reaching between 96\% and 97\% of correctly classified patterns. 
+% Antonio - I would point that the FS improves the system because of the reduction in features, and thus in computational time, while the percentages in accuracy are almost the same (improved sometimes). I mean, the accuracies were very good even without the FS process. ;)
+Indeed, among the obtained results, we demonstrate that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs access requests as allowed or as denied. 
 \end{abstract}
-
+% Antonio - I think that the asbtract is a bit long.
 
 \textbf{Keywords.} Computational Intelligence, Rough Sets, Feature Selection, Corporate Security Policies, Internet Access Control, Data Mining, Blacklists and Whitelists.
 
@@ -97,7 +106,7 @@ million active websites. But McAfee reported \cite{mcafee:site} that, at the end
 there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand 
 new phishing URLs (almost 150 thousand associated domains).
 
-With this situation in mind and in this chapter, our aim is to define a tool for automatically making allow or 
+With this situation in mind, in this chapter, our aim is to define a tool for automatically making allow or 
 deny decisions with respect to URLs that are, actually, not included in the aforementioned lists. This decision 
 would be based on that made for similar URL accesses (those with similar features), but instead of using only 
 the URL strings included in the lists, we will consider other parameters of the request/connection.
@@ -115,7 +124,7 @@ information as possible from the connections
 that the employees normally make throughout the workday. This translates into high computational requirements, which is 
 why we introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection 
 technique to extract the most important features from the data at hand. Among the well known feature selection techniques 
-proposed in literature, we propose to use Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally 
+proposed in literature, we propose to use a Computational Intelligence method: the Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally 
 evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches 
 in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
  
@@ -546,6 +555,10 @@ After having analised the log of connecting patterns, we studied the field \text
 Having, then, an initial set of 12 extracted features, our aim is to see if we can reduce execution time while preserving good accuracies. Thus, after applying a feature selection method, based on Rough Sets (see Section \ref{sec:featureselection}), we obtained a list of 9 features. 
 % Antonio - you should specify the data to which the method has been applied (unbalanced), and justify why have you considered those data (not balanced). This section was thought to be after the first results have been shown...
 % Why was thought like that? By whom? As far as I know, for ECTA we put Methodology in one section and in another, the results. Here is the same.
+
+% Antonio - When we proposed this extension we/you should decide which dataset to use. This decision must be commented here, since you have one dataset and another one without duplications, so please clarify here which dataset have you used.
+% Moreover, this was a general comment (you must refer to the dataset used in every experiment and explain why have you used it). In the case of the test of the new features I proposed initially to consider all the same datasets (with the partitions). This was a big amount of work, so we decided to use just unbalanced data, because they got better results than balanced datasets. This is what I mean that must be clarified/justified in the text.
+
 The resulting reduced dataset was used to test the same chosen classifiers as before, plus JRip. This is a classifier which consists of a propositional rule learner, the so-called Repeated Incremental Pruning to Produce Error Reduction (RIPPER) algorithm. It was proposed by W. Cohen \cite{cohen1995fast} as an improved version of the Incremental Reduced Error Pruning (IREP) algorithm. The reason why this JRip classifier was added to the list, is because we cannot compare the size of the trees for the Random Forest classifier, as the size of the forest is chosen when running it. Then, we added JRip for making the comparison more complete.
 
 All the experiments were made with the same computer, in the following conditions: Toshiba Laptop with Intel\texttrademark  Core i7-3630QM, CPU@2'40GHz x 8; RAM 3'8 GB; Operating System Linux Ubuntu 14.04 LTS 64 bits; and Weka version 3.6.10, with 3 GB assigned for memory usage. Table \ref{tab_runningtimes} shows the results of the comparison between performance before and after applying feature selection. Though the complexity of the trees generated by the classifiers grow after applying feature selection, even obtaining more rules for PART classifiers, the running time lowers an average of 40\%. This is one of the main objectives when a feature selection technique is applied [REF].
