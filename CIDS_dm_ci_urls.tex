@@ -840,9 +840,12 @@ One of the main objectives of this paper is to find a method (classifier) that c
 
 In the performed experiments the majority of the obtained rules/trees are based on the URL in order to discriminate between the two classes, however we also found several ones which consider variables/features different of this to make the decision. For instance:\\
 
+\begin{small}
 \begin{verbatim}
-IF server_or_cache_address = "90.84.53.17" 
-THEN DENY
+IF server_or_cache_address = "173.194.34.225"
+AND http_method = "GET"
+AND duration_milliseconds > 52
+THEN ALLOW
 
 IF server_or_cache_address = "173.194.78.103" 
 THEN ALLOW
@@ -857,16 +860,8 @@ AND content_type = "text/html"
 AND http_reply_code = "200"
 AND bytes > 772
 THEN ALLOW
-
-IF server_or_cache_address = "173.194.34.225"
-AND http_method = "GET"
-AND duration_milliseconds > 52
-THEN ALLOW
-
-IF server_or_cache_address = "90.84.53.49"
-AND time <= 33758000
-THEN ALLOW
 \end{verbatim}
+\end{small}
 
 These are the interesting rules for our purposes, since they are somehow independent of the URL to which the client requests to access. Thus, it would be potentially possible to allow or deny the access to unknown URLs just taking into account some parameters of the session.
 In the case that the features considered in the rule can be known in advance, such as \texttt{http\_method}, or \texttt{server\_or\_cache\_address}, for instance, the decision could be made in real-time, and thus, a granted URL (Whitelisted) could be DENIED or the other way round.
@@ -905,70 +900,75 @@ JRip & 87.45 & 85.60 \\
 
 % Antonio - I have to change the name of 'determining features', I don't like it very much, but cannot think in a better option... 
 
-As expected, and as it can be seen in the table, the percentages of accuracies have been decreased. This is much more dramatic in the case where three features have been discarded.
+As expected, and as it can be seen in the table, the percentages of accuracies have been decreased. This is more dramatic in the case where three features have been discarded.
 However, the results are still quite good, having in mind that the remaining features are more general than these.
 
-Anyway, what is really important in these experiments is to analyse the set of rules that the (rule-based) classifiers have obtained as models.
+Anyway, what is really important in these experiments is to analyse the set of rules that the classifiers\footnote{We can deploy the trees as rules also.} have obtained as models.
 
-Thus, having a look at these rules, in the case without \texttt{url} (i.e. 11 features),we can find: 
+Thus, having a look at these rules, in the case without \texttt{url} (i.e. 11 features), the rules are pretty similar to those presented before. Thus, we can find, among the most important rules (in the sense that the classification accuracy depends in a big part on them): 
 
-*** RULES WITHOUT URL ***\\
+\begin{small}
+\begin{verbatim}
+IF bytes >= 1075
+AND time >= 29633000
+AND time <= 30031000
+AND client_address = "10.159.52.182"
+AND content_type_MCT = "image"
+AND content_type = image/jpeg
+THEN DENY
 
-> Analyse the rules\\
-\\
-*** RULES WITHOUT URL-IPs ***\\
+IF server_or_cache_address = "173.194.66.121" 
+AND client_address = "192.168.4.4"
+AND time <= 33603000
+THEN ALLOW
 
-> Analyse the rules\\
+IF client_address = "10.159.188.11"
+AND bytes <= 2166 
+AND content_type_MCT = "text"
+THEN ALLOW
+\end{verbatim}
+\end{small}
 
-Of course, some of these features depend on the session itself, i.e. they will be computed after the session is over, but the idea in that case would be `to refine' somehow the existing set of URLs in the White List.
+Which depends on the so-called `determining features'. Actually, almost all the important rules depend on them.
+
+Due to this reason we have performed another experiment omitting these variables, in addition to the \texttt{url}, as it has been commented before.
+
+The generated rules for some of the classifiers (tree and rule-based) in this experiment are closer to what we want to obtain. Some examples of relevant rules are:
+
+%[J48], [REP Tree], [PART] and [PART]
+\begin{small}
+\begin{verbatim}
+
+IF http_reply_code = "200"
+AND content_type = "application/json"
+AND time <= 33635000
+AND bytes <= 3921
+THEN ALLOW
+
+IF content_type = "text/plain"
+AND duration_milliseconds >= 7233.5 
+THEN DENY
+
+IF content_type = "application/octet-stream"
+AND bytes <= 803
+THEN ALLOW
+
+IF bytes <= 1220
+AND time <= 33841000
+AND http_reply_code = "404"
+AND squid_hierarchy = DEFAULT_PARENT
+AND duration_milliseconds <= 233
+AND bytes <= 722
+THEN ALLOW
+\end{verbatim}
+\end{small}
+
+As it can be seen these are more general rules which could be much more useful to classify new URL accesses requests (non-previously known) in a company.
+These rules could be taken as a reference to build a decision system, but there still some considerations to have into account, since all the rules have been created using very specific data. Thus, there are several rules that cannot be used as they are in other companies, and should be supervised somehow (maybe by a human expert).
+
+Moreover, some of these features depend on the session itself, i.e. they will be computed after the session is over, but the idea in that case would be `to refine' somehow the existing set of URLs in the White List.
 Thus, when a client requests access to a Whitelisted URL, this will be allow, but after the session is over, and depending on the obtained values, and on one of these classifiers, the URL could be labelled as DENIED for further requests.
 This could be a useful decision-aid tool for the CSO in a company, for instance.
-
-
-%
-%server_or_cache_address = 90.84.53.80: deny (27.0/1.0)
-%
-%server_or_cache_address = 208.43.111.194: deny (19.0)
-%
-%server_or_cache_address = 173.194.78.105 AND
-%content_type_MCT = null: allow (19.0)
-%
-%server_or_cache_address = 173.194.78.94 AND
-%content_type_MCT = text AND
-%content_type = text/html AND
-%http_reply_code = 200 AND
-%bytes > 772: allow (42.0)
-%
-%
-%server_or_cache_address = 173.194.78.106 AND
-%content_type_MCT = image: allow (8.0)
-%
-%server_or_cache_address = 173.194.34.225 AND
-%http_method = GET AND
-%duration_milliseconds > 52: allow (51.0/1.0)
-%
-%server_or_cache_address = 90.84.53.49 AND
-%time <= 33758000: allow (33.0/1.0)
-%
-%server_or_cache_address = 173.194.78.104: allow (21.0/3.0)
-%
-%server_or_cache_address = 173.194.78.94 AND
-%content_type = text/plain: allow (15.0)
-%
-%server_or_cache_address = 91.216.63.241: allow (10.0/2.0)
-%
-%server_or_cache_address = 66.196.66.157 AND
-%duration_milliseconds > 250: allow (8.0)
-%
-%server_or_cache_address = 176.28.113.132 AND
-%time > 33570000: deny (21.0/2.0)
-%
-%server_or_cache_address = 173.194.78.94 AND
-%content_type = text/html AND
-%duration_milliseconds > 52 AND
-%http_reply_code = 200 AND
-%duration_milliseconds <= 72: allow (14.0)
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
