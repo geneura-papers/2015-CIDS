@@ -371,10 +371,10 @@ Subsection \ref{subsec:logparsing} details how the patterns of the navigation da
 
 At the end of these two steps, the two hashes are compared in order to obtain which entries of the log should be ALLOW or DENY, know as the \textit{labelling} step. This is similar to perform a decision process in a security system. This step results in that there are 38972 pattern belonging to class ALLOW (positive class) and 18530 of class DENY (negative class), so just a 67.78\% of the samples belong to the majority class. This represents a very important problem, since a classifier that is trained considering these proportions is supposed to classify all the samples as ALLOW, getting a theoretically quite good classification accuracy equal or greater than 68\%. However, in section \ref{sec:results} we will see that, despite the fact that some denied patterns are classified as allow, the overall performance of the classifiers are better than the expected.
 
-Given that the dataset contains a majority of categorical/nominal data, we have performed different approaches for data balancing:
+We observed that more than half of the initial amount of patterns are labelled, and that the ratio is 2:1 in allows to denies. The 2:1 ratio means that the data is unbalanced, and therefore we have performed different approaches from the first and second groups of data balancing techniques, which were introduced in Section \ref{subsec:dataanalysis}:
 \begin{itemize}
-\item Undersampling: we will remove random samples of the majority class until the amount in both classes are similar.
-\item Oversampling: we will duplicate random samples of the minority class, in order to get a close number of patterns in both classes. This has to be done due to the impossibility of creating synthetic data when dealing with categorical values (there is not a proper distance measure between two values in a category). Actually, since the number of samples in the majority class is almost twice the minority one, we have just duplicated all of those belonging to the minority class.
+\item Undersampling: we will randomly remove samples of the majority class until the amount in both classes are similar. In other words, we will reduce the amount of `denied' patterns by a half.
+\item Oversampling: we will introduce random samples in the minority class, in order to get a closer number of patterns in both classes. This has to be done due to the impossibility of creating synthetic data when dealing with categorical values (there is not a proper distance measure between two values in a category). Actually, since the number of samples in the majority class is almost twice the minority one, we have just duplicated all of those belonging to the minority class.
 \end{itemize}
 
 Finally, in Subsection \ref{subsec:methods} we explain the selection of the methods to apply in order to classify the data. We just have considered the patterns correctly labelled in the preprocessing phase. Thus, a supervised classification process \cite{classification_67} has been conducted on the balanced datasets.
@@ -636,7 +636,7 @@ Three different tests have been done for the random pattern distribution approac
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{tabresults_nobalan} Percentage of correctly classified patterns for non-balanced data}
+ \caption{\label{tabresults_nobalan} Percentage of correctly classified patterns for unbalanced data}
 % Antonio - try to use the same term always 'unbalanced' or 'non-balanced'.
 %           Moreover, the captions should be more explicit, I mean, specify if these results are obtained for the initial data or for the new set of 9 features.
 % Please, revise the rest o captions in this sense.
@@ -994,15 +994,6 @@ The results show that classification accuracies are between 95\% and 97\%, even 
 
 In this way, we can conclude that the approach has been successful and it would be a useful tool in an enterprise.
 
-% ***
-% RESUMEN en un pÃ¡rrafo de lo que se ha obtenido:
-% - muy buenos porcentajes (en torno al 95-97\%) en general incluso en datos no balanceados
-% - el mÃ©todo pierde efectividad si se omiten algunos patrones que pueden no haber aparecido antes (datos secuenciales o undersampling) => hay que estudiarlo mejor en siguientes trabajos
-% 
-% Esto tenÃ­ais que haberlo puesto antes que nada. - JJ
-% Antonio - yo creo que estÃ¡ bien asÃ­. Las conclusiones suelen ser autocontenidas y yo las estructuro como un resumen del trabajo. ;)
-% So we can conclude that...
-% *** la propuesta ha sido exitosa y podrÃ­a ser, potencialmente, una buena herramienta de decisiÃ³n en sistemas de seguridad ***
 Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, maybe considering bigger data divisions, bigger data sets (from a whole day or working day), or adding some kind of `noise' to the dataset.
 So that, considering the good classification results obtained in this work, the next step could be the application of these methods in the real system from which data was gathered, counting with the opinion of expert CSOs, in order to know the real value of the proposal.
 The study of other classification methods could be another research branch, along with the implementation of a Genetic Programming approach, which could deal with the imbalance problem using a modification of the cost associated to misclassifying, could be done (as the authors did in \cite{cost_adjustment_07}).
