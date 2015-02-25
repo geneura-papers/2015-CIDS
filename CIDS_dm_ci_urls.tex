@@ -3,7 +3,6 @@
 \usepackage[latin1]{inputenc}
 \usepackage{epsfig}
 \usepackage{graphicx}        % standard LaTeX graphics tool
-%\usepackage{subfigure}
 \usepackage{url}
 \usepackage{subfig}
 \usepackage{calc}
@@ -773,7 +772,7 @@ REP Tree & \textbf{97.32} & \textbf{96.38 $\pm$ 0.07} & 97.67 \\
 
 The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Naïve Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
-\begin{figure}[htb]
+\begin{table}[htb]
 \centering
 \subfloat[80\% for training, \%20 for testing, and 90\% for training, 10\% for testing]{
 \small
@@ -821,9 +820,7 @@ PART & 96.05 $\pm$ 0.45 & 81.29 \\
 \end{tabular}
 }
 \caption[Correctly classified patterns for unbalanced data after the removal of entries that could lead to missclassification.]{Percentage of correctly classified patterns for unbalanced data, after the removal of entries that could lead to missclassification.. (a) 80\% for training, \%20 for testing, and 90\% for training, 10\% for testing. (b) 60\% for training, 40\% for testing. Best results are marked in boldface. \label{tab:repurl_unb_traintest}}
-\end{figure}
-
-% Antonio - These should be tables instead of sub-figures
+\end{table}
 
 %%%%% From here, results after feature selection
 
