@@ -58,114 +58,91 @@ able to detect anomalous and potentially insecure situations that could be dange
 \section{Introduction}
 \label{sec:introduction}
 
-\noindent Security is an inclusive term that refers to a diversity of
-steps taken by individuals, and companies, in order to protect
-computers or computer networks that are connected to the Internet. The
-Internet was initially conceived as an open network facilitating the
-free exchange of information. However, data which is sent/received
-over the Internet travel through a dynamic chain of computers and
-network links and, as a consequence, the risk of intercepting and changing
-the data is high. In fact, it would be virtually impossible to secure
-every computer connected to the Internet around the world. So, there
-will likely always be weak links in the chain of data exchange
-\cite{cheswick2003firewalls}. Yet, companies have to find out a way
-for their employees to
-safely interact with customers, clients, and anyone who uses the
-Internet while protecting internal confidential information. Companies
-have, also, to alert the employees from the Internet misuse while
-doing their job. 
+\noindent Security is an inclusive term that refers to a diversity of steps taken by individuals, 
+and companies, in order to protect computers or computer networks that are connected to the Internet. 
+The Internet was initially conceived as an open network facilitating the free exchange of information. 
+However, data which is sent/received over the Internet travel through a dynamic chain of computers and 
+network links and, as a consequence, the risk of intercepting and changing the data is high. 
+In fact, it would be virtually impossible to secure every computer connected to the Internet around the world. 
+So, there will likely always be weak links in the chain of data exchange \cite{cheswick2003firewalls}. 
+Yet, companies have to find out a way for their employees to safely interact with customers, clients, and anyone 
+who uses the Internet while protecting internal confidential information. Companies have, also, to alert the employees 
+from the Internet misuse while doing their job.
  
-Most of the time, employees have a misguided sense of security and
-believe that it is an IT problem, a purely technical issue, and they
-naively believe that an incident may never happen to them. \cite{stanton2005analysis}
- Actually, the employees' web misuse is one of the main causes of
- security breaches \cite{breivik2002abstract}, 
- and so making them security-conscious has become a security
- challenge. The reality is that every department must be involved in
- readiness planning and establishing security policies and procedures
- to minimize their risks. Such strategies are mainly handled by means
- of \textit{Corporate Security Policies} (CSPs) which basically are a
- set of security rules aiming at protecting company assets by defining
- permissions to be considered for every different action to be
- performed inside the security system \cite{kaeo2003designing}.
+Most of the time, employees have a misguided sense of security and believe that it is an IT problem, a purely technical 
+issue, and they naively believe that an incident may never happen to them \cite{stanton2005analysis}.  
+Actually, the employees' web misuse is one of the main causes of  security breaches \cite{breivik2002abstract},  
+so that making them security-conscious has become a security  challenge. 
+
+The reality is that every department must be involved in  readiness planning and establishing security policies 
+and procedures  to minimize their risks. Such strategies are mainly handled by 
+means  of \textit{Corporate Security Policies} (CSPs) which basically are a  set of security rules aiming at 
+protecting company assets by defining  permissions to be considered for every different action to be  performed 
+inside the security system \cite{kaeo2003designing}.
  
-The basic idea behind these CSPs is usually to include rules to
-either allow or deny employees' access to non-confident or
-non-certified web sites, which are referenced by their URLs in this chapter.
-% in the current work or in general? References!!!! - JJ
-% Changed? - Paloma
- Moreover, several web pages might be also controlled for productivity
- or suitability reasons, given the fact that the employees who connect
- to these might have working purposes or not. Actually, some of the
- CSPs usually define sets of allowed or denied web pages or web sites
- that could be accessed by the company employees. These sets are
- usually included in two main lists; a white list (referring to
- ``permitted'') and a black list (referring to
- ``non-permitted''). Both lists, the white and the black, act as a
- good and useful control tools for those URLs included in them, as
- well as for the complementary. For instance, the URLs which are not
- included in a white list will automatically have a denial of
- access \cite{ludl2007effectiveness}.
+The basic idea behind these CSPs is usually to include rules to either allow or deny employees' access to 
+non-confident or non-certified websites, which are referenced by their URLs in this chapter. Moreover, several web pages 
+might be also controlled for productivity  or suitability reasons, given the fact that the employees who connect  
+to these might have working purposes or not. Actually, some of the  CSPs usually define sets of allowed or denied 
+web pages or websites that could be accessed by the company employees. These sets are  usually included in two main 
+lists; a white list (referring to  ``permitted'') and a black list (referring to  ``non-permitted''). 
+Both lists, the white and the black, act as a  good and useful control tools for those URLs included in them, 
+as  well as for the complementary. For instance, the URLs which are not included in a white list will automatically 
+have a denial of  access \cite{ludl2007effectiveness}.
 
-The aim of this paper is going beyond this traditional and simple
-decision making process. By using black and/or white lists, we either
-allow or deny users' requests/connection based, only, on the URLs
-provided in the lists; there is usually no mechanism for updating that
-list and even if there is, the only information available is the URL
-that can be easily overcome (using IPs, alternative URLs, proxies or
-many other ways). Thus, our aim is to define a tool for automatically
-making allow or a deny decisions with respect to URLs that are,
-actually, not included in the aforementioned lists. This decision
-would be based on that made for similar URL accesses (those with
-similar features), but instead of using only the URL strings
-included in the lists, we will consider other parameters of
-the request/connection. 
-For this reason, the problem has been mapped to a
-\textit{classification} problem in which we start from a set of
-unlabelled patterns that model the connection properties from a huge
-amount of \textit{actual}\footnote{Taken from a log file released to
-  us by a  Spanish company.} URL accesses, known as sessions. After
-that, we assign a label to many of them, considering a set of
-\textit{actual}\footnote{The set of rules has been written by the same
-  company, with respect to its employees.} security rules (CSPs)
-defined by the Chief Security Officer (CSO) in the company. This was the approach followed in \cite{ECTA}, and which we extend in this chapter.
+The aim of this paper is going beyond this traditional and simple decision making process. Actually, by using black 
+and/or white lists, we either allow or deny users' requests/connection based, only, on the URLs provided in the lists. 
+Yet, updating these lists is a never ending task, as numerous malicious websites appear every day. 
+For instance, Netcraft reports from November of 2014 \cite{netcraft:site} showed that there are about 950 
+million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, 
+there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand 
+new phishing URLs (almost 150 thousand associated domains).
 
-In order to extract conclusions from the resulting studied dataset and
-to properly apply a classification algorithm, a pre-processing step is
-needed. In fact, to obtain an accurately trained classifier, there is
-a need to extract as much information as possible from the connections
-that the employees normally make throughout the workday. This
-translates into high computational requirements, which is why we
-introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection technique to extract the most important features from the data at hand. Among the well known feature selection techniques proposed in literature, we propose to use Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
+With this situation in mind and in this chapter, our aim is to define a tool for automatically making allow or 
+deny decisions with respect to URLs that are, actually, not included in the aforementioned lists. This decision 
+would be based on that made for similar URL accesses (those with similar features), but instead of using only 
+the URL strings included in the lists, we will consider other parameters of the request/connection.
+
+For this reason, the problem has been mapped to a \textit{classification} problem in which we start from a set of 
+unlabelled patterns that model the connection properties from a huge amount of \textit{actual}\footnote{Taken from a 
+log file released to   us by a  Spanish company.} URL accesses, known as sessions. After that, we assign a label to many 
+of them, considering a set of \textit{actual}\footnote{The set of rules has been written by the same   company, with respect 
+to its employees.} security rules (CSPs) defined by the Chief Security Officer (CSO) in the company. This was the approach 
+followed in \cite{ECTA}, and which we extend in this chapter.
+
+In order to extract conclusions from the resulting studied dataset and to properly apply a classification algorithm, 
+a pre-processing step is needed. In fact, to obtain an accurately trained classifier, there is a need to extract as much 
+information as possible from the connections
+that the employees normally make throughout the workday. This translates into high computational requirements, which is 
+why we introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection 
+technique to extract the most important features from the data at hand. Among the well known feature selection techniques 
+proposed in literature, we propose to use Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally 
+evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches 
+in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
  
-After pre-processing and based on the reduced dataset, we will apply
-several classification algorithms, testing them and selecting the most
-appropriate one for this problem. The selected classifier should be
-capable of dealing with our data while producing high accuracies and
-being lightweight in terms of running time. Moreover, as we want to
-further test the reliability of the results, in this work we propose
-different experimental setups based on different data
-partitions. These partitions are formed either by preserving the order
-of the data or by taking the patterns in a random way. Finally, given
-that the used data presents unbalance, we aim to apply balancing
-techniques \cite{imbalance_techniques_02}. 
+After pre-processing and based on the reduced dataset, we will apply several classification algorithms, 
+testing them and selecting the most appropriate one for this problem. The selected classifier should be capable 
+of dealing with our data while producing high accuracies and
+being lightweight in terms of running time. Moreover, as we want to further test the reliability of the results, 
+in this work we propose different experimental setups based on different data
+partitions. These partitions are formed either by preserving the order of the data or by taking the patterns in 
+a random way. Finally, given that the used data presents unbalance, we aim to apply balancing 
+techniques \cite{imbalance_techniques_02} to further guarantee the fairness of our obtained results.
 
+In this chapter, we want to improve the accuracies obtained in our previous work \cite{ECTA}, 
+as well as see if the new incorporated method (namely Rough Sets) for feature selection yields to better rules. 
+This is meant to be done not only by applying RST for feature selection, but also by improving the quality of the 
+original data set, by means of erasing information that may be redundant.
 
-In this chapter, we want to improve the accuracies obtained in our previous work \cite{ECTA}, as well as see if the new incorporated method (namely Rough Sets) for feature selection yields to better rules. This is meant to be done not only by applying RST for feature selection, but also by improving the quality of the original data set, by means of erasing information that may be redundant.
-
-The rest of the paper is structured as follows. Next section describes
-the state of the art related to Data Mining (DM), Machine Learning
-(ML), and Computational Intelligence (CI) techniques applied to
-corporate security. Also, related works about URL filtering will be reviewed. Data
- description is detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the
- basic concepts of Rough Set Theory for feature selection which we
- have used for data pre-processing. Section \ref{sec:methodology} gives an overview of the
- followed methodology, as well as the improvements done after our
- first results. Results are detailed in Section \ref{sec:results}. Then, Section \ref{sec:rulesdiscussion}
-  discusses the
- obtained rules which are different for every used
- classifier. Finally, conclusions and future trends are given in
- Section \ref{sec:conclusions}.  
+The rest of the paper is structured as follows. Next section describes the state of the art related 
+to Data Mining (DM), Machine Learning (ML), and Computational Intelligence (CI) techniques applied 
+to corporate security. Also, related works about URL filtering will be reviewed. Data  description is 
+detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the  
+basic concepts of Rough Set Theory for feature selection which we  have used for data pre-processing. 
+Section \ref{sec:methodology} gives an overview of the  followed methodology, as well as the improvements 
+done after our  first results obtained in \cite{ECTA}. Results are detailed in Section \ref{sec:results}. 
+Then, Section \ref{sec:rulesdiscussion}   discusses the  obtained rules which are different for every used 
+classifier. Finally, conclusions and future trends are given in Section \ref{sec:conclusions}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
