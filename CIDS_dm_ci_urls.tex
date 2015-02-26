@@ -213,20 +213,16 @@ In the next Section, we will describe the problem we aim to solve, in addition t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PROBLEM DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Problem and Data Description} 
+\section{Problem and Data Description}
 \label{sec:problemDescription}
 
-\noindent The problem to solve is related with the application of corporate security policies in order to deal with potential URL accesses inside an enterprise. To this end a dataset of URL sessions (requests and accesses) is analysed. These data are labelled with the corresponding permission or not for that access following the aforementioned rules. The problem is then transformed into a classification one, in which every new URL request will be classified, and thus, a grant or deny action will be assigned to that pattern.
+\noindent The problem to solve is related with the application of corporate security policies in order to deal with potential URL accesses inside an enterprise. To this end a dataset of URL sessions (requests and accesses) is analysed. These data are labelled with the corresponding permission or denial for that access, following a set of rules. The rules themselves act as a mix between a black list and a white list. The problem is then transformed into a classification one, in which every new URL request will be classified, and thus, a grant or deny action will be assigned to that pattern.
 
-The analysed data come from an \texttt{access.log} of the Squid
-proxy application
-\cite{squid:site}, in a real Spanish company. This open source tool
-works as a proxy, but with the advantage of storing a cache of recent
-transactions so future requests may be answered without asking the
-origin server again \cite{DuaneWessels2004}.  
-Every pattern, namely a URL request has ten variables associated,
-which we describe in Table \ref{tabdata}, indicating if the variable
-is numeric or nominal/categorical. The table has, however, not only ten but eleven described variables. This is due to the fact that we decided to consider the `Content Type' of the requested webpage as a whole, but also its Main Content Type (MCT) separately. By adding more information through a new feature, we intended to see if more general rules could be obtained by the classifiers, given that there are less possible values for an MCT than for a whole `Content Type'.
+The analysed data come from an \texttt{access.log} of the Squid proxy application \cite{squid:site}, in a real Spanish company. This open source tool works as a proxy, but with the advantage of storing a cache of recent transactions so future requests may be answered without asking the origin server again \cite{DuaneWessels2004}.  
+
+Every pattern, namely an URL request, has ten associated variables. These patterns are described in Table \ref{tabdata} in which we have indicated the type of  each variable; either if it is numeric or nominal/categorical. The table has, however, not only ten but eleven described variables. This is due to the fact that we decided to consider the `Content Type' of the requested web page as a whole, but also its Main Content Type (MCT) separately. By adding more information through a new feature, we intended to see if more general rules could be obtained by the classifiers, given that there are less possible values for an MCT than for a whole `Content Type'.
+
+ 
 
 \begin{table*}[htpb]
 \centering
@@ -252,15 +248,11 @@ Variable name & Description & Type & Rank/Number of Values (if categorical)\\
 }
 \end{table*}
 
-The dependent variable or class is a label which inherently assigns an decision (and so the following action) to every request. This can be: \textit{ALLOW} if the access is permitted according to the CSPs, or can be \textit{DENY}, if the connection is not permitted. These patterns are labelled using an `engine' based in a set of security rules, that specify the decision to make. This process is described in Subsection \ref{subsec:ruleparsing}.
+The dependent variable or class is a label which inherently assigns a decision (and so the following action) to every request. This can be: \textit{ALLOW} if the access is permitted according to the CSPs, or can be \textit{DENY}, if the connection is not permitted. These patterns are labelled using an `engine' based in a set of security rules, that specify the decision to make. This process is described in Subsection \ref{subsec:ruleparsing}.
 
-These data were gathered along a period of two hours, from 8.30 to
-10.30 am (30 minutes after the work started), monitoring the activity
-of all the employees in a medium-size Spanish company (80-100 people),
-obtaining 100000 patterns. We consider this dataset as quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day).
-Moreover, the results derived from the experiments (described in Section \ref{sec:results}) show that this quantity of data might be big enough, but a more accurate outcome would be given with, for instance, a 24 hours long log.
+These data were gathered along a period of two hours, from 8.30 to 10.30 am (30 minutes after the work started), monitoring the activity of all the employees in a medium-size Spanish company (80-100 people), obtaining 100000 patterns. We consider this dataset as quite complete because it contains a very diverse amount of connection patterns, going from personal to professional issues. Moreover, results derived from the experiments and which are described in Section \ref{sec:results} show that this quantity of data might be big enough, but a more accurate outcome would be given with, for instance, a 24 hours long log.
 
-After describing the whole followed methodology, an overview of feature selection techniques, and more specifically Rough Set Theory applied to them, is depicted in the nect Section.
+At this stage and after describing the data, it seems necessary to describe the technique that we have used for the URL data pre-processing. Rough Set Theory for feature selection is depicted in the next Section. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ROUGH SET FOR FEATURE SELECTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
