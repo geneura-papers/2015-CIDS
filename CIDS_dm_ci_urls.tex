@@ -562,9 +562,9 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 \section{Results}
 \label{sec:results}
 
-This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presentes the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
+This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
  
-\subsection{Classification results}
+\subsection{Results about classification}
 \label{subsec:firstresults}
 
 \noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Naïve Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.   
@@ -575,11 +575,13 @@ As stated in Section \ref{subsec:balancing}, the dataset presents unbalance in t
 
 Classification results for the unbalanced data are presented in Table \ref{tabresults_nobalan}. Three different tests have been performed for the random pattern distribution approach, so the mean and standard deviation are shown in the corresponding columns.
 
+
+
 \begin{table*}[htpb]
 \centering
  \caption{\label{tabresults_nobalan} Percentage of correctly classified patterns for the unbalanced dataset with 12 features.} 
 {\small
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|}
 \cline{2-5}
 \multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\
 \cline{2-5}
@@ -605,7 +607,8 @@ As it can be seen from Table \ref{tabresults_nobalan}, all five classifiers achi
 
 For a 80\%-20\% division, results based on the sequential data have lower values than those obtained from the random data, but still they are considered as good ($>$ 85\%). This is due to the occurrence of new patterns from a certain time. Some requests may happen just at one specific time of the day, or in settled days. Then, the classifier may not find enough similarity in the patterns to correctly classify the entries in the test file. On the other hand, the loss of 5 to 6 points in the results of the 90\%-10\% division is somehow expected as it reinforces the previous mentioned hypothesis.
 
-The classifier that lightly stands out over the others is \textit{Random Forest}, being the best in almost every case for randomly made divisions, and it also has good results for sequentially made divisions. However, if we focus on the standard deviation, \textit{REP Tree} is the chosen one, as its results present robustness (low standard deviation).
+The classifier that lightly stands out over the others is \textit{Random Forest}, being the best in almost every case for randomly made divisions, and it also has good results for sequentially made divisions. However, if we focus on the standard deviation, \textit{REP Tree} is the chosen
+one, as its results present robustness.
 
 Once balancing is performed, resulting datasets were used as inputs for the same classifiers, and results are shown in Tables \ref{tabresults_balan_under} and \ref{tabresults_balan_over}. Table \ref{tabresults_balan_under} shows the classifiers accuracy for the balanced dataset with 12 features, applying undersampling technique, and Table \ref{tabresults_balan_over}, with the application of oversampling technique. For each one, the 90\%-10\% and 80\%-20\% divisions were also made.
 
@@ -613,7 +616,7 @@ Once balancing is performed, resulting datasets were used as inputs for the same
 \centering
  \caption{\label{tabresults_balan_under} Percentage of correctly classified patterns for the balanced dataset with 12 features, applying undersampling technique.}
 {\small
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|}
 \cline{2-5}
 \multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\
 \cline{2-5}
@@ -639,7 +642,7 @@ PART & 96.19 $\pm$ 0.14 & 85.16 & 96.09 $\pm$ 0.10 & 79.70 \\
 \centering
  \caption{\label{tabresults_balan_over} Percentage of correctly classified patterns for the balanced dataset with 12 features, applying oversampling technique.}
 {\small
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|c|c|}
 \cline{2-5}
 \multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\
 \cline{2-5}
@@ -674,10 +677,10 @@ The results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). 
 
 The way it happened for the original datasets, results for files with the patterns taken consecutively lower significantly. And as previously explained, this happens due to the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
-\begin{table}[htb]
+\begin{table*}[htpb]
 \centering
-\subfloat[80\% for training, \%20 for testing, and 90\% for training, 10\% for testing]{
-\small
+ \caption{\label{tab:repurl_unb_traintest}Percentage of correctly classified patterns for unbalanced data, after the removal of entries that could lead to misclassification.}
+{\small
 \begin{tabular}{|l|c|c|c|c|}
 \cline{2-5}
 \multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\
@@ -698,41 +701,222 @@ PART & 96.84 $\pm$ 0.18 & 86.68 & 96.55 $\pm$ 0.87 & 83.61 \\
 \hline
 \end{tabular}
 }
-
-\subfloat[60\% for training, 40\% for testing]{
-\small
-\begin{tabular}{|l|c|c|}
-\cline{2-3}
-\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{60\% Training - 40\% Test} \\
-\cline{2-3}
-\multicolumn{1}{l|}{} & Random (mean) & Sequential\\
-\hline
-Na\"ive Bayes & 92.76 $\pm$ 1.34 & 77.74 \\
-\cline{1-1}
-Random Forest & 96.45 $\pm$ 0.67 & 87.50 \\
-\cline{1-1}
-J48 & 96.44 $\pm$ 0.19 & 87.42 \\
-\cline{1-1}
-NNge & 95.98 $\pm$ 0.34 & 84.73 \\
-\cline{1-1}
-REP Tree & 96.41 $\pm$ 0.27 & 88.91 \\
-\cline{1-1}
-PART & 96.05 $\pm$ 0.45 & 81.29 \\
-\hline
-\end{tabular}
-}
-\caption[Correctly classified patterns for unbalanced data after the removal of entries that could lead to misclassification.]{Percentage of correctly classified patterns for unbalanced data, after the removal of entries that could lead to misclassification.. (a) 80\% for training, \%20 for testing, and 90\% for training, 10\% for testing. (b) 60\% for training, 40\% for testing. Best results are marked in boldface. \label{tab:repurl_unb_traintest}}
-\end{table}
+\end{table*}
 
 First, we concluded that not balancing the dataset was better for obtaining good results, also that taking the samples randomly instead of a sequential way is more adequate. Finally, we noticed that we have successfully reduced the dataset and did not lose good accuracies. For this reason, the dataset with the redundant patterns erased is the chosen one to perform the feature selection. Results are described in next subsection.
+
 
 \subsection{Results about feature selection}
 \label{subsec:RSTresults}
 
 In this section, our aim is to prove two hypotheses. First, we want to prove that applying rough set theory for feature selection reduces the running time when testing the classifiers. Second and based on the reduced feature set of data, we want to prove that the accuracies remain the same, or even improve in comparison to the original set of features.
 
+The resulting reduced dataset, from the previous subsection, was used to test the same chosen classifiers, plus JRip. This is a classifier which consists of a propositional rule learner, the so-called Repeated Incremental Pruning to Produce Error Reduction (RIPPER) algorithm. It was proposed by W. Cohen \cite{cohen1995fast} as an improved version of the Incremental Reduced Error Pruning (IREP) algorithm. The reason why this JRip classifier was added to the list, is because we cannot compare the size of the trees for the Random Forest classifier, as the size of the forest is chosen when running it. Then, we added JRip for making the comparison more complete.
+
+All the experiments were made with the same computer, in the following conditions: Toshiba Laptop with Intel\texttrademark  Core i7-3630QM, CPU@2'40GHz x 8; RAM 3'8 GB; Operating System Linux Ubuntu 14.04 LTS 64 bits; and Weka version 3.6.10, with 3 GB assigned for memory usage. Table \ref{tab_runningtimes} shows the results of the comparison between performance before and after applying feature selection. Though the complexity of the trees generated by the classifiers grows after applying feature selection, even obtaining more rules for PART classifiers, the running time lowers by an average of 40\%.  
+
+ 
+\begin{table}[htpb]
+\centering
+ \caption{\label{tab_runningtimes} Comparison between rule/tree complexity and running times for the initial data set, which had 12 features, and the resulting one, having 9 features, after applying Rough Set Theory for feature selection.} 
+{\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & 12 features & 9 features \\
+\hline
+J48 & Size of the tree 8113, 0.62 seconds & Size of the tree 10191, 0.26 seconds \\
+\cline{1-1}
+Random Forest & 10 trees, 1.59 seconds & 10 trees, 1.32 seconds \\
+\cline{1-1}
+REP Tree & Size of the tree 8317, 2.24 seconds & Size of the tree 8817, 0.53 seconds \\
+\cline{1-1}
+NNge & 1341 exemplars, 48.11 seconds & 1294 exemplars, 39.57 seconds \\
+\cline{1-1}
+PART & 966 rules, 15.38 & 998 rules, 11.24 seconds \\
+\cline{1-1}
+JRip & 87 rules, 127.28 seconds & 64 rules, 64.23 seconds \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Now, if we focus on the results of the accuracies which are summarised in Table \ref{tab_12featvs9feat}, we notice that the classification accuracies are nearly the same. This comparison was made in the same conditions which are unbalanced datasets, and with a 10 fold cross-validation technique for training-test.
+
+\begin{table}[htpb]
+\centering
+ \caption{\label{tab_12featvs9feat} Comparison between the obtained accuracies for the initial data set, which had 12 features, and the resulting one, having 9 features, after applying Rough Set Theory for feature selection.}
+{\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & 12 features & 9 features \\
+\hline
+Na\"ive Bayes & 92.30 & 92.19 \\
+\cline{1-1}
+J48 & 97.37 & 97.40 \\
+\cline{1-1}
+Random Forest & 97.60 & 97.57 \\
+\cline{1-1}
+REP Tree & 97.33 & 97.34 \\
+\cline{1-1}
+NNge & 97.18 & 97.13 \\
+\cline{1-1}
+PART & 97.41 & 97.27 \\
+\cline{1-1}
+JRip & 92.95 & 91.66 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Moreover, results in Table \ref{tab_featselect} show the same behaviour as for previous experiments. Actually, results from this table are compared to those obtained from Table \ref{tabresults_nobalan}. This is because both tables are sharing nearly the same conditions, except that each one has a specific number of features. 
+
+We can see that, for example, for a division of 80\% training - 20\% test, the results after feature selection are better for the \textit{Random Forest} and \textit{PART} classifiers. Only \textit{NNge} seems to generate lower classification results, but still considered as interesting as it is higher than 96\%.  
+
+\begin{table*}[htpb]
+\centering
+ \caption{\label{tab_featselect} Percentage of correctly classified patterns for the unbalanced dataset with 9 features.}
+{\small
+\begin{tabular}{|l|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\
+\cline{2-5}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\
+\hline
+J48 & 97.10 $\pm$ 0.23 & 87.83 & 97.33 $\pm$ 0.80 & 84.51 \\
+\cline{1-1}
+Random Forest & 97.61 $\pm$ 0.49 & 88.06 & 97.76 $\pm$ 0.83 & 83.71 \\
+\cline{1-1}
+REP Tree & 97.17 $\pm$ 0.15 & 87.79 & 97.39 $\pm$ 0.58 & 85.73 \\
+\cline{1-1}
+NNge & 96.63 $\pm$ 0.50 & 82.18 & 97.27 $\pm$ 1.12 & 80.94 \\
+\cline{1-1}
+PART & 97.24 $\pm$ 0.12 & 87.88 & 97.29 $\pm$ 0.86 & 85.11 \\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+Finally, we have proved our first hypothesis: applying Rough Set Theory for feature selection significantly improves the computational cost of the system. Also, we proved that our second hypothesis is also true, because the obtained accuracies after applying rough set theory for feature selection are the same, even slightly better, than the ones obtained before the pre-processing phase.
+
 \subsection{Discussion about the Obtained Rules}
 \label{subsec:rulesdiscussion}
+
+One of the main objectives of this chapter is to find a method (classifier) that can build rules not dependent on the URL, in order to get a behaviour quite different from the classical black and white lists. Thus, it could made a decision about new connection requests based on other, more general, features.
+
+In the performed experiments, the majority of the obtained rules/trees are based on the URL in order to discriminate between the two classes. However, we also found several ones which consider other variables/features rather than the URL itself to make the decision. For instance:\\
+
+\begin{small}
+\begin{verbatim}
+IF server_or_cache_address = "173.194.34.225"
+AND http_method = "GET"
+AND duration_milliseconds > 52
+THEN ALLOW
+
+IF server_or_cache_address = "173.194.78.103"
+THEN ALLOW
+
+IF content_type =
+ "application/vnd.google.safebrowsing-update"
+THEN DENY
+
+IF server_or_cache_address = "173.194.78.94"
+AND content_type_MCT = "text"
+AND content_type = "text/html"
+AND http_reply_code = "200"
+AND bytes > 772
+THEN ALLOW
+\end{verbatim}
+\end{small}
+
+In their presented format, these rules are considered adequate to fulfill our purposes, since they are somehow independent of the URL to which the client requests to access. Thus, it would be potentially possible to allow or deny the access to unknown URLs just taking into account some parameters of the request. 
+
+When the features considered in the rule can be known in advance, such as \texttt{http\_method}, or \texttt{server\_or\_cache\_address}, for instance, the decision could be made in real-time, and thus, a granted URL (whitelisted) could be DENIED, or the other way round.
+
+Tree-based classifiers also yield to several useful branches in this sense, but they have not been plotted here because of the difficulty for showing/visualizing them properly.
+
+Focusing on the presented rules, it can be noticed that almost all of them also depend on very determining features/values, such as \texttt{server\_or\_cache\_address}, or even on the \texttt{client\_address} (not presented here). These features create several non-useful rules, mainly in the case of the client IP address, because it will not be correct to settle that a specific IP cannot access to some URLs. Thus, we have conducted additional experiments in this line by removing these three features (\texttt{url}, \texttt{server\_or\_cache\_address}, \texttt{client\_address}) from the dataset and training again the classifiers. These have been performed over the unbalanced data, considering a 10-fold cross validation test. 
+
+The results of classification accuracies are shown in Table \ref{tab_rules_study_classification}.
+ 
+\begin{table}[htpb]
+\centering
+ \caption{\label{tab_rules_study_classification} Percentage of correctly classified patterns for the unbalanced dataset without the set of critical features, namely \texttt{URL}, \texttt{server\_or\_cache\_address}, and \texttt{client\_address}.} 
+{\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & Without URL feature & Without URL-IPs features\\
+\hline
+J48 & 93.62 & 90.53 \\
+\cline{1-1}
+Random Forest & 94.42 & 91.75 \\
+\cline{1-1}
+REP Tree & 92.58 & 89.61 \\
+\cline{1-1}
+PART & 93.40 & 88.25 \\
+\cline{1-1}
+JRip & 87.45 & 85.60 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+As expected, and as it can be seen in Table \ref{tab_rules_study_classification}, the percentages of accuracies have been decreased. Results are more influenced and decrease  in the case where three features have been discarded. However, the results are still quite good, having in mind that the remaining features are more general than these. In addition, it is worth to analyse the set of rules that the classifiers\footnote{Trees can be deployed as rules.} have generated as models. Thus, having a look at these other rules, in the case without \texttt{url} (i.e. 11 features), the rules are pretty similar to those presented before. Thus, we can find, among the most important rules (in the sense that the classification accuracy depends in a big part on them) the following ones:
+
+\begin{small}
+\begin{verbatim}
+IF bytes >= 1075
+AND time >= 29633000
+AND time <= 30031000
+AND client_address = "10.159.52.182"
+AND content_type_MCT = "image"
+AND content_type = image/jpeg
+THEN DENY
+
+IF server_or_cache_address = "173.194.66.121"
+AND client_address = "192.168.4.4"
+AND time <= 33603000
+THEN ALLOW
+
+IF client_address = "10.159.188.11"
+AND bytes <= 2166
+AND content_type_MCT = "text"
+THEN ALLOW
+\end{verbatim}
+\end{small}
+
+These rules depend on the so-called `critical features'. Actually, almost all the important rules depend on them. Due to this reason, we have performed another experiment omitting these variables, in addition to the \texttt{URL}, as it was mentioned before. The generated rules by some of the classifiers, tree and rule-based, are closer to what we aim to obtain. Some examples of relevant rules are the following:
+
+%[J48], [REP Tree], [PART] and [PART]
+\begin{small}
+\begin{verbatim}
+
+IF http_reply_code = "200"
+AND content_type = "application/json"
+AND time <= 33635000
+AND bytes <= 3921
+THEN ALLOW
+
+IF content_type = "text/plain"
+AND duration_milliseconds >= 7233.5
+THEN DENY
+
+IF content_type = "application/octet-stream"
+AND bytes <= 803
+THEN ALLOW
+
+IF bytes <= 1220
+AND time <= 33841000
+AND http_reply_code = "404"
+AND squid_hierarchy = DEFAULT_PARENT
+AND duration_milliseconds <= 233
+AND bytes <= 722
+THEN ALLOW
+\end{verbatim}
+\end{small}
+
+As it can be seen these are more general rules which could be much more useful for classifying new, previously unknown, URL access requests in a company. These rules could be taken as a reference to build a decision system. However, there are still some considerations that should be taken into account since all the rules have been created using a very specific data. Thus, there are several rules that cannot be used as they are specific for some other companies, and should be supervised somehow (maybe by an expert).
+
+Moreover, some of these features depend on the session itself, i.e. they will be computed after the session is over, but the idea in that case would be `to refine' somehow the existing set of URLs in the white list. Thus, when a client requests access to a whitelisted URL, this will be allowed, but after the session is over and depending on the obtained values, one of these classifiers could label the URL as DENIED for further requests. This could be a useful decision-aid tool for the Chief Security Officer (CSO) inside a company, for instance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
