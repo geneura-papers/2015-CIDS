@@ -167,30 +167,66 @@ Section \ref{sec:methodology} gives an overview of the  followed methodology, as
 done after our  first results obtained in \cite{ECTA}. Results are detailed in Section \ref{sec:results}. 
 Then, Section \ref{sec:rulesdiscussion}   discusses the  obtained rules which are different for every used 
 classifier. Finally, conclusions and future trends are given in Section \ref{sec:conclusions}.
-
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \section{State of the Art}
 \label{sec:stateofart}
 
-\noindent Our work tries to obtain a URL classification tool for enhancing the security in the client side, as at the end we want to get if a certain URL is secure or not, having as reference a set of rules (derived from a CSP) which allow or deny a set of known \textit{HTTP} requests. For this, different techniques belonging to Data Mining (DM), Machine Learning (ML), and Computational Intelligence, have been applied. This section gives  an overview in a number of solutions given to protect the user, or the company, against insecure situations. 
+\noindent Our work tries to obtain a URL classification tool for
+enhancing the security in the client side, as at the end we want to
+get if a certain URL is secure or not, having as reference a set of
+rules (derived from a CSP) which allow or deny a set of known
+\textit{HTTP} requests. For this, different techniques belonging to
+Data Mining (DM), Machine Learning (ML), and Computational
+Intelligence, have been applied. This section gives  an overview in a
+number of solutions given to protect the user, or the company, against
+insecure situations.  % Please introduce subsections in an
+                      % argument. First, we will explain this
+                      % because... then, we will explain that in
+                      % subsection because - JJ
 
 % ------------------------------------------------------------------
 \subsection{Data Analysis and pre-processing}
 \label{subsec:dataanalysis}
 
-Performing DM means that an analysis is performed over the database we have \cite{Frank2011}. In our case, this database is a log of URL connections. Leake \& Wilson  \cite{wilson2001maintaining} present a vast review of works which study database maintenance, and the conclusion is that a database with good quality is decisive when trying to obtain good accuracies; a fact which was also demonstrated in \cite{zeineb2014thesis}. To analyse the data that we have at hand, we have based our work on two main processes. A process consisting of performing data pre-processing on the URL dataset and a process consisting of applying balancing techniques depending on the data at hand. 
+Performing DM means analyzing the database we have \cite{Frank2011}
+which in our case is a log of URL connections. Leake \& Wilson
+\cite{wilson2001maintaining} present a exhaustive review of works which
+study database maintenance, and the conclusion is that a database with
+good quality is decisive when trying to obtain good accuracies; a fact
+which was also demonstrated in \cite{zeineb2014thesis}. To analyse the
+data that we have at hand, we have based our work on two main
+processes: data pre-processing on
+the URL dataset and the application of balancing
+techniques depending on the data. %Avoid repetitions of "Data at hand"
+                                %- JJ  
 
-While performing data pre-processing, we have focused, first , on the kind/type of data included in the URL connections log file; the input file. We remarked that many URL strings are redundant in the dataset and thus we aimed to maintain the input file by eliminating the redundant strings. Actually, the quality of the dataset is very important to generate accurate results and to have the possibility to learn models from the presented data. Thus, maintaining it is an essential step. Many maintenance techniques were proposed in literature \cite{wilson2001maintaining} in order to guarantee the good quality of a given dataset.   Most of these techniques are based on updating a database by adding or deleting instances to optimize and reduce the initial database. 
+While performing data pre-processing, we have focused first on the
+kind/type of data included in the URL connections log file; the input
+file. We realized % remarquer in French is "realize" in English - Jj
+ that many URL strings are redundant in the dataset and thus we aimed
+ to maintain the input file by eliminating the redundant
+ strings. Actually, the quality of the dataset is very important to
+ generate accurate results and to have the possibility to learn models
+ from the presented data. Thus, maintaining it is an essential
+ step. Many maintenance techniques have been proposed in literature \cite{wilson2001maintaining} in order to guarantee the good quality of a given dataset.   Most of these techniques are based on updating a database by adding or deleting instances to optimize and reduce the initial database. 
 These policies include different operations such as: the outdated, redundant, or inconsistent instances may be deleted; groups of objects may be merged to eliminate redundancy and improve reasoning power; objects may be re-described to repair incoherencies; signs of corruption in the database have to be checked, and any abnormalities in the database which might signal a problem has to be controlled. A database which is not maintained can become sluggish and without accurate data users will make uninformed decisions. In this work, we have maintained the URL dataset that we have at hand by focusing on a specific kind of data that should be eliminated; which are the redundant URL strings. Section \ref{subsec:duplicateddata} explains in detail the process that we have adopted to eliminated these redundant data.
 
-Still with the data pre-processing task, we have focused as a second step on the set of features presented in the URL connections log file. Thus we tried to select the most informative features from the initial feature set. At this point, we have introduced an extra technique, a data reduction technique, that was not included in our first work presented in \cite{ECTA}. 
+Still with the data pre-processing task, we have focused as a second
+step on %doing what to them? - JJ
+ the set of features presented in the URL connections log file. Thus
+ we tried to select the most informative features from the initial
+ feature set. At this point, we have introduced an extra technique, a
+ data reduction technique, that was not included in our first work
+ presented in \cite{ECTA}.  
 
 Actually, data reduction is a main point of interest across a wide variety of fields. In fact, focusing on this step is crucial as it often presents a source of significant data loss. Many techniques were proposed in literature to achieve the task of data reduction and they can be categorized into two main heads; techniques that transform the original meaning of the features, called the ``transformation-based approaches", and the second category is a set of semantic-preserving techniques known as the ``selection-based approaches".
 
 Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to accurately describe a large set of data. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database will not be needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important/informative ones which nearly preserve  the same performance as the initial feature set.
 
-Yet, it is important to mention that most of the feature selection techniques, proposed in literature, suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough}, which will be deeply explained in Section \ref{sec:featureselection}, can be used as such tool. 
+Yet it is important to mention that most feature selection techniques
+proposed in the literature suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough}, which will be deeply explained in Section \ref{sec:featureselection}, can be used as such tool. 
  
 As previously stated and apart from applying a data pre-processing process, we aim to apply balancing techniques, depending on the distribution of patterns per class, in order to ensure the fairness of our results. This is due to the fact that using ``real data''\footnote{Data which was gathered from the real world, and was not artificially generated.} may yield to highly unbalanced data sets \cite{imbalanced_data_05}. This is our case, as the log file includes a set of URL accesses performed by humans, and indeed we obtained an unbalanced dataset. In order to deal with this kind of data there exist several methods in literature known as balancing techniques \cite{imbalanced_data_05}. These methods can be categorized into three main groups \cite{imbalance_techniques_02}: 
 
@@ -205,13 +241,14 @@ Techniques belonging to the first group have been applied to some works, followi
 Techniques belonging to the second  group have been so far the most widely used, following different approaches, such as SMOTE (Synthetic Minority Oversampling Technique) \cite{smote_02} which is a method proposed by Chawla et al. for creating `artificial' samples for the minority class in order to balance the amount of them, with respect to the amount of samples in the majority class. However this technique is based on numerical computations, considering  different distance measures, in order to generate useful patterns  (i.e. realistic or similar to the existing ones).
 
 The third group implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance by Alfaro-Cid et al. in \cite{cost_adjustment_07}, where they used a Genetic Programming (GP) approach in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
-However almost all the approaches deal with numerical (real, integer) data.
+However almost all the approaches deal with numerical (real, integer)
+data. %something on what you are going to use and why - JJ 
 
 Details about the balancing techniques used in our work will be explained in Section \ref{sec:methodology}. 
 
 % ------------------------------------------------------------------
 %
-\subsection{Related works and contribution}
+\subsection{Related work and contribution}
 \label{subsec:relatedworks}
 
 The works that we are interested in are those which scope is related with the users' information and behaviour, and the management (and adaptation) of Information or Corporate Security Policies (ISPs).
@@ -224,7 +261,18 @@ In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,
 
 Furthermore, it is worth mentioning a tool developed in Perl language, by Evan Harris \cite{harris2003next}, taking the approach of ``greylisting'', and which \textit{temporarily} rejects messages that come from senders who are not in the black list or in the white list, so that the system does not know if it is a spam message or not. And, like in our approach, it works trying to have a minimal impact on the users.
 
-Finally, a system named MUSES (from Multiplatform Usable Endpoint Security System) \cite{MUSES_SAC_14} is being developed under the European Seventh Framework  programme (FP7). This system will include event treatment on the user actions inside a company, DM techniques for applying the set of policies from the company ISP to the actions, allowing or denying them, CI techniques for enhancing the system performance, and ML techniques for improving the set of rules derived from these policies, according to user's feedback and behaviour after the system decisions \cite{muses_sotics_13}. The results of this work could be applied in this system, by changing the pre-processing step, due to the fact that the database is different. But overall, our conclusions can be escalated to be included in such a system.   
+Finally, a system named MUSES (from Multiplatform Usable Endpoint
+Security System) \cite{MUSES_SAC_14} is being developed under the
+European Seventh Framework  programme (FP7). This system will include
+event treatment on the user actions inside a company, DM techniques
+for applying the set of policies from the company ISP to the actions,
+allowing or denying them, CI techniques for enhancing the system
+performance, and ML techniques for improving the set of rules derived
+from these policies, according to user's feedback and behaviour after
+the system decisions \cite{muses_sotics_13}. The results of this work
+could be applied in this system, by changing the pre-processing step,
+due to the fact that the database is different. But overall, our
+conclusions can be escalated to be included in such a system.    
 
 %Introduce next section - JJ
 In the next Section, we will describe the problem we aim to solve, in addition to the data from which the data sets are composed.
