@@ -415,31 +415,6 @@ total.
 \caption{Perl hash with an example entry. The actual hash used for this work has a total of 100000 entries, with more than a half labelled as \textit{ALLOW} or \textit{DENY} after the comparing process. \label{fig:data_hash}}
 \end{figure}
 
-
-% En un universo lejano vivía nuestro rasputín.
-% 
-% 
-% pantalones
-% camiseta
-% machete
-% dataset
-% nerf
-% pintura
-% perro pancho
-% weka
-% paper de la asoco
-% señora de los cocos
-% ipad
-% brownie
-% joker
-% seat ibiza
-% secador
-% túnel de zarzalejo
-% raspberry pi
-% olivo
-% agujero
-% 
-
 % ------------------------------------------------------------------
 %
 \subsection{Balancing the dataset}
@@ -470,7 +445,14 @@ The first thing to do is studying the data in order to look for the ones that ar
 \subsubsection{Performing feature selection}
 \label{subsec:featselresults}
 
-Next step in the `database maintenance' is that having the reduced dataset (see previous Subsection) with 12 features, our aim now is to see if we can reduce execution time while preserving good accuracies. Thus, after applying a feature selection method, based on Rough Sets (see Section \ref{sec:featureselection}), we obtained a list of 9 features. Figure \ref{fig:data_9features} shows the final list of selected features.
+Next step in the `database maintenance' is that having the reduced dataset (see previous Subsection) with 12 features, our aim now is to see if we can reduce execution time while preserving good accuracies. For pattern classification, our learning problem has to select high discriminating features from the original input database which corresponds to the URL information dataset. We may formalize this problem as an information table where universe $U = \{x_1, x_2, \ldots, x_N\}$ is a set of pattern identifiers, the conditional attribute set $C =\{c_1,c_2, \ldots, c_N\}$ contains each feature of the information table to select and the decision attribute $D$ of our learning problem corresponds to the class label of each pattern. The input database has a single binary decision attribute. Hence, the decision attribute $D$  has binary values $d$:  either the URL connection is allowed   or denied. The condition attribute feature $D$ is defined as follows:
+\begin{displaymath}
+D =\{Allow, Deny\}
+\end{displaymath}
+
+For feature selection, we apply the \emph{``QuickReduct"} algorithm. First of all, the dependency of the entire database $\gamma_{C}(D)$ is calculated. To do so, the algorithm has to calculate the positive region for the whole attribute set $C$: $POS_{C}(D)$. Once the consistency of the database is measured, the feature selection process starts off with an empty set and moves to calculate the dependency of each attribute $c$ apart: $\gamma_{c}(D)$. The attribute $c$ having the greatest value of dependency is added to the empty set. Once the first attribute $c$ is selected, the algorithl adds, in turn, one attribute to the selected first attribute and computes the dependency of each obtained attributes couple $\gamma_{\{c, c_{i}\}}(D)$. The algorithm chooses the couple having the greatest dependency degree. The process of adding each time one attribute to the subset of the selected features continues until the dependency of the obtained subset equals the consistency of the entire database already calculated; i.e., $\gamma_{C}(D)$. 
+
+Thus, after applying a feature selection method, we obtained a list of 9 features. Figure \ref{fig:data_9features} shows the final list of selected features.
 
 \begin{figure}[htb]
 \centering
