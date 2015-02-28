@@ -566,6 +566,33 @@ JRip & 92.95 & 91.66 \\
 }
 \end{table}
 
+More results in \ref{tab_featselect} show that our results are awesome and your argument is invalid.
+% Antonio - I think that we should remove the joke.
+
+\begin{table*}[htpb]
+\centering
+ \caption{\label{tab_featselect} Percentage of correctly classified patterns for non-balanced data}
+{\small
+\begin{tabular}{|l|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
+\cline{2-5}
+\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
+\hline
+J48 & 96.97 $\pm$ 0.17 & 87.83 & 97.09 $\pm$ 1.03 & 84.51 \\ 
+\cline{1-1}
+Random Forest & 97.68 $\pm$ 0.67 & 88.06 & 97.80 $\pm$ 1.17 & 83.71 \\ 
+\cline{1-1}
+REP Tree & 97.14 $\pm$ 0.10 & 87.79 & 97.18 $\pm$ 0.71 & 85.73 \\ 
+\cline{1-1}
+NNge & 96.27 $\pm$ 0.14 & 82.18 & 97.27 $\pm$ 1.57 & 80.94 \\ 
+\cline{1-1}
+PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\ 
+\hline
+\end{tabular}
+}
+\end{table*}
+
 \subsection{Results about classification}
 
 \noindent Several experiments have been conducted, once a subset of classification methods has been chosen in previous section.
@@ -757,35 +784,6 @@ PART & 96.05 $\pm$ 0.45 & 81.29 \\
 }
 \caption[Correctly classified patterns for unbalanced data after the removal of entries that could lead to missclassification.]{Percentage of correctly classified patterns for unbalanced data, after the removal of entries that could lead to missclassification.. (a) 80\% for training, \%20 for testing, and 90\% for training, 10\% for testing. (b) 60\% for training, 40\% for testing. Best results are marked in boldface. \label{tab:repurl_unb_traintest}}
 \end{table}
-
-%%%%% From here, results after feature selection
-
-More results in \ref{tab_featselect} show that our results are awesome and your argument is invalid.
-% Antonio - I think that we should remove the joke.
-
-\begin{table*}[htpb]
-\centering
- \caption{\label{tab_featselect} Percentage of correctly classified patterns for non-balanced data}
-{\small
-\begin{tabular}{|l|c|c|c|c|}
-\cline{2-5}
-\multicolumn{1}{l|}{} & \multicolumn{2}{c|}{80\% Training - 20\% Test} & \multicolumn{2}{c|}{90\% Training - 10\% Test} \\ 
-\cline{2-5}
-\multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
-\hline
-J48 & 96.97 $\pm$ 0.17 & 87.83 & 97.09 $\pm$ 1.03 & 84.51 \\ 
-\cline{1-1}
-Random Forest & 97.68 $\pm$ 0.67 & 88.06 & 97.80 $\pm$ 1.17 & 83.71 \\ 
-\cline{1-1}
-REP Tree & 97.14 $\pm$ 0.10 & 87.79 & 97.18 $\pm$ 0.71 & 85.73 \\ 
-\cline{1-1}
-NNge & 96.27 $\pm$ 0.14 & 82.18 & 97.27 $\pm$ 1.57 & 80.94 \\ 
-\cline{1-1}
-PART & 97.17 $\pm$ 0.05 & 87.88 & 97.08 $\pm$ 1.14 & 85.11 \\ 
-\hline
-\end{tabular}
-}
-\end{table*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RULES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
