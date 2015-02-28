@@ -45,13 +45,31 @@ S2 Grupo, Spain\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{abstract} 
-Corporate security is usually one of the matters in which companies invest more resources, since the loss of information directly translates into money loss; these losses might have an origin in external attacks or internal security failures, but an important part of the security breaches is related to the lack of awareness that the employees have with regard to the use of the Web. In this work we have focused on the latter problem, creating and improving a system
-able to detect anomalous and potentially insecure situations that could be dangerous for a company. This system was initially conceived as a step beyond the use of what are known as black/white lists. These lists contain URLs that are forbidden to access, or dangerous (black lists), or URLs to which the access is permitted or allowed (white lists). 
-In this chapter, we propose a system that can initially learn from the already known black/white lists, and then classify a new, unknown, URL connection either as ``should be allowed'' or ``should be denied''. This system is described, as well as its results, and the improvements made by means of an initial data pre-processing 
+Corporate security is usually one of the matters in which companies
+invest more resources, since the loss of information directly
+translates into monetary losses. Security issues  might have an origin
+in external attacks or internal security failures, but an important
+part of the security breaches is related to the lack of awareness that
+the employees have with regard to the use of the Web. In this work we
+have focused on the latter problem, describing the improvements to a system 
+able to detect anomalous and potentially insecure situations that
+could be dangerous for a company. This system was initially conceived
+as a better alternative to what are known as black/white lists. These
+lists contain URLs whose  access is banned or dangerous (black
+list), or URLs to which the access is permitted or allowed (white
+list).  
+In this chapter, we propose a system that can initially learn from
+existing black/white lists and then classify a new, unknown, URL request
+either as ``should be allowed'' or ``should be
+denied''. This system is described, as well as its results and the
+improvements made by means of an initial data pre-processing  
 % Antonio - we have used the term 'preprocessing' in several places in the paper. Please fix it (here or there) to use always the same. ;)
 % We are changing the rest to pre-processing.
 step based on applying Rough Set Theory for feature selection. We prove that 
-high accuracies can be obtained with a proper pre-processing of the data, reaching between 96\% and 97\% of correctly classified patterns. We also demonstrate that including the use of Computational Intelligence techniques, such as the one used for feature selection, enhances the system performance, while the accuracies maintain their values.
+high accuracies can be obtained with a proper pre-processing of the
+data, reaching between 96\% and 97\% of correctly classified
+patterns. %while before we only obtained... - JJ
+We also demonstrate that including the use of Computational Intelligence techniques, such as the one used for feature selection, enhances the system performance, while the accuracies maintain their values.
 Indeed, among the obtained results, we demonstrate that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs access requests as allowed or as denied. 
 \end{abstract}
 % Antonio - I think that the asbtract is a bit long.
@@ -227,7 +245,10 @@ Every pattern, namely an URL request, has ten associated variables. These patter
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{tabdata} Independent Variables corresponding to a URL request through \textit{HTTP}. The URLs are parsed as detailed in Subsection \ref{subsec:logparsing}.}
+ \caption{\label{tabdata} Independent Variables corresponding to a URL
+   request through \textit{HTTP}. The URLs are parsed as detailed in
+   Subsection \ref{subsec:logparsing}.} % This subsection does not
+                                % exist - JJ
 {\scriptsize
 \begin{tabular}{llll}
 \hline\noalign{\smallskip}
@@ -487,6 +508,7 @@ Yet, it is important to mention that previously in \cite{ECTA}, we studied a set
 
 \begin{description}
 
+
  \item[J48] This classifier generates a pruned or unpruned C4.5 decision tree. Described for the first time in 1993 by \cite{Quinlan1993}, this machine learning method builds a decision tree selecting, for each node, the best attribute for splitting and create the next nodes. An attribute is selected as `the best' by evaluating the difference in entropy (information gain) resulting from choosing that attribute for splitting the data. In this way, the tree continues to grow till there are not attributes anymore for further splitting, meaning that the resulting nodes are instances of single classes.
 
 
@@ -548,7 +570,7 @@ Now, if we focus on the results of the accuracies, which are in Table \ref{tab_1
 \cline{2-3}
 \multicolumn{1}{l|}{} & 12 features & 9 features \\ 
 \hline
-Naïve Bayes & 92.30 & 92.19 \\ 
+Na\"ive Bayes & 92.30 & 92.19 \\ 
 \cline{1-1}
 J48 & 97.37 & 97.40 \\ 
 \cline{1-1}
@@ -650,7 +672,9 @@ For its part, results obtained from unbalanced data are shown in Table \ref{tabr
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{tabresults_balan} Percentage of correctly classified patterns for balanced data (under- and oversampling)}
+ \caption{\label{tabresults_balan} Percentage of correctly classified
+   patterns for balanced data (under- and oversampling)}
+% You should probably divide this table in two, it's too wide - JJ
 {\small
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
 \cline{2-9}
@@ -694,7 +718,7 @@ After performing the removal of duplicated requests, a whole new ranking of clas
 \cline{2-4}
 \multicolumn{1}{l|}{} & Unbalanced & Undersampling & Oversampling \\
 \hline
-Naïve Bayes & 92.30 & 90.77 $\pm$ 0.06 & 91.77 \\
+Na\"ive Bayes & 92.30 & 90.77 $\pm$ 0.06 & 91.77 \\
 \cline{1-1}
 Conjunctive Rule & 73.31 & 59.53 $\pm$ 0.15 & 60.02 \\
 \cline{1-1}
@@ -733,7 +757,7 @@ REP Tree & \textbf{97.32} & \textbf{96.38 $\pm$ 0.07} & 97.67 \\
 \caption[Global classification methods ranking after the removal of entries that could lead to missclassification.]{\label{tab:gobalrank_repurls} Results of all tested classification methods on unbalanced and balanced data, after the repeated requests have been removed. The best ones are marked in boldface.}
 \end{table}
 
-The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Naïve Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
+The process is again the same, and the results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results are slightly worse than the ones obtained in step 1, but they are still good, and definitely better than Na\"ive Bayes, our result reference. It is not a surprise that, again, results for files with the patterns taken consecutively lower significantly. As previously, this is because the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
 \begin{table}[htb]
 \centering
@@ -745,7 +769,7 @@ The process is again the same, and the results are displayed in Tables \ref{tab:
 \cline{2-5}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\ 
 \hline
-Naïve Bayes & 93.01 $\pm$ 0.32 & 82.61 & 93.09 $\pm$ 0.91 & 83.04 \\ 
+Na\"ive Bayes & 93.01 $\pm$ 0.32 & 82.61 & 93.09 $\pm$ 0.91 & 83.04 \\ 
 \cline{1-1}
 Random Forest & \textbf{96.97} $\pm$ \textbf{0.47} & \textbf{91.03} & \textbf{96.79} $\pm$ \textbf{0.97} & 80.60 \\ 
 \cline{1-1}
@@ -768,7 +792,7 @@ PART & 96.84 $\pm$ 0.18 & 86.68 & 96.55 $\pm$ 0.87 & 83.61 \\
 \cline{2-3}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential\\ 
 \hline
-Naïve Bayes & 92.76 $\pm$ 1.34 & 77.74 \\ 
+Na\"ive Bayes & 92.76 $\pm$ 1.34 & 77.74 \\ 
 \cline{1-1}
 Random Forest & \textbf{96.45} $\pm$ \textbf{0.67} & 87.50 \\ 
 \cline{1-1}
@@ -787,7 +811,7 @@ PART & 96.05 $\pm$ 0.45 & 81.29 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   RULES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\subsection{Discussion on the Obtained Rules}
+\subsection{Discussion about the Obtained Rules}
 \label{sec:rulesdiscussion}
 
 One of the main objectives of this paper is to find a method (classifier) that can build rules not dependent on the URL, in order to get a behaviour quite different from the classical black and white lists. Thus, it could made a decision about new connection requests based in other (more general) features.
@@ -926,7 +950,7 @@ This could be a useful decision-aid tool for the CSO in a company, for instance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\section{\uppercase{Conclusions and Future Work}}
+\section{\uppercase{Conclusions and Future Work}} %why uppercase? - jj
 \label{sec:conclusions}
 
 \noindent In this paper a set of classification methods have been applied
