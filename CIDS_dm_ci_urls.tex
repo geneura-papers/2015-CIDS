@@ -565,7 +565,7 @@ This section presents the obtained results for the different configurations of t
 \subsection{Results about classification}
 \label{subsec:firstresults}
 
-\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Naïve Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.   
+\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.   
 
 Moreover, the way in which those divisions were built has been considered as: randomly built, or sequentially built. We say that the training and test files were randomly built when the patterns are taken from the original dataset and, by generating a random number, they have a certain probability to belong to the training file, and another to belong to the test file. On the contrary, the training and test files are built sequentially when the patterns inside them strictly follow the same order in time as the original dataset, before being divided. The aim of the sequential division is to compare if the online activity of the employees, considering URL sessions, could be somehow `predicted', just using data from previous minutes or hours.
 
@@ -585,7 +585,7 @@ Classification results for the unbalanced data are presented in Table \ref{tabre
 \cline{2-5}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\
 \hline
-Naïve Bayes & 91.60 $\pm$ 1.25 & 85.53 & 92.89 $\pm$ 0.12 & 83.84 \\
+Na\"ive Bayes & 91.60 $\pm$ 1.25 & 85.53 & 92.89 $\pm$ 0.12 & 83.84 \\
 \cline{1-1}
 J48 & 97.56 $\pm$ 0.20 & 88.48 & 97.70 $\pm$ 0.15 & 82.28 \\
 \cline{1-1}
@@ -620,7 +620,7 @@ Once balancing is performed, resulting datasets were used as inputs for the same
 \cline{2-5}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\
 \hline
-Naïve Bayes & 91.30 $\pm$ 0.20 & 84.94 & 91.74 $\pm$ 0.13 & 85.43 \\
+Na\"ive Bayes & 91.30 $\pm$ 0.20 & 84.94 & 91.74 $\pm$ 0.13 & 85.43 \\
 \cline{1-1}
 J48 & 97.05 $\pm$ 0.25 & 84.29 & 96.85 $\pm$ 0.35 & 76.44 \\
 \cline{1-1}
@@ -646,7 +646,7 @@ PART & 96.19 $\pm$ 0.14 & 85.16 & 96.09 $\pm$ 0.10 & 79.70 \\
 \cline{2-5}
 \multicolumn{1}{l|}{} & Random (mean) & Sequential & Random (mean) & Sequential \\
 \hline
-Naïve Bayes & 91.18 $\pm$ 0.16 & 82.35 & 91.77 $\pm$ 0.28 & 81.81 \\
+Na\"ive Bayes & 91.18 $\pm$ 0.16 & 82.35 & 91.77 $\pm$ 0.28 & 81.81 \\
 \cline{1-1}
 J48 & 97.40 $\pm$ 0.03 & 85.66 & 97.37 $\pm$ 0.06 & 74.24 \\
 \cline{1-1}
