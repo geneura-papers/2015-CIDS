@@ -922,23 +922,51 @@ Moreover, some of these features depend on the session itself, i.e. they will be
 %
 \section{Conclusions and future work}
 \label{sec:conclusions}
+In this paper various classification methods have been applied in order to perform a decision process inside a company, 
+according to some predefined corporate security policies. This decision is focused on allowing or denying URL access 
+requests by considering previous decisions on similar requests, and not having specific rules in an already defined 
+white/black list for those URLs. Thus, the proposed method would allow or deny an access to a URL based on additional 
+features rather than the specific URL string, only. This could be very useful since new URLs could be 
+automatically 'whitelisted' or 'blacklisted' depending on some of the connection parameters, 
+such as the \texttt{content\_type} of the access or the \texttt{IP} of the client which makes the request.
 
-\noindent In this paper a set of classification methods have been applied
-in order to perform a decision process inside a company, according to
-some predefined corporate security policies. 
-This decision is focused on allowing or denying URL access requests, but just considering previous decisions on similar requests, not having specific rules in a White/Black List, defined for those URLs. Thus, the proposed method could allow or deny an access to a URL based in additional terms rather than just the specific URL string. This could be very useful since new URLs could be automatically 'Whitelisted' or 'Blacklisted', just depending on some of the connection parameters, such as the \texttt{content\_type} of the access or the \texttt{IP} of the client which makes the request.
+To this aim, we have started from a big dataset (100000 patterns) with employees' URL requests information, 
+and by considering a set of URL access permissions, we have composed a labelled dataset (57000 patterns). 
+Over that set of data, we have tested several classification methods, after some data balancing techniques 
+have been applied. Then, the best five classifiers have been deeply proved over several training and test divisions, 
+and with two methods: by leaving the order in time when the URL were requested, and by taking them in a random way.
 
-To this aim, we have started from a big dataset (100000 patterns) about employees' URL sessions information, and considering a set of URL access permissions, we have composed a labelled dataset (57000 patterns). Over that set of data, we have tested several classification methods, after some data balancing techniques have been applied. Then, the best five have been deeply proved over several training and test divisions, and with two methods: using sequential patterns (consecutive URL accesses), and taking them in a randomly way.
+The results show that classification accuracies are between 95\% and 97\%, even when using the unbalanced datasets. 
+However, they have been diminished because of the possible loss of data that comes from performing an undersampling 
+(removing patterns) method; or taking the training and the datasets in a sequential way from the main log file, 
+due to the fact that certain URL requests can be made only at a certain time.
 
-The results show that classification accuracies are between 95\% and 97\%, even when using the unbalanced datasets. However, they have been diminished because of the possible loss of data that comes from performing an undersampling (removing patterns) method; or taking the training and the data sets in a sequential way from the main log file, due to the fact that certain URL requests can be made only at a certain time.
+After that, we have shown that maintaining the dataset is crucial in order to improve the performance of 
+the system, mainly, in terms of classification accuracy. We have shown that by erasing the duplicated data, 
+the accuracies remain inside the range of 96\% - 97\%, which means that indeed there was redundant information 
+in the dataset.
 
-In this way, we can conclude that the approach has been successful and it would be a useful tool in an enterprise.
+Actually, the resulting dataset was the one over which we have performed feature selection by means of rough sets, 
+and we have proved that by selecting the most interesting features we could improve the classification accuracy of 
+the system while being lightweight in terms of running time. In this way, we can conclude that our proposed approach 
+has been successful and it would be a useful tool in an enterprise.
 
-Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, maybe considering bigger data divisions, bigger data sets (from a whole day or working day), or adding some kind of `noise' to the dataset.
-So that, considering the good classification results obtained in this work, the next step could be the application of these methods in the real system from which data was gathered, counting with the opinion of expert CSOs, in order to know the real value of the proposal.
-The study of other classification methods could be another research branch, along with the implementation of a Genetic Programming approach, which could deal with the imbalance problem using a modification of the cost associated to misclassifying, could be done (as the authors did in \cite{cost_adjustment_07}).
 
-Finally, we also point to extract additional information from the URL string, than could be transformed into additional features that could be more discriminative than the current set. Moreover, a data process involving summarizing data about sessions (such as number of requests per client, or average time connection) will be also considered.
+Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, 
+maybe by considering bigger data divisions, bigger data sets (from a whole day, or a week), or by adding some kind 
+of `noise' to the dataset.
+Moreover, considering the good classification results obtained in this work, the next step could be the application 
+of our methodology in the real system from which data was gathered, counting with the opinion of expert CSOs, in order 
+to know the real value of the proposal.
+
+The study of other classification methods could be another research branch, along with the implementation of a Genetic 
+Programming approach, which could deal with the unbalance problem. This can be done by using a modification of the 
+cost associated to misclassifying patterns as done  in \cite{cost_adjustment_07}.
+
+Finally, we also aim at extracting additional information from the URL string. This information could be transformed 
+into additional features that could be more discriminative than the current set of obtained rules. Moreover, a data 
+process involving grouping data into sessions (such as number of requests per client, or average time connection) 
+will be also considered.
 
 
 \section*{Acknowledgements}
