@@ -205,7 +205,7 @@ file. We realised % remarquer in French is "realize" in English - Jj
  generate accurate results and to have the possibility to learn models
  from the presented data. Thus, maintaining it is an essential
  step. Many maintenance techniques have been proposed in literature \cite{wilson2001maintaining} in order to guarantee the good quality of a given dataset.   Most of these techniques are based on updating a database by adding or deleting instances to optimize and reduce the initial database. 
-These policies include different operations such as: the outdated, redundant, or inconsistent instances may be deleted; groups of objects may be merged to eliminate redundancy and improve reasoning power; objects may be re-described to repair incoherencies; signs of corruption in the database have to be checked, and any abnormalities in the database which might signal a problem has to be controlled. A database which is not maintained can become sluggish and without accurate data users will make uninformed decisions. In this work, we have maintained the URL dataset that we have at hand by focusing on a specific kind of data that should be eliminated; which are the redundant URL strings. Section \ref{subsec:duplicateddata} explains in detail the process that we have adopted to eliminated these redundant data.
+These policies include different operations such as: the outdated, redundant, or inconsistent instances may be deleted; groups of objects may be merged to eliminate redundancy and improve reasoning power; objects may be re-described to repair incoherencies; signs of corruption in the database have to be checked, and any abnormalities in the database which might signal a problem has to be controlled. A database which is not maintained can become sluggish and without accurate data users will make uninformed decisions. In this work, we have maintained the URL dataset that we have at hand by focusing on a specific kind of data that should be eliminated; which are the redundant URL strings. Section \ref{subsec:duplicateddata} explains in detail the process that we have adopted to eliminate these redundant data.
 
 Still with the data pre-processing task, we have focused as a second
 step on %doing what to them? - JJ
@@ -251,7 +251,7 @@ In this line, the paper proposed by Greenstadt and Beal \cite{cognitive_security
 
 On the other hand, policies could be created for enhancing user's privacy, as proposed by Danezis in \cite{inferring_policies_socialnetworks_09}, who defined a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment. The idea of inferring policies can be also considered after our results, given the fact that we are able to obtain new rules from the output of the classifiers, but in the scope of the company, and focused on ISPs.
 
-In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} took the same approach as Lim et al., but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
+In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} took the same approach as Lim et al., but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs; for instance, our case with the allowed or denied HTTP requests.
 
 Furthermore, it is worth mentioning a tool developed in Perl by Evan
 Harris \cite{harris2003next}, taking the approach of ``greylisting'',
@@ -562,7 +562,19 @@ In Section \ref{subsec:RSTresults}, we will show that by applying rough set theo
 \subsection{Classification Methods}
 \label{subsec:methods}
 
-\noindent The choice of the classifiers to apply and would be admitted before we make a test selection phase - known as a `pre-selection phase' - is based on two main requirements. First and as our goal consists of obtaining a set of rules able to classify unknown URL connection requests,  we need classifiers based on decision trees or rules, so that we can study their output in addition to their accuracy. Second and as mentioned in Section \ref{sec:problemDescription}, the features of the data used for this work are mainly categorical, but also numerical. Thus, among the classifiers based on trees or rules, we need classifiers that are able to handle these types of features. Consequently, we made a first selection over all the classifiers in Weka which complied with these requirements.
+\noindent The choice of the classifiers to apply and would be admitted
+before we make a test selection phase -- known as a `pre-selection
+phase' -- is based on two main requirements. First and as our goal
+consists of obtaining a set of rules able to classify unknown URL
+connection requests,  we need classifiers based on decision trees or
+rules, so that we can study their output in addition to their
+accuracy. Second and as mentioned in Section
+\ref{sec:problemDescription}, the features of the data used for this
+work are mainly categorical, but also numerical. Thus, among the
+classifiers based on trees or rules, we need classifiers that are able
+to handle these types of features. Consequently, we made a first
+selection over all the classifiers in Weka which complied with these
+requirements. 
 
 Yet, it is important to mention that previously in \cite{ECTA}, we studied a set of classifiers that may be applied to the nature of our dataset; classifiers that fit our requirements. The selected classifiers are indeed based on the obtained good classification accuracy. In fact, we demonstrated that the classifiers that lead to better classification results were:
 
@@ -588,14 +600,14 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 \section{Results}
 \label{sec:results}
 
-This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
+This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers' output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
  
 \subsection{Results about classification}
 \label{subsec:firstresults}
 
 \noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.   
 
-Moreover, the way in which those divisions were built has been considered as: randomly built, or sequentially built. We say that the training and test files were randomly built when the patterns are taken from the original dataset and, by generating a random number, they have a certain probability to belong to the training file, and another to belong to the test file. On the contrary, the training and test files are built sequentially when the patterns inside them strictly follow the same order in time as the original dataset, before being divided. The aim of the sequential division is to compare if the online activity of the employees, considering URL sessions, could be somehow `predicted', just using data from previous minutes or hours.
+Moreover, the way in which those divisions were built has been considered as: randomly built, or sequentially built. We say that the training and test files were randomly built when the patterns are taken from the original dataset and, by generating a random number, they have a certain probability to belong to the training file, and another to belong to the test file. On the contrary, the training and test files are built sequentially when the patterns inside them strictly follow the same order in time as the original dataset, before being divided. The aim of the sequential division is to compare if the online activity of the employees, considering URL sessions, could be somehow ``predicted'', just using data from previous minutes or hours.
 
 As stated in Section \ref{subsec:balancing}, the dataset presents unbalance in the data due to the fact that there are more patterns classified as `allow' than `deny'. Therefore, two data balancing methods have been applied to all the files to get similar pattern amounts in both classes: undersampling (random removal of ALLOW patterns) and oversampling (duplication of DENY patterns). 
 
@@ -629,14 +641,18 @@ PART & 97.06 $\pm$ 0.19 & 89.11 & 97.40 $\pm$ 0.16 & 84.17 \\
 }
 \end{table*}
 
-As it can be seen from Table \ref{tabresults_nobalan}, all five classifiers achieved a high performance classifying in the right way the test dataset. Also, having low values of standard deviation means that the obtained accuracies are stable; and this can be seen from the obtained results as well. 
+As it can be seen from Table \ref{tabresults_nobalan}, all five
+classifiers achieved a high performance classifying in the right way
+the test dataset. Also, having low values of standard deviation means
+that the obtained accuracies are stable; and this can be seen from the
+obtained results as well.
 
 For a 80\%-20\% division, results based on the sequential data have lower values than those obtained from the random data, but still they are considered as good ($>$ 85\%). This is due to the occurrence of new patterns from a certain time. Some requests may happen just at one specific time of the day, or in settled days. Then, the classifier may not find enough similarity in the patterns to correctly classify the entries in the test file. On the other hand, the loss of 5 to 6 points in the results of the 90\%-10\% division is somehow expected as it reinforces the previous mentioned hypothesis.
 
 The classifier that lightly stands out over the others is \textit{Random Forest}, being the best in almost every case for randomly made divisions, and it also has good results for sequentially made divisions. However, if we focus on the standard deviation, \textit{REP Tree} is the chosen
 one, as its results present robustness.
 
-Once balancing is performed, resulting datasets were used as inputs for the same classifiers, and results are shown in Tables \ref{tabresults_balan_under} and \ref{tabresults_balan_over}. Table \ref{tabresults_balan_under} shows the classifiers accuracy for the balanced dataset with 12 features, applying undersampling technique, and Table \ref{tabresults_balan_over}, with the application of oversampling technique. For each one, the 90\%-10\% and 80\%-20\% divisions were also made.
+Once balancing is performed, resulting datasets were used as inputs for the same classifiers, and results are shown in Tables \ref{tabresults_balan_under} and \ref{tabresults_balan_over}. Table \ref{tabresults_balan_under} shows the classifiers' accuracy for the balanced dataset with 12 features, applying undersampling technique, and Table \ref{tabresults_balan_over}, with the application of oversampling technique. For each one, the 90\%-10\% and 80\%-20\% divisions were also made.
 
 \begin{table*}[htpb]
 \centering
@@ -735,11 +751,24 @@ First, we concluded that not balancing the dataset was better for obtaining good
 \subsection{Results about feature selection}
 \label{subsec:RSTresults}
 
-In this section, our aim is to prove two hypotheses. First, we want to prove that applying rough set theory for feature selection reduces the running time when testing the classifiers. Second and based on the reduced feature set of data, we want to prove that the accuracies remain the same, or even improve in comparison to the original set of features.
+In this section, our aim is to prove two hypotheses. First, we want to
+prove that applying rough set theory for feature selection reduces the
+running time when testing the classifiers. Second and based on the
+reduced feature set of data, we want to prove that the accuracies
+remain the same, or even improve in comparison to the original set of
+features. 
 
 The resulting reduced dataset, from the previous subsection, was used to test the same chosen classifiers, plus JRip. This is a classifier which consists of a propositional rule learner, the so-called Repeated Incremental Pruning to Produce Error Reduction (RIPPER) algorithm. It was proposed by W. Cohen \cite{cohen1995fast} as an improved version of the Incremental Reduced Error Pruning (IREP) algorithm. The reason why this JRip classifier was added to the list, is because we cannot compare the size of the trees for the Random Forest classifier, as the size of the forest is chosen when running it. Then, we added JRip for making the comparison more complete.
 
-All the experiments were made with the same computer, in the following conditions: Toshiba Laptop with Intel\texttrademark  Core i7-3630QM, CPU@2'40GHz x 8; RAM 3'8 GB; Operating System Linux Ubuntu 14.04 LTS 64 bits; and Weka version 3.6.10, with 3 GB assigned for memory usage. Table \ref{tab_runningtimes} shows the results of the comparison between performance before and after applying feature selection. Though the complexity of the trees generated by the classifiers grows after applying feature selection, even obtaining more rules for PART classifiers, the running time lowers by an average of 40\%.  
+All the experiments were made with the same computer, in the following
+conditions: Toshiba Laptop with Intel\texttrademark  Core i7-3630QM,
+CPU@2.40GHz x 8; RAM 3.8 GB; operating system 64 bit Ubuntu Linux 14.04 LTS; and Weka version 3.6.10, with 3 GB assigned for memory
+usage. Table \ref{tab_runningtimes} shows the results of the
+comparison between performance before and after applying feature
+selection. Though the complexity of the trees generated by the
+classifiers grows after applying feature selection, even obtaining
+more rules for PART classifiers, the running time lowers by an average
+of 40\%.  
 
  
 \begin{table}[htpb]
