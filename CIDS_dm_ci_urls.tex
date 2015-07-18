@@ -184,40 +184,96 @@ First, as we want to add a good pre-processing phase to our system, in order to 
 \label{subsec:dataanalysis}
 
 Performing DM means analyzing the database we have \cite{Frank2011}
-which in our case is a log of URL connections. Leake \& Wilson
+which in our case is a log of HTTP requests. Leake \& Wilson
 \cite{wilson2001maintaining} present a exhaustive review of works which
-study database maintenance, and the conclusion is that a database with
+study database maintenance and their conclusion is that a database with
 good quality is decisive when trying to obtain good accuracies; a fact
 which was also demonstrated in \cite{zeineb2014thesis}. To analyse the
 data that we have at hand, we have based our work on two main
 processes: data pre-processing on
 the URL dataset and the application of balancing
-techniques depending on the data. %Avoid repetitions of "Data at hand"
-                                %- JJ  
+techniques depending on the data. 
 
 While performing data pre-processing, we have focused first on the
-kind/type of data included in the URL connections log file; the input
-file. We realised % remarquer in French is "realize" in English - Jj
-% And I've changed it to "realise", because British 
+kind/type of data included in the HTTP requests in the log file that is
+used as input 
+file. We realised  
  that many URL strings are redundant in the dataset and thus we aimed
- to maintain the input file by eliminating the redundant
+ to maintain the input file %maintain? keep? Maintain it how? - JJ
+ by eliminating the redundant
  strings. Actually, the quality of the dataset is very important to
  generate accurate results and to have the possibility to learn models
- from the presented data. Thus, maintaining it is an essential
- step. Many maintenance techniques have been proposed in literature \cite{wilson2001maintaining} in order to guarantee the good quality of a given dataset.   Most of these techniques are based on updating a database by adding or deleting instances to optimize and reduce the initial database. 
-These policies include different operations such as: the outdated, redundant, or inconsistent instances may be deleted; groups of objects may be merged to eliminate redundancy and improve reasoning power; objects may be re-described to repair incoherencies; signs of corruption in the database have to be checked, and any abnormalities in the database which might signal a problem has to be controlled. A database which is not maintained can become sluggish and without accurate data users will make uninformed decisions. In this work, we have maintained the URL dataset that we have at hand by focusing on a specific kind of data that should be eliminated; which are the redundant URL strings. Section \ref{subsec:duplicateddata} explains in detail the process that we have adopted to eliminate these redundant data.
+ from the presented data. % repeated from previous paragraph, maybe
+                          % eliminate  JJ 
+ Thus, maintaining it is an essential
+ step. % maintaining quality?  Maintaining with respect to what?
+       % Please rephrase
+Many maintenance techniques have been proposed in literature
+\cite{wilson2001maintaining} in order to guarantee the good quality of
+a given dataset.   Most of these techniques are based on updating a
+database by adding or deleting instances to optimize and reduce the
+initial database.  % rather than maintaining, wouldn't that be
+                   % obtaining? Cleaning? - JJ
+These policies include different operations such as deleting the
+outdated, redundant, or inconsistent instances; merging groups of
+objects to eliminate redundancy and improve reasoning power;
+re-describe objects to repair incoherencies; check for signs of
+corruption in the database and controlling any abnormalities in the
+database which might signal a problem. A database which is not
+maintained % cleaned? preserved? cleansed? debugged? - JJ
+can become sluggish % sluggish as in slow? Working with it might be
+                    % sluggish, not the database itself - JJ
+and without accurate data users will make uninformed decisions. In
+this work, we have maintained the our HTTP request dataset by focusing
+on a specific kind of data that should be eliminated:
+redundant URL strings. Section \ref{subsec:duplicateddata} explains in
+detail the process that we have adopted to eliminate these redundant
+data.  
 
 Still with the data pre-processing task, we have focused as a second
 step on %doing what to them? - JJ
- the set of features presented in the URL connections log file. Thus
+ the set of features presented in the HTTP requests log file. Thus
  we tried to select the most informative features from the initial
  feature set. At this point, we have introduced an extra technique, a
  data reduction technique, that was not included in our first work
- presented in \cite{ECTA}.  
+ presented in \cite{ECTA}.  % you should use the standard
+                            % bibliography, not your own for our
+                            % papers - JJ
 
-Actually, data reduction is a main point of interest across a wide variety of fields. In fact, focusing on this step is crucial as it often presents a source of significant data loss. Many techniques were proposed in literature to achieve the task of data reduction and they can be categorized into two main heads; techniques that transform the original meaning of the features, called the ``transformation-based approaches", and the second category is a set of semantic-preserving techniques known as the ``selection-based approaches".
+Actually, data reduction % data or feature reduction? - JJ
+is a main point of interest across a wide
+variety of fields. In fact, focusing on this step is crucial as it
+often presents a source of significant data loss. % what? Reducing
+                                % data means data loss? - JJ
+Many techniques were
+proposed in literature to achieve the task of data reduction %without
+                                %data loss? - JJ
+ and they
+can be categorized into two main heads; techniques that transform the
+original meaning of the features, called the ``transformation-based
+approaches", and the second category is a set of semantic-preserving
+techniques known as the ``selection-based approaches".
 
-Transformation based approaches, also called ``feature extraction approaches", involve simplifying the amount of resources required to accurately describe a large set of data. Feature extraction is a general term for methods that construct combinations of variables to represent the original set of features but with new variables while still describing the data with sufficient accuracy. The transformation based techniques are employed in situations where the semantics of the original database will not be needed by any future process. In contrast to the semantics-destroying dimensionality reduction techniques, the semantics-preserving techniques, also called ``feature selection techniques", attempt to retain the meaning of the original feature set. The main aim of this kind of techniques is to determine a minimal feature subset from a problem domain while retaining a suitably high accuracy in representing the original features \cite{liu1998feature}. In this work, we mainly focus on the use of a feature selection technique, instead of a feature extraction technique, as it is crucial to preserve the semantics of the features in the URL data that we dispose at hand, and among them, select the most important/informative ones which nearly preserve  the same performance as the initial feature set.
+Transformation based approaches, also called ``feature extraction
+approaches", involve simplifying the amount of resources required to
+accurately describe a large set of data. Feature extraction is a
+general term for methods that construct combinations of variables to
+represent the original set of features but with new variables while
+still describing the data with sufficient accuracy. The transformation
+based techniques are employed in situations where the semantics of the
+original database will not be needed by any future process. In
+contrast to the semantics-destroying dimensionality reduction
+techniques, the semantics-preserving techniques, also called ``feature
+selection techniques", attempt to retain the meaning of the original
+feature set. The main aim of this kind of techniques is to determine a
+minimal feature subset from a problem domain while retaining a
+suitably high accuracy in representing the original features
+\cite{liu1998feature}. In this work, we mainly focus on the use of a
+feature selection technique, instead of a feature extraction
+technique, as it is crucial to preserve the semantics of the features
+in the URL data that we dispose at hand, and among them, select the
+most important/informative ones which nearly preserve  the same
+performance as the initial feature set. 
 
 Yet it is important to mention that most feature selection techniques
 proposed in the literature suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough}, which will be deeply explained in Section \ref{sec:featureselection}, can be used as such tool. 
