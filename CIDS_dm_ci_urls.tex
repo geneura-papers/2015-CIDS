@@ -7,8 +7,7 @@
 \usepackage{subfig}
 \usepackage{calc}
 \usepackage{makeidx}
-%\usepackage{amstext}
- \usepackage{amsmath}
+\usepackage{amsmath}
  
 \usepackage{multicol}
 \usepackage{pslatex}
@@ -254,7 +253,12 @@ On the other hand, policies could be created for enhancing user's privacy, as pr
 
 In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} took the same approach as Lim et al., but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs - for instance, our case with the allowed or denied http requests -.
 
-Furthermore, it is worth mentioning a tool developed in Perl language, by Evan Harris \cite{harris2003next}, taking the approach of ``greylisting'', and which \textit{temporarily} rejects messages that come from senders who are not in the black list or in the white list, so that the system does not know if it is a spam message or not. And, like in our approach, it works trying to have a minimal impact on the users.
+Furthermore, it is worth mentioning a tool developed in Perl by Evan
+Harris \cite{harris2003next}, taking the approach of ``greylisting'',
+and which \textit{temporarily} rejects messages that come from senders
+who are not in the black list or in the white list, so that the system
+does not know if it is a spam message or not. And, like in our
+approach, it works trying to have a minimal impact on the users. 
 
 Finally, a system named MUSES (from Multiplatform Usable Endpoint
 Security System) \cite{MUSES_SAC_14} is being developed under the
@@ -391,7 +395,19 @@ For further details about how to compute a  reduct using the   QuickReduct algor
 \section{Followed Methodology}
 \label{sec:methodology}
 
-\noindent Before classification techniques are applied, a data pre-processing step has been performed. First, the raw dataset is labelled according a set of \textit{initial corporate security rules}, i.e. every pattern is assigned to a label indication if the corresponding URL request/access would be ALLOWED or DENIED considering these rules. This step is necessary in order to transform the problem into a classification one. However, in order to apply the rules they must be transformed from their initial format into another one that can be applied in our programs (a hash in Perl\footnote{A \textit{hash} in Perl is an object that represents a \textit{hash table}, which is a set of pairs key-value. Sometimes, the value can be another hash itself.}). This is described in Subsection \ref{sec:buldingdataset}. This Subsection also details how the patterns of the navigation data log (URL sessions) are parsed, in order to build a Perl hash to perform the matting/labelling process.
+\noindent Before classification techniques are applied, a data
+pre-processing step has been performed. First, the raw dataset is
+labelled according a set of \textit{initial corporate security rules},
+i.e. every pattern is assigned to a label indication if the
+corresponding URL request/access would be ALLOWED or DENIED
+considering these rules. This step is necessary in order to transform
+the problem into a classification one. However, in order to apply the
+rules they must be transformed from their initial format into another
+one that can be applied in our programs, a hash or map. This is
+described in Subsection 
+\ref{sec:buldingdataset}. This Subsection also details how the
+patterns of the navigation data log (URL sessions) are parsed, in
+order to build a hash to perform the matting/labelling process. 
 
 At the end of the `parsing' phase, the two hashes are compared in order to obtain which entries of the log should be ALLOW or DENY, known as the \textit{labelling} step. This is similar to perform a decision process in a security system. This step results in that there are 38972 pattern belonging to class ALLOW (positive class) and 18530 of class DENY (negative class), so just a 67.78\% of the samples belong to the majority class. This represents a very important problem, since a classifier that is trained considering these proportions is supposed to classify all the samples as ALLOW, getting a theoretically quite good classification accuracy equal or greater than 68\%. However, in Section \ref{sec:results} we will see that, despite the fact that some denied patterns are classified as allow, the overall performance of the classifiers is better than expected.
 
@@ -409,7 +425,11 @@ In previous sections, it was stated that the data to work with was not originall
 First, in this work we have considered Drools \cite{drools:site} as the tool to create and  manage rules in a business environment. This so called Business Rule Management System (BRMS) has been developed by the JBoss community under an Apache License and it is written in Java. Though this platform consists of many components; here we focus on Drools Expert and the Drools Rule Language (DRL, \cite{drools:doc}). Then, the defined rules for a certain company are included in a file with a \texttt{.drl} extension; the file that needs to be parsed to obtain the final set of rules. 
 
 In Figure \ref{fig:drools_hash}, (a), we display the typical rule syntax in DRL. Two main parts should be obtained from the parsing method that will be applied: both left and right sides of the rule, taking into account that the left side is where the company specifies the conditions required to apply the action indicated in the right side. Also, for describing the conditions, Squid syntax is used (see Section \ref{sec:problemDescription}), having thus the following structure: \texttt{squid:Squid(\textit{conditions})}. Finally, from the right side of the rule, the \textit{ALLOW} or \textit{DENY} label to apply on the data which matches with the conditions, will be extracted. 
-The Perl parser that we have implemented applies two regular expressions, one for each side of the rule, and returns a hash with all the rules with the conditions and actions defined. The `before and after' performing the parsing over the \texttt{.drl} file is presented in Figure \ref{fig:drools_hash}.
+The parser that we have implemented applies two regular
+expressions, one for each side of the rule, and returns a hash with
+all the rules with the conditions and actions defined. The `before and
+after' performing the parsing over the \texttt{.drl} file is presented
+in Figure \ref{fig:drools_hash}. 
 
 \begin{figure}[htb]
 \centering
@@ -443,7 +463,7 @@ The Perl parser that we have implemented applies two regular expressions, one fo
 Then, the log file is analysed. Usually, the instances of a log file have a number of fields (which will be later referred as features/attributes of a connection pattern), in order to have a registration of the client who asks for a resource, the time of the day when the request is made, and so on. In this case, we have worked with an \textit{access.log} (see Section \ref{sec:problemDescription}) file, converted into a CSV format file so it could be parsed and transformed in another hash of data. All ten fields of the Squid log yield a hash like the one depicted in Figure \ref{fig:data_hash}. Once the two hashes of data were created, they were compared in such a way that for each rule in the hash of rules, it was determined how many entries in the data log hash are covered by the rule, and so they were applied the label that appears as `action' in the rule.
 
 Among the tasks to be performed, is the one to extract from a whole URL the part that was more interesting for our defined purposes. It is important to point out that in a log with thousands of entries, an enormous variety of URLs can be found, since some can belong to advertisements, images, videos, or even some others does not have a domain name but are given directly by an IP address. For this reason, we have taken into account that for a domain name, many subdomains (separated by dots) could be considered, and their hierarchy grows from the right towards the left. The highest level of the domain name space is the Top-Level Domain (TLD) at the right-most part of the domain name, divided itself in country code TLDs and generic TLDs. Then, a domain and a number of subdomains follow the TLD (again, from right to left). In this way, the URLs in the
-used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{other\_subdirectories}. However, for the ARFF\footnote{Format of Weka files} file to be created, only the domain (without the subdomains and the TLD) should be considered, because there are too many different URLs to take into consideration. Hence, applying another regular expression, the data parser implemented in Perl obtains all the core domains of the URLs, which makes 976 domains in total.
+used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{other\_subdirectories}. However, for the ARFF\footnote{Format of Weka files} file to be created, only the domain (without the subdomains and the TLD) should be considered, because there are too many different URLs to take into consideration. Hence, applying another regular expression, the data parser obtains all the core domains of the URLs, which makes 976 domains in total.
 
 \begin{figure}[htb]
 \centering
@@ -464,7 +484,10 @@ used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{o
    & \texttt{\},} & \\
   \texttt{);} & & \\
 \end{tabular}
-\caption{Perl hash with an example entry. The actual hash used for this work has a total of 100000 entries, with more than a half labelled as \textit{ALLOW} or \textit{DENY} after the comparing process. \label{fig:data_hash}}
+\caption{Hash in Perl with an example entry. The actual hash used for
+  this work has a total of 100000 entries, with more than a half
+  labelled as \textit{ALLOW} or \textit{DENY} after the comparing
+  process. \label{fig:data_hash}} 
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -472,7 +495,12 @@ used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{o
 \subsection{Balancing the dataset}
 \label{subsec:balancing}
 
-While analysing the data, we observed that more than half of the initial amount of patterns are labelled, and that the ratio is 2:1 in allows to denies. The 2:1 ratio means that the data is unbalanced, and therefore we have performed different approaches from the first and second groups of data balancing techniques, which were introduced in Section \ref{subsec:dataanalysis}:
+While analysing the data, we observed that more than half of the
+initial amount of patterns are labelled, and that the ratio is 2:1 in
+allows to denies. The 2:1 ratio means that the data is unbalanced, and
+therefore we have performed different approaches from the first and
+second groups of data balancing techniques, which were introduced in
+Section \ref{subsec:dataanalysis}: 
 
 \begin{itemize}
 \item Undersampling: we will randomly remove samples of the majority class until the amount in both classes are similar. In other words, we will reduce the amount of `denied' patterns by a half.
