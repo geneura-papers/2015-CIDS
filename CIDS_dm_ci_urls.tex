@@ -276,9 +276,34 @@ most important/informative ones which nearly preserve  the same
 performance as the initial feature set. 
 
 Yet it is important to mention that most feature selection techniques
-proposed in the literature suffer from some limitations. Most of these techniques involve the user for the task of the algorithms parameterization and this is actually seen as a significant drawback. Some feature selectors require noise levels to be specified by the user beforehand, some simply rank features leaving the user to choose their own subset. There are those that require the user to state how many features are to be chosen, or they must supply a threshold that determines when the algorithm should terminate. All of these require the user to make a decision based on its own (possibly faulty) judgment \cite{jensen2005semantics}. To overcome the shortcomings of the existing methods, it would be interesting to look for a method that does not require any external or additional information to function appropriately. Rough Set Theory (RST) \cite{pawlak2008rough}, which will be deeply explained in Section \ref{sec:featureselection}, can be used as such tool. 
+proposed in the literature suffer from some limitations. Most of these
+techniques involve the user for the task of the algorithms
+parameterization and this is actually seen as a significant
+drawback. Some feature selectors require noise levels to be specified
+by the user beforehand, some simply rank features leaving the user to
+choose their own subset. There are those that require the user to
+state how many features are to be chosen, or they must supply a
+threshold that determines when the algorithm should terminate. All of
+these require the user to make a decision based on its own (possibly
+faulty) judgment \cite{jensen2005semantics}. To overcome the
+shortcomings of the existing methods, it would be interesting to look
+for a method that does not require any external or additional
+information to function appropriately. Rough Set Theory (RST)
+\cite{pawlak2008rough}, which will be deeply explained in Section
+\ref{sec:featureselection}, can be used as such tool.  
  
-As previously stated and apart from applying a data pre-processing process, we aim to apply balancing techniques, depending on the distribution of patterns per class, in order to ensure the fairness of our results. This is due to the fact that using ``real data''\footnote{Data which was gathered from the real world, and was not artificially generated.} may yield to highly unbalanced data sets \cite{imbalanced_data_05}. This is our case, as the log file includes a set of URL accesses performed by humans, and indeed we obtained an unbalanced dataset. In order to deal with this kind of data there exist several methods in literature known as balancing techniques \cite{imbalanced_data_05}. These methods can be categorized into three main groups \cite{imbalance_techniques_02}: 
+As previously stated and apart from applying a data pre-processing
+process, we aim to apply balancing techniques, depending on the
+distribution of patterns per class, in order to ensure the fairness of
+our results. This is due to the fact that using ``real
+data''\footnote{Data which was gathered from the real world, and was
+  not artificially generated.} may yield to highly unbalanced data
+sets \cite{imbalanced_data_05}. This is our case, as the log file
+includes a set of URL accesses performed by humans, and indeed we
+obtained an unbalanced dataset. In order to deal with this kind of
+data there exist several methods in literature known as balancing
+techniques \cite{imbalanced_data_05}. These methods can be categorized
+into three main groups \cite{imbalance_techniques_02}:  
 
 \begin{itemize}
 \item \textit{Undersampling the over-sized classes}: This category aims at reducing the considered number of patterns for the classes with the majority.
