@@ -103,14 +103,14 @@ inside the security system \cite{kaeo2003designing}.
 The basic idea behind these CSPs is usually to include rules to either allow or deny employees' access to
 non-confident or non-certified websites, which are referenced by their URLs in this chapter. Moreover, several web pages
 might be also controlled for productivity  or suitability reasons, given the fact that the employees who connect
-to these might have working purposes or not. Actually, some of the  CSPs usually define sets of allowed or denied
+to these might have working purposes or not. In fact, some of the  CSPs usually define sets of allowed or denied
 web pages or websites that could be accessed by the company employees. These sets are  usually included in two main
 lists; a white list (referring to  ``permitted'') and a black list (referring to  ``non-permitted'').
 Both lists, the white and the black, act as a  good and useful control tools for those URLs included in them,
 as  well as for the complementary. For instance, the URLs which are not included in a white list will automatically
 have a denial of  access \cite{ludl2007effectiveness}.
 
-The aim of this paper is going beyond this traditional and simple decision making process. Actually, by using black
+The aim of this paper is going beyond this traditional and simple decision making process. By using black
 and/or white lists, we either allow or deny users' requests/connection based, only, on the URLs provided in the lists.
 Yet, updating these lists is a never ending task, as numerous malicious websites appear every day.
 For instance, Netcraft reports from November of 2014 \cite{netcraft:site} showed that there are about 950
@@ -119,7 +119,7 @@ there were more than 18 million new suspect URLs (2 million associated domains),
 new phishing URLs (almost 150 thousand associated domains).
 
 With this situation in mind, in this chapter, our aim is to define a tool for automatically making allow or
-deny decisions with respect to URLs that are, actually, not included in the aforementioned lists. This decision
+deny decisions with respect to URLs that are not included in the aforementioned lists. This decision
 would be based on that made for similar URL accesses (those with similar features), but instead of using only
 the URL strings included in the lists, we will consider other parameters of the request/connection.
 
@@ -200,7 +200,7 @@ file. We realised
  that many URL strings are redundant in the dataset and thus we aimed
  to maintain the input file %maintain? keep? Maintain it how? - JJ
  by eliminating the redundant
- strings. Actually, the quality of the dataset is very important to
+ strings. The quality of the dataset is very important to
  generate accurate results and to have the possibility to learn models
  from the presented data. % repeated from previous paragraph, maybe
                           % eliminate  JJ
@@ -239,9 +239,9 @@ step on %doing what to them? - JJ
                             % bibliography, not your own for our
                             % papers - JJ
 
-Actually, data reduction % data or feature reduction? - JJ
+Data reduction % data or feature reduction? - JJ
 is a main point of interest across a wide
-variety of fields. In fact, focusing on this step is crucial as it
+variety of fields and focusing on this step is crucial as it
 often presents a source of significant data loss. % what? Reducing
                                 % data means data loss? - JJ
 Many techniques were
@@ -277,7 +277,7 @@ performance as the initial feature set.
 Yet it is important to mention that most feature selection techniques
 proposed in the literature suffer from some limitations. Most of these
 techniques involve the user for the task of the algorithms
-parameterization and this is actually seen as a significant
+parameterization and this is  seen as a significant
 drawback. Some feature selectors require noise levels to be specified
 by the user beforehand, some simply rank features leaving the user to
 choose their own subset. There are those that require the user to
@@ -679,7 +679,7 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 \section{Results}
 \label{sec:results}
 
-This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers' output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
+This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets  enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers' output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
 
 \subsection{Results about classification}
 \label{subsec:firstresults}
@@ -902,7 +902,7 @@ JRip & 92.95 & 91.66 \\
 }
 \end{table}
 
-Moreover, results in Table \ref{tab_featselect} show the same behaviour as for previous experiments. Actually, results from this table are compared to those obtained from Table \ref{tabresults_nobalan}. This is because both tables are sharing nearly the same conditions, except that each one has a specific number of features.
+Moreover, results in Table \ref{tab_featselect} show the same behaviour as for previous experiments. Results from this table are compared to those obtained from Table \ref{tabresults_nobalan}. This is because both tables are sharing nearly the same conditions, except that each one has a specific number of features.
 
 We can see that, for example, for a division of 80\% training - 20\% test, the results after feature selection are better for the \textit{Random Forest} and \textit{PART} classifiers. Only \textit{NNge} seems to generate lower classification results, but still considered as interesting as it is higher than 96\%.
 
@@ -1018,7 +1018,7 @@ THEN ALLOW
 \end{verbatim}
 \end{small}
 
-These rules depend on the so-called `critical features'. Actually, almost all the important rules depend on them. Due to this reason, we have performed another experiment omitting these variables, in addition to the \texttt{URL}, as it was mentioned before. The generated rules by some of the classifiers, tree and rule-based, are closer to what we aim to obtain. Some examples of relevant rules are the following:
+These rules depend on the so-called `critical features' and almost all the important rules depend on them. Due to this reason, we have performed another experiment omitting these variables, in addition to the \texttt{URL}, as it was mentioned before. The generated rules by some of the classifiers, tree and rule-based, are closer to what we aim to obtain. Some examples of relevant rules are the following:
 
 %[J48], [REP Tree], [PART] and [PART]
 \begin{small}
@@ -1080,7 +1080,7 @@ the system, mainly, in terms of classification accuracy. We have shown that by e
 the accuracies remain inside the range of 96\% - 97\%, which means that indeed there was redundant information
 in the dataset.
 
-Actually, the resulting dataset was the one over which we have performed feature selection by means of rough sets,
+The resulting dataset was the one over which we have performed feature selection by means of rough sets,
 and we have proved that by selecting the most interesting features we could improve the classification accuracy of
 the system while being lightweight in terms of running time. In this way, we can conclude that our proposed approach
 has been successful and it would be a useful tool in an enterprise.
