@@ -184,44 +184,40 @@ First, as we want to add a good pre-processing phase to our system, in order to 
 \label{subsec:dataanalysis}
 
 Performing DM means analyzing the database we have \cite{Frank2011}
-which in our case is a log of HTTP requests. The work discussed in \cite{wilson2001maintaining} present an exhaustive review of works which
-study database maintenance and their conclusion is that a database with
-good quality is decisive when trying to obtain good accuracies; a fact
-which was also demonstrated in \cite{zeineb2014thesis}. To analyse the
-data that we have at hand, we have based our work on two main
-processes: data pre-processing on
-the URL dataset and the application of balancing
-techniques depending on the data.
+which in our case is a log of HTTP requests. The work discussed in \cite{wilson2001maintaining} presents an exhaustive review of works which study database cleaning and their conclusion is that a database with good quality is decisive when trying to obtain good accuracies; a fact which was also demonstrated in \cite{zeineb2014thesis}. To analyse the data that we have at hand, we have based our work on two main processes: data pre-processing on the URL dataset and the application of balancing techniques depending on the data.
 
-While performing data pre-processing, we have focused first on the
-kind/type of data included in the HTTP requests in the log file that is
-used as input
-file. We realised
- that many URL strings are redundant in the dataset and thus we aimed
- to maintain the input file %maintain? keep? Maintain it how? - JJ
- by eliminating the redundant
- strings. The quality of the dataset is very important to
- generate accurate results and to have the possibility to learn models
- from the presented data. % repeated from previous paragraph, maybe
-                          % eliminate  JJ
- Thus, maintaining it is an essential
- step. % maintaining quality?  Maintaining with respect to what?
-       % Please rephrase
-Many maintenance techniques have been proposed in literature
+While performing data pre-processing, we have focused first on the kind/type of data included in the HTTP requests in the log file that is used as input file. We realised  that many URL strings are redundant in the dataset and thus we aimed  to eliminate them which is seen a cleaning approach.
+ %maintain? keep? Maintain it how? - JJ
+% sentence reformulated -- Zeineb
+%The word "maintenance" is replaced by "cleaning" in all the manuscript -- Zeineb
+  
+%The quality of the dataset is very important to  generate accurate results and to have the possibility to learn models  from the presented data. 
+% repeated from previous paragraph, maybe eliminate  JJ
+% sentence deleted -- Zeineb 
+
+% Thus, maintaining it is an essential  step. 
+% maintaining quality?  Maintaining with respect to what?
+% Please rephrase
+% sentence deleted -- Zeineb 
+
+Many cleaning techniques have been proposed in literature
 \cite{wilson2001maintaining} in order to guarantee the good quality of
 a given dataset.   Most of these techniques are based on updating a
 database by adding or deleting instances to optimize and reduce the
 initial database.  % rather than maintaining, wouldn't that be
                    % obtaining? Cleaning? - JJ
+                   %The word "maintenance" is replaced by "cleaning" in all the manuscript -- Zeineb
 These policies include different operations such as deleting the
 outdated, redundant, or inconsistent instances; merging groups of
 objects to eliminate redundancy and improve reasoning power;
 re-describe objects to repair incoherencies; check for signs of
 corruption in the database and controlling any abnormalities in the
-database which might signal a problem. A database which is not
-maintained % cleaned? preserved? cleansed? debugged? - JJ
+database which might signal a problem. Working with a database which is not
+cleaned % cleaned? preserved? cleansed? debugged? - JJ
+%The word "maintenance" is replaced by "cleaning" in all the manuscript -- Zeineb
 can become sluggish % sluggish as in slow? Working with it might be
                     % sluggish, not the database itself - JJ
+                    %sentence reformulated -- Zeineb
 and without accurate data users will make uninformed decisions. In
 this work, we have maintained the our HTTP request dataset by focusing
 on a specific kind of data that should be eliminated:
@@ -230,23 +226,27 @@ detail the process that we have adopted to eliminate these redundant
 data.
 
 Still with the data pre-processing task, we have focused as a second
-step on %doing what to them? - JJ
- the set of features presented in the HTTP requests log file. Thus
+step on checking the importance of the %doing what to them? - JJ
+%sentence reformulated -- Zeineb
+  set of features presented in the HTTP requests log file. Thus
  we tried to select the most informative features from the initial
  feature set. At this point, we have introduced an extra technique, a
  data reduction technique, that was not included in our first work
  presented in \cite{ECTA}.  % you should use the standard
                             % bibliography, not your own for our
                             % papers - JJ
-
-Data reduction % data or feature reduction? - JJ
+% I think the reference is correct JJ -- Zeineb
+Feature reduction % data or feature reduction? - JJ
+% reformulated -- Zeineb
 is a main point of interest across a wide
 variety of fields and focusing on this step is crucial as it
-often presents a source of significant data loss. % what? Reducing
+often presents a source of significant information loss. % what? Reducing
                                 % data means data loss? - JJ
+                                % it is seen as an information loss -- Zeineb
 Many techniques were
-proposed in literature to achieve the task of data reduction %without
+proposed in literature to achieve the task of feature reduction %without
                                 %data loss? - JJ
+                                % no, here we talk in general -- Zeineb
  and they
 can be categorized into two main heads; techniques that transform the
 original meaning of the features, called the ``transformation-based
