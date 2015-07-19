@@ -794,7 +794,7 @@ In both cases, it is noticeable that if we take the data in a sequential way, in
 
 Once this first study is finished, the next step is to erase the duplicated requests. And then, we test the obtained reduced dataset to see if it has some influence on the results. As it seems that the best results are obtained for an unbalanced dataset, and also for a training-test random division, we choose this configuration for the following experiments.
 
-The results are displayed in Table \ref{tab:repurl_unb_traintest}.  We can see that the results slightly decrease in comparison to the ones obtained originally, but they are still good, and definitely better than Na\"ive Bayes.
+The results are displayed in Table \ref{tab:repurl_unb_traintest}. We can see that the results slightly decrease in comparison to the ones obtained originally, but they are still good, and definitely better than Na\"ive Bayes.
 
 The way it happened for the original datasets, results for files with the patterns taken consecutively lower significantly. And as previously explained, this happens due to the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
@@ -866,7 +866,7 @@ REP Tree & Size of the tree 8317, 2.24 seconds & Size of the tree 8817, 0.53 sec
 \cline{1-1}
 NNge & 1341 exemplars, 48.11 seconds & 1294 exemplars, 39.57 seconds \\
 \cline{1-1}
-PART & 966 rules, 15.38 & 998 rules, 11.24 seconds \\
+PART & 966 rules, 15.38 seconds & 998 rules, 11.24 seconds \\
 \cline{1-1}
 JRip & 87 rules, 127.28 seconds & 64 rules, 64.23 seconds \\
 \hline
