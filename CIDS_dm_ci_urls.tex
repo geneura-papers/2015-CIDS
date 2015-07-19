@@ -8,10 +8,10 @@
 \usepackage{calc}
 \usepackage{makeidx}
 \usepackage{amsmath}
- 
+
 \usepackage{multicol}
 \usepackage{pslatex}
-\usepackage{caption}  
+\usepackage{caption}
 \usepackage{amssymb}
 \usepackage{verbatim}
 \usepackage{algorithm,algorithmic}
@@ -22,7 +22,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{An Improved Decision System for URL Accesses based on a Rough Feature Selection Technique} 
+\title{An Improved Decision System for URL Accesses based on a Rough Feature Selection Technique}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -43,30 +43,30 @@ S2 Grupo, Spain\\
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\begin{abstract} 
+\begin{abstract}
 Corporate security is usually one of the matters in which companies
 invest more resources, since the loss of information directly
 translates into monetary losses. Security issues  might have an origin
 in external attacks or internal security failures, but an important
 part of the security breaches is related to the lack of awareness that
 the employees have with regard to the use of the Web. In this work we
-have focused on the latter problem, describing the improvements to a system 
+have focused on the latter problem, describing the improvements to a system
 able to detect anomalous and potentially insecure situations that
 could be dangerous for a company. This system was initially conceived
 as a better alternative to what are known as black/white lists. These
 lists contain URLs whose  access is banned or dangerous (black
 list), or URLs to which the access is permitted or allowed (white
-list).  
+list).
 In this chapter, we propose a system that can initially learn from
 existing black/white lists and then classify a new, unknown, URL request
 either as ``should be allowed'' or ``should be
 denied''. This system is described, as well as its results and the
-improvements made by means of an initial data pre-processing step based on applying Rough Set Theory for feature selection. We prove that 
+improvements made by means of an initial data pre-processing step based on applying Rough Set Theory for feature selection. We prove that
 high accuracies can be obtained even without including a pre-processing step, reaching between 96\% and 97\% of correctly classified
 patterns. Furthermore, we also prove that including the use of Computational Intelligence techniques for pre-processing the data enhances the system performance, in terms of running time, while the accuracies remain close to 97\%.
 %while before we only obtained... - JJ
 %Thing is that we already obtained those accuracies... it's mentioned right after, maybe it's better to re-write...
-Indeed, among the obtained results, we demonstrate that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs access requests as allowed or as denied. 
+Indeed, among the obtained results, we demonstrate that it is possible to obtain interesting rules which are not based only on the URL string feature, for classifying new unknown URLs access requests as allowed or as denied.
 \end{abstract}
 % Antonio - I think that the asbtract is a bit long.
 
@@ -78,90 +78,90 @@ Indeed, among the obtained results, we demonstrate that it is possible to obtain
 \section{Introduction}
 \label{sec:introduction}
 
-\noindent Security is an inclusive term that refers to a diversity of steps taken by individuals, 
-and companies, in order to protect computers or computer networks that are connected to the Internet. 
-The Internet was initially conceived as an open network facilitating the free exchange of information. 
-However, data which is sent/received over the Internet travel through a dynamic chain of computers and 
-network links and, as a consequence, the risk of intercepting and changing the data is high. 
-In fact, it would be virtually impossible to secure every computer connected to the Internet around the world. 
-So, there will likely always be weak links in the chain of data exchange \cite{cheswick2003firewalls}. 
-Yet, companies have to find out a way for their employees to safely interact with customers, clients, and anyone 
-who uses the Internet while protecting internal confidential information. Companies have, also, to alert the employees 
+\noindent Security is an inclusive term that refers to a diversity of steps taken by individuals,
+and companies, in order to protect computers or computer networks that are connected to the Internet.
+The Internet was initially conceived as an open network facilitating the free exchange of information.
+However, data which is sent/received over the Internet travel through a dynamic chain of computers and
+network links and, as a consequence, the risk of intercepting and changing the data is high.
+In fact, it would be virtually impossible to secure every computer connected to the Internet around the world.
+So, there will likely always be weak links in the chain of data exchange \cite{cheswick2003firewalls}.
+Yet, companies have to find out a way for their employees to safely interact with customers, clients, and anyone
+who uses the Internet while protecting internal confidential information. Companies have, also, to alert the employees
 from the Internet misuse while doing their job.
- 
-Most of the time, employees have a misguided sense of security and believe that it is an IT problem, a purely technical 
-issue, and they naively believe that an incident may never happen to them \cite{stanton2005analysis}.  
-Actually, the employees' web misuse is one of the main causes of  security breaches \cite{breivik2002abstract},  
-so that making them security-conscious has become a security  challenge. 
 
-The reality is that every department must be involved in  readiness planning and establishing security policies 
-and procedures  to minimize their risks. Such strategies are mainly handled by 
-means  of \textit{Corporate Security Policies} (CSPs) which basically are a  set of security rules aiming at 
-protecting company assets by defining  permissions to be considered for every different action to be  performed 
+Most of the time, employees have a misguided sense of security and believe that it is an IT problem, a purely technical
+issue, and they naively believe that an incident may never happen to them \cite{stanton2005analysis}.
+Actually, the employees' web misuse is one of the main causes of  security breaches \cite{breivik2002abstract},
+so that making them security-conscious has become a security  challenge.
+
+The reality is that every department must be involved in  readiness planning and establishing security policies
+and procedures  to minimize their risks. Such strategies are mainly handled by
+means  of \textit{Corporate Security Policies} (CSPs) which basically are a  set of security rules aiming at
+protecting company assets by defining  permissions to be considered for every different action to be  performed
 inside the security system \cite{kaeo2003designing}.
- 
-The basic idea behind these CSPs is usually to include rules to either allow or deny employees' access to 
-non-confident or non-certified websites, which are referenced by their URLs in this chapter. Moreover, several web pages 
-might be also controlled for productivity  or suitability reasons, given the fact that the employees who connect  
-to these might have working purposes or not. Actually, some of the  CSPs usually define sets of allowed or denied 
-web pages or websites that could be accessed by the company employees. These sets are  usually included in two main 
-lists; a white list (referring to  ``permitted'') and a black list (referring to  ``non-permitted''). 
-Both lists, the white and the black, act as a  good and useful control tools for those URLs included in them, 
-as  well as for the complementary. For instance, the URLs which are not included in a white list will automatically 
+
+The basic idea behind these CSPs is usually to include rules to either allow or deny employees' access to
+non-confident or non-certified websites, which are referenced by their URLs in this chapter. Moreover, several web pages
+might be also controlled for productivity  or suitability reasons, given the fact that the employees who connect
+to these might have working purposes or not. Actually, some of the  CSPs usually define sets of allowed or denied
+web pages or websites that could be accessed by the company employees. These sets are  usually included in two main
+lists; a white list (referring to  ``permitted'') and a black list (referring to  ``non-permitted'').
+Both lists, the white and the black, act as a  good and useful control tools for those URLs included in them,
+as  well as for the complementary. For instance, the URLs which are not included in a white list will automatically
 have a denial of  access \cite{ludl2007effectiveness}.
 
-The aim of this paper is going beyond this traditional and simple decision making process. Actually, by using black 
-and/or white lists, we either allow or deny users' requests/connection based, only, on the URLs provided in the lists. 
-Yet, updating these lists is a never ending task, as numerous malicious websites appear every day. 
-For instance, Netcraft reports from November of 2014 \cite{netcraft:site} showed that there are about 950 
-million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, 
-there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand 
+The aim of this paper is going beyond this traditional and simple decision making process. Actually, by using black
+and/or white lists, we either allow or deny users' requests/connection based, only, on the URLs provided in the lists.
+Yet, updating these lists is a never ending task, as numerous malicious websites appear every day.
+For instance, Netcraft reports from November of 2014 \cite{netcraft:site} showed that there are about 950
+million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014,
+there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand
 new phishing URLs (almost 150 thousand associated domains).
 
-With this situation in mind, in this chapter, our aim is to define a tool for automatically making allow or 
-deny decisions with respect to URLs that are, actually, not included in the aforementioned lists. This decision 
-would be based on that made for similar URL accesses (those with similar features), but instead of using only 
+With this situation in mind, in this chapter, our aim is to define a tool for automatically making allow or
+deny decisions with respect to URLs that are, actually, not included in the aforementioned lists. This decision
+would be based on that made for similar URL accesses (those with similar features), but instead of using only
 the URL strings included in the lists, we will consider other parameters of the request/connection.
 
-For this reason, the problem has been mapped to a \textit{classification} problem in which we start from a set of 
-unlabelled patterns that model the connection properties from a huge amount of \textit{actual}\footnote{Taken from a 
-log file released to   us by a  Spanish company.} URL accesses, known as sessions. After that, we assign a label to many 
-of them, considering a set of \textit{actual}\footnote{The set of rules has been written by the same   company, with respect 
-to its employees.} security rules (CSPs) defined by the Chief Security Officer (CSO) in the company. This was the approach 
+For this reason, the problem has been mapped to a \textit{classification} problem in which we start from a set of
+unlabelled patterns that model the connection properties from a huge amount of \textit{actual}\footnote{Taken from a
+log file released to   us by a  Spanish company.} URL accesses, known as sessions. After that, we assign a label to many
+of them, considering a set of \textit{actual}\footnote{The set of rules has been written by the same   company, with respect
+to its employees.} security rules (CSPs) defined by the Chief Security Officer (CSO) in the company. This was the approach
 followed in \cite{ECTA}, and which we extend in this chapter.
 
-In order to extract conclusions from the resulting studied dataset and to properly apply a classification algorithm, 
-a pre-processing step is needed. In fact, to obtain an accurately trained classifier, there is a need to extract as much 
+In order to extract conclusions from the resulting studied dataset and to properly apply a classification algorithm,
+a pre-processing step is needed. In fact, to obtain an accurately trained classifier, there is a need to extract as much
 information as possible from the connections
-that the employees normally make throughout the workday. This translates into high computational requirements, which is 
-why we introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection 
-technique to extract the most important features from the data at hand. Among the well known feature selection techniques 
-proposed in literature, we propose to use a Computational Intelligence method: the Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally 
-evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches 
+that the employees normally make throughout the workday. This translates into high computational requirements, which is
+why we introduce in this paper  techniques for data reduction. More precisely, we aim to apply a feature selection
+technique to extract the most important features from the data at hand. Among the well known feature selection techniques
+proposed in literature, we propose to use a Computational Intelligence method: the Rough Set Theory (RST) \cite{pawlak2008rough}. RST has been experimentally
+evaluated with other leading feature selection techniques, such as Relif-F and entropy-based approaches
 in \cite{jensen2007fuzzy}, and has been shown to outperform these in terms of resulting classification performance.
- 
-After pre-processing and based on the reduced dataset, we will apply several classification algorithms, 
-testing them and selecting the most appropriate one for this problem. The selected classifier should be capable 
+
+After pre-processing and based on the reduced dataset, we will apply several classification algorithms,
+testing them and selecting the most appropriate one for this problem. The selected classifier should be capable
 of dealing with our data while producing high accuracies and
-being lightweight in terms of running time. Moreover, as we want to further test the reliability of the results, 
+being lightweight in terms of running time. Moreover, as we want to further test the reliability of the results,
 in this work we propose different experimental setups based on different data
-partitions. These partitions are formed either by preserving the order of the data or by taking the patterns in 
-a random way. Finally, given that the used data presents unbalance, we aim to apply balancing 
+partitions. These partitions are formed either by preserving the order of the data or by taking the patterns in
+a random way. Finally, given that the used data presents unbalance, we aim to apply balancing
 techniques \cite{imbalance_techniques_02} to further guarantee the fairness of our obtained results.
 
-In this chapter, we want to improve the accuracies obtained in our previous work \cite{ECTA}, 
-as well as see if the new incorporated method (namely Rough Sets) for feature selection yields to better rules. 
-This is meant to be done not only by applying RST for feature selection, but also by improving the quality of the 
+In this chapter, we want to improve the accuracies obtained in our previous work \cite{ECTA},
+as well as see if the new incorporated method (namely Rough Sets) for feature selection yields to better rules.
+This is meant to be done not only by applying RST for feature selection, but also by improving the quality of the
 original data set, by means of erasing information that may be redundant.
 
-The rest of the paper is structured as follows. Next section describes the state of the art related 
-to Data Mining (DM), Machine Learning (ML), and Computational Intelligence (CI) techniques applied 
-to corporate security. Also, related works about URL filtering will be reviewed. Data  description is 
-detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the  
-basic concepts of Rough Set Theory for feature selection which we  have used for data pre-processing. 
-Section \ref{sec:methodology} gives an overview of the  followed methodology, as well as the improvements 
+The rest of the paper is structured as follows. Next section describes the state of the art related
+to Data Mining (DM), Machine Learning (ML), and Computational Intelligence (CI) techniques applied
+to corporate security. Also, related works about URL filtering will be reviewed. Data  description is
+detailed in Section \ref{sec:problemDescription}. Then, Section \ref{sec:featureselection} describes the
+basic concepts of Rough Set Theory for feature selection which we  have used for data pre-processing.
+Section \ref{sec:methodology} gives an overview of the  followed methodology, as well as the improvements
 done after our  first results obtained in \cite{ECTA}. Then Section \ref{sec:results} depicts the results, and discusses the  obtained rules which are different for every used classifier. Finally, conclusions and future trends are given in Section \ref{sec:conclusions}.
- 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \section{State of the Art}
@@ -175,8 +175,8 @@ rules (derived from a CSP) which allow or deny a set of known
 Data Mining (DM), Machine Learning (ML), and Computational
 Intelligence, have been applied. This section gives  an overview in a
 number of solutions given to protect the user, or the company, against
-insecure situations.  
-                      
+insecure situations.
+
 First, as we want to add a good pre-processing phase to our system, in order to improve it, Subsection \ref{subsec:dataanalysis} gives an overview of the state of the art related to data analysis and pre-processing. Then, in Subsection \ref{subsec:relatedworks} we try to analyse similar systems, as well as define which advantages our system provides.
 
 % ------------------------------------------------------------------
@@ -184,27 +184,26 @@ First, as we want to add a good pre-processing phase to our system, in order to 
 \label{subsec:dataanalysis}
 
 Performing DM means analyzing the database we have \cite{Frank2011}
-which in our case is a log of HTTP requests. Leake \& Wilson
-\cite{wilson2001maintaining} present a exhaustive review of works which
+which in our case is a log of HTTP requests. The work discussed in \cite{wilson2001maintaining} present an exhaustive review of works which
 study database maintenance and their conclusion is that a database with
 good quality is decisive when trying to obtain good accuracies; a fact
 which was also demonstrated in \cite{zeineb2014thesis}. To analyse the
 data that we have at hand, we have based our work on two main
 processes: data pre-processing on
 the URL dataset and the application of balancing
-techniques depending on the data. 
+techniques depending on the data.
 
 While performing data pre-processing, we have focused first on the
 kind/type of data included in the HTTP requests in the log file that is
-used as input 
-file. We realised  
+used as input
+file. We realised
  that many URL strings are redundant in the dataset and thus we aimed
  to maintain the input file %maintain? keep? Maintain it how? - JJ
  by eliminating the redundant
  strings. Actually, the quality of the dataset is very important to
  generate accurate results and to have the possibility to learn models
  from the presented data. % repeated from previous paragraph, maybe
-                          % eliminate  JJ 
+                          % eliminate  JJ
  Thus, maintaining it is an essential
  step. % maintaining quality?  Maintaining with respect to what?
        % Please rephrase
@@ -228,7 +227,7 @@ this work, we have maintained the our HTTP request dataset by focusing
 on a specific kind of data that should be eliminated:
 redundant URL strings. Section \ref{subsec:duplicateddata} explains in
 detail the process that we have adopted to eliminate these redundant
-data.  
+data.
 
 Still with the data pre-processing task, we have focused as a second
 step on %doing what to them? - JJ
@@ -273,7 +272,7 @@ feature selection technique, instead of a feature extraction
 technique, as it is crucial to preserve the semantics of the features
 in the URL data that we dispose at hand, and among them, select the
 most important/informative ones which nearly preserve  the same
-performance as the initial feature set. 
+performance as the initial feature set.
 
 Yet it is important to mention that most feature selection techniques
 proposed in the literature suffer from some limitations. Most of these
@@ -290,8 +289,8 @@ shortcomings of the existing methods, it would be interesting to look
 for a method that does not require any external or additional
 information to function appropriately. Rough Set Theory (RST)
 \cite{pawlak2008rough}, which will be deeply explained in Section
-\ref{sec:featureselection}, can be used as such tool.  
- 
+\ref{sec:featureselection}, can be used as such tool.
+
 As previously stated and apart from applying a data pre-processing
 process, we aim to apply balancing techniques, depending on the
 distribution of patterns per class, in order to ensure the fairness of
@@ -303,7 +302,7 @@ includes a set of URL accesses performed by humans, and indeed we
 obtained an unbalanced dataset. In order to deal with this kind of
 data there exist several methods in literature known as balancing
 techniques \cite{imbalanced_data_05}. These methods can be categorized
-into three main groups \cite{imbalance_techniques_02}:  
+into three main groups \cite{imbalance_techniques_02}:
 
 \begin{itemize}
 \item \textit{Undersampling the over-sized classes}: This category aims at reducing the considered number of patterns for the classes with the majority.
@@ -311,15 +310,15 @@ into three main groups \cite{imbalance_techniques_02}:
 \item \textit{Modifying the cost associated to misclassifying the positive and the negative class}: This category aims at compensating the unbalance in the ratio of the two classes. For example, if the imbalance ratio is 1:10 in favour of the negative class, the penalty of misclassifying a positive example should be 10 times greater.
 \end{itemize}
 
-Techniques belonging to the first group have been applied to some works, following a random undersampling approach \cite{random_undersampling_08}. However, those techniques have the problem of the loss of valuable information. 
+Techniques belonging to the first group have been applied to some works, following a random undersampling approach \cite{random_undersampling_08}. However, those techniques have the problem of the loss of valuable information.
 
-Techniques belonging to the second  group have been so far the most widely used, following different approaches, such as SMOTE (Synthetic Minority Oversampling Technique) \cite{smote_02} which is a method proposed by Chawla et al. for creating `artificial' samples for the minority class in order to balance the amount of them, with respect to the amount of samples in the majority class. However this technique is based on numerical computations, considering  different distance measures, in order to generate useful patterns  (i.e. realistic or similar to the existing ones).
+Techniques belonging to the second  group have been so far the most widely used, following different approaches, such as SMOTE (Synthetic Minority Oversampling Technique)  which is a method proposed in \cite{smote_02} for creating `artificial' samples for the minority class in order to balance the amount of them, with respect to the amount of samples in the majority class. However this technique is based on numerical computations, considering  different distance measures, in order to generate useful patterns  (i.e. realistic or similar to the existing ones).
 
-The third group implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance by Alfaro-Cid et al. in \cite{cost_adjustment_07}, where they used a Genetic Programming (GP) approach in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
+The third group implies using a method in which a cost can be associated to the classifier accuracy at every step. This was done for instance  in \cite{cost_adjustment_07}, where  a Genetic Programming (GP) approach was used in which the fitness function was modified in order to consider a penalty when the classifier makes a false negative (an element from the minority class was classified as belonging to the majority class).
 However almost all the approaches deal with numerical (real, integer)
-data. 
+data.
 
-For our purposes, we will focus on techniques of the first and second group, as we will use state-of-the-art classifiers. Details about the balancing techniques used in our work will be explained in Section \ref{subsec:balancing}. 
+For our purposes, we will focus on techniques of the first and second group, as we will use state-of-the-art classifiers. Details about the balancing techniques used in our work will be explained in Section \ref{subsec:balancing}.
 
 % ------------------------------------------------------------------
 %
@@ -328,18 +327,17 @@ For our purposes, we will focus on techniques of the first and second group, as 
 
 The works that we are interested in are those which scope is related with the users' information and behaviour, and the management (and adaptation) of Information or Corporate Security Policies (ISPs).
 
-In this line, the paper proposed by Greenstadt and Beal \cite{cognitive_security_08} combined biometrics signals with ML methods in order to get a reliable user authentication in a computer system. P.G. Kelley et al. \cite{user-controllable_learning_08} presented a method named \textit{user-controllable policy learning} in which the user gives feedback to the system every time that a security policy is applied, so these policies can be refined according to that feedback to be more accurate with respect to the user's needs. 
+In this line, in \cite{cognitive_security_08} a combined biometrics signals with ML methods in order to get a reliable user authentication in a computer system was proposed. In \cite{user-controllable_learning_08}  a method was presented named \textit{user-controllable policy learning} in which the user gives feedback to the system every time that a security policy is applied, so these policies can be refined according to that feedback to be more accurate with respect to the user's needs.
 
-On the other hand, policies could be created for enhancing user's privacy, as proposed by Danezis in \cite{inferring_policies_socialnetworks_09}, who defined a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment. The idea of inferring policies can be also considered after our results, given the fact that we are able to obtain new rules from the output of the classifiers, but in the scope of the company, and focused on ISPs.
+On the other hand, policies could be created for enhancing user's privacy, as proposed  in \cite{inferring_policies_socialnetworks_09}, where a system able to infer privacy-related restrictions by means of a ML method applied in a social network environment was defined. The idea of inferring policies can be also considered after our results, given the fact that we are able to obtain new rules from the output of the classifiers, but in the scope of the company, and focused on ISPs.
 
-In the same line, Lim et al. proposed a system \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08} which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, Suarez-Tangil et al. \cite{rule_generation_gp_09} took the same approach as Lim et al., but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs; for instance, our case with the allowed or denied HTTP requests.
+In the same line, in \cite{sec_policy_evolution_gp_08,pol_evol_gp_3_approaches_08}  a system  was proposed which evolves a set of computer security policies by means of GP, taking again into account the user's feedback. Furthermore, the work presented in  \cite{rule_generation_gp_09} took the same approach as the latter mentioned work, but also bringing event correlation into it. The two latter works are interesting in our case, though they are not focused on company ISPs; for instance, our case with the allowed or denied HTTP requests.
 
-Furthermore, it is worth mentioning a tool developed in Perl by Evan
-Harris \cite{harris2003next}, taking the approach of ``greylisting'',
+Furthermore, it is worth mentioning a tool developed in  \cite{harris2003next}, taking the approach of ``greylisting'',
 and which \textit{temporarily} rejects messages that come from senders
 who are not in the black list or in the white list, so that the system
 does not know if it is a spam message or not. And, like in our
-approach, it works trying to have a minimal impact on the users. 
+approach, it works trying to have a minimal impact on the users.
 
 Finally, a system named MUSES (from Multiplatform Usable Endpoint
 Security System) \cite{MUSES_SAC_14} is being developed under the
@@ -352,7 +350,7 @@ from these policies, according to user's feedback and behaviour after
 the system decisions \cite{muses_sotics_13}. The results of this work
 could be applied in this system, by changing the pre-processing step,
 due to the fact that the database is different. But overall, our
-conclusions can be escalated to be included in such a system.    
+conclusions can be escalated to be included in such a system.
 
 In the next Section, we will describe the problem we aim to solve, in addition to the data from which the data sets are composed.
 
@@ -364,18 +362,18 @@ In the next Section, we will describe the problem we aim to solve, in addition t
 
 \noindent The problem to solve is related with the application of corporate security policies in order to deal with potential URL accesses inside an enterprise. To this end a dataset of URL sessions (requests and accesses) is analysed. These data are labelled with the corresponding permission or denial for that access, following a set of rules. The rules themselves act as a mix between a black list and a white list. The problem is then transformed into a classification one, in which every new URL request will be classified, and thus, a grant or deny action will be assigned to that pattern.
 
-The analysed data come from an \texttt{access.log} of the Squid proxy application \cite{squid:site}, in a real Spanish company. This open source tool works as a proxy, but with the advantage of storing a cache of recent transactions so future requests may be answered without asking the origin server again \cite{DuaneWessels2004}.  
+The analysed data come from an \texttt{access.log} of the Squid proxy application \cite{squid:site}, in a real Spanish company. This open source tool works as a proxy, but with the advantage of storing a cache of recent transactions so future requests may be answered without asking the origin server again \cite{DuaneWessels2004}.
 
 Every pattern, namely an URL request, has ten associated variables. These patterns are described in Table \ref{tabdata} in which we have indicated the type of  each variable; either if it is numeric or nominal/categorical. The table has, however, not only ten but eleven described variables. This is due to the fact that we decided to consider the `Content Type' of the requested web page as a whole, but also its Main Content Type (MCT) separately. By adding more information through a new feature, we intended to see if more general rules could be obtained by the classifiers, given that there are less possible values for an MCT than for a whole `Content Type'.
 
- 
+
 
 \begin{table*}[htpb]
 \centering
  \caption{\label{tabdata} Independent Variables corresponding to a URL
    request through \textit{HTTP}. The URLs are parsed as detailed in
-   Subsection \ref{sec:buldingdataset}.} 
-   
+   Subsection \ref{sec:buldingdataset}.}
+
 {\scriptsize
 \begin{tabular}{llll}
 \hline\noalign{\smallskip}
@@ -485,10 +483,10 @@ considering these rules. This step is necessary in order to transform
 the problem into a classification one. However, in order to apply the
 rules they must be transformed from their initial format into another
 one that can be applied in our programs, a hash or map. This is
-described in Subsection 
+described in Subsection
 \ref{sec:buldingdataset}. This Subsection also details how the
 patterns of the navigation data log (URL sessions) are parsed, in
-order to build a hash to perform the matting/labelling process. 
+order to build a hash to perform the matting/labelling process.
 
 At the end of the `parsing' phase, the two hashes are compared in order to obtain which entries of the log should be ALLOW or DENY, known as the \textit{labelling} step. This is similar to perform a decision process in a security system. This step results in that there are 38972 pattern belonging to class ALLOW (positive class) and 18530 of class DENY (negative class), so just a 67.78\% of the samples belong to the majority class. This represents a very important problem, since a classifier that is trained considering these proportions is supposed to classify all the samples as ALLOW, getting a theoretically quite good classification accuracy equal or greater than 68\%. However, in Section \ref{sec:results} we will see that, despite the fact that some denied patterns are classified as allow, the overall performance of the classifiers is better than expected.
 
@@ -503,14 +501,14 @@ Based on the generated pre-processed and balanced dataset and as a final step, a
 
 In previous sections, it was stated that the data to work with was not originally presented in the form of a dataset. Instead, `raw' data was gathered. In order to have the data in the form of a dataset, ready to be pre-processed, as well as being adequate to act as an input for the classifiers, a parsing process must be performed.
 
-First, in this work we have considered Drools \cite{drools:site} as the tool to create and  manage rules in a business environment. This so called Business Rule Management System (BRMS) has been developed by the JBoss community under an Apache License and it is written in Java. Though this platform consists of many components; here we focus on Drools Expert and the Drools Rule Language (DRL, \cite{drools:doc}). Then, the defined rules for a certain company are included in a file with a \texttt{.drl} extension; the file that needs to be parsed to obtain the final set of rules. 
+First, in this work we have considered Drools \cite{drools:site} as the tool to create and  manage rules in a business environment. This so called Business Rule Management System (BRMS) has been developed by the JBoss community under an Apache License and it is written in Java. Though this platform consists of many components; here we focus on Drools Expert and the Drools Rule Language (DRL, \cite{drools:doc}). Then, the defined rules for a certain company are included in a file with a \texttt{.drl} extension; the file that needs to be parsed to obtain the final set of rules.
 
-In Figure \ref{fig:drools_hash}, (a), we display the typical rule syntax in DRL. Two main parts should be obtained from the parsing method that will be applied: both left and right sides of the rule, taking into account that the left side is where the company specifies the conditions required to apply the action indicated in the right side. Also, for describing the conditions, Squid syntax is used (see Section \ref{sec:problemDescription}), having thus the following structure: \texttt{squid:Squid(\textit{conditions})}. Finally, from the right side of the rule, the \textit{ALLOW} or \textit{DENY} label to apply on the data which matches with the conditions, will be extracted. 
+In Figure \ref{fig:drools_hash}, (a), we display the typical rule syntax in DRL. Two main parts should be obtained from the parsing method that will be applied: both left and right sides of the rule, taking into account that the left side is where the company specifies the conditions required to apply the action indicated in the right side. Also, for describing the conditions, Squid syntax is used (see Section \ref{sec:problemDescription}), having thus the following structure: \texttt{squid:Squid(\textit{conditions})}. Finally, from the right side of the rule, the \textit{ALLOW} or \textit{DENY} label to apply on the data which matches with the conditions, will be extracted.
 The parser that we have implemented applies two regular
 expressions, one for each side of the rule, and returns a hash with
 all the rules with the conditions and actions defined. The `before and
 after' performing the parsing over the \texttt{.drl} file is presented
-in Figure \ref{fig:drools_hash}. 
+in Figure \ref{fig:drools_hash}.
 
 \begin{figure}[htb]
 \centering
@@ -568,7 +566,7 @@ used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{o
 \caption{Hash in Perl with an example entry. The actual hash used for
   this work has a total of 100000 entries, with more than a half
   labelled as \textit{ALLOW} or \textit{DENY} after the comparing
-  process. \label{fig:data_hash}} 
+  process. \label{fig:data_hash}}
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -581,7 +579,7 @@ initial amount of patterns are labelled, and that the ratio is 2:1 in
 allows to denies. The 2:1 ratio means that the data is unbalanced, and
 therefore we have performed different approaches from the first and
 second groups of data balancing techniques, which were introduced in
-Section \ref{subsec:dataanalysis}: 
+Section \ref{subsec:dataanalysis}:
 
 \begin{itemize}
 \item Undersampling: we will randomly remove samples of the majority class until the amount in both classes are similar. In other words, we will reduce the amount of `denied' patterns by a half.
@@ -607,7 +605,7 @@ The first thing to do is studying the data in order to look for the patterns tha
 \subsubsection{Performing feature selection}
 \label{subsec:featselresults}
 
-For pattern classification, our learning problem has to select high discriminating features from the input database which corresponds to the URL information dataset. To perform this task, we apply rough set theory. 
+For pattern classification, our learning problem has to select high discriminating features from the input database which corresponds to the URL information dataset. To perform this task, we apply rough set theory.
 
 Technically, we may formalize our problem as an information system where universe $U = \{x_1, x_2, \ldots, x_N\}$ is a set of pattern identifiers, the conditional attribute set $C =\{c_1,c_2, \ldots, c_N\}$ contains each feature of the information table to select and the decision attribute $D$ of our learning problem corresponds to the class label of each pattern. The input database has a single binary decision attribute. Hence, the decision attribute $D$  has binary values $d$:  either the URL connection is allowed   or denied. The condition attribute feature $D$ is defined as follows:
 \begin{displaymath}
@@ -655,7 +653,7 @@ work are mainly categorical, but also numerical. Thus, among the
 classifiers based on trees or rules, we need classifiers that are able
 to handle these types of features. Consequently, we made a first
 selection over all the classifiers in Weka which complied with these
-requirements. 
+requirements.
 
 Yet, it is important to mention that previously in \cite{ECTA}, we studied a set of classifiers that may be applied to the nature of our dataset; classifiers that fit our requirements. The selected classifiers are indeed based on the obtained good classification accuracy. In fact, we demonstrated that the classifiers that lead to better classification results were:
 
@@ -682,15 +680,15 @@ These methods will be deeply tested on the dataset (balanced and unbalanced) in 
 \label{sec:results}
 
 This section presents the obtained results for the different configurations of the experimental setup. First, Subsection \ref{subsec:firstresults} depicts the first results, summarising what was proved in \cite{ECTA}. This means that, for the chosen classifiers, described in Section \ref{subsec:methods}, results are displayed for the dataset when it is in its initial - unbalanced - form, as well as after the balancing process. At the end of this Subsection, we introduce the results obtained once the dataset is released from the redundant patterns. Then, Subsection \ref{subsec:RSTresults} presented the results obtained when applying rough set theory as a feature selection technique to the balanced generated dataset. This subsection justifies that the use of rough sets actually enhances the system performance in terms of  both execution/running time and classification accuracy. Finally, examples of the obtained rules which were taken from the classifiers' output, are discussed in Subsection \ref{subsec:rulesdiscussion}.
- 
+
 \subsection{Results about classification}
 \label{subsec:firstresults}
 
-\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.   
+\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.
 
 Moreover, the way in which those divisions were built has been considered as: randomly built, or sequentially built. We say that the training and test files were randomly built when the patterns are taken from the original dataset and, by generating a random number, they have a certain probability to belong to the training file, and another to belong to the test file. On the contrary, the training and test files are built sequentially when the patterns inside them strictly follow the same order in time as the original dataset, before being divided. The aim of the sequential division is to compare if the online activity of the employees, considering URL sessions, could be somehow ``predicted'', just using data from previous minutes or hours.
 
-As stated in Section \ref{subsec:balancing}, the dataset presents unbalance in the data due to the fact that there are more patterns classified as `allow' than `deny'. Therefore, two data balancing methods have been applied to all the files to get similar pattern amounts in both classes: undersampling (random removal of ALLOW patterns) and oversampling (duplication of DENY patterns). 
+As stated in Section \ref{subsec:balancing}, the dataset presents unbalance in the data due to the fact that there are more patterns classified as `allow' than `deny'. Therefore, two data balancing methods have been applied to all the files to get similar pattern amounts in both classes: undersampling (random removal of ALLOW patterns) and oversampling (duplication of DENY patterns).
 
 Classification results for the unbalanced data are presented in Table \ref{tabresults_nobalan}. Three different tests have been performed for the random pattern distribution approach, so the mean and standard deviation are shown in the corresponding columns.
 
@@ -698,7 +696,7 @@ Classification results for the unbalanced data are presented in Table \ref{tabre
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{tabresults_nobalan} Percentage of correctly classified patterns for the unbalanced dataset with 12 features.} 
+ \caption{\label{tabresults_nobalan} Percentage of correctly classified patterns for the unbalanced dataset with 12 features.}
 {\small
 \begin{tabular}{|l|c|c|c|c|}
 \cline{2-5}
@@ -792,11 +790,11 @@ PART & 96.82 $\pm$ 0.09 & 84.50 & 96.68 $\pm$ 0.11 & 78.16 \\
   \item[Applying Oversampling] Here we have duplicated the DENY patterns so their number could be up to that of the ALLOW patterns. However, it does not work as well as in other approaches which uses numerical computations for creating the new patterns to include in the minority class. Consequently, the results have been decreased.
 \end{description}
 
-In both cases, it is noticeable that if we take the data in a sequential way, instead of randomly, results will decrease. Also, it is clear that due to the fact that performing undersampling some patterns are lost while in the case of oversampling they all remain, and this leads to have better results with the \textit{oversampling} balancing technique. Then, in this case the algorithm with best performance is \textit{J48}, though \textit{Random Forest} follows its results very closely in random datasets processing, and \textit{REP Tree}, which is better than the rest when working with sequential data. Nevertheless, generally speaking and given the aforementioned reasons, performing data balancing methods decreases  the results. 
+In both cases, it is noticeable that if we take the data in a sequential way, instead of randomly, results will decrease. Also, it is clear that due to the fact that performing undersampling some patterns are lost while in the case of oversampling they all remain, and this leads to have better results with the \textit{oversampling} balancing technique. Then, in this case the algorithm with best performance is \textit{J48}, though \textit{Random Forest} follows its results very closely in random datasets processing, and \textit{REP Tree}, which is better than the rest when working with sequential data. Nevertheless, generally speaking and given the aforementioned reasons, performing data balancing methods decreases  the results.
 
 Once this first study is finished, the next step is to erase the duplicated requests. And then, we test the obtained reduced dataset to see if it has some influence on the results. As it seems that the best results are obtained for an unbalanced dataset, and also for a training-test random division, we choose this configuration for the following experiments.
 
-The results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results slightly decrease in comparison to the ones obtained originally, but they are still good, and definitely better than Na\"ive Bayes. 
+The results are displayed in Tables \ref{tab:repurl_unb_traintest} (a) and (b). We can see that the results slightly decrease in comparison to the ones obtained originally, but they are still good, and definitely better than Na\"ive Bayes.
 
 The way it happened for the original datasets, results for files with the patterns taken consecutively lower significantly. And as previously explained, this happens due to the possible loss of information. Best results are obtained by both \textit{Random Forest} and \textit{REP Tree} classifiers, with a 96\% of accuracy.
 
@@ -837,9 +835,9 @@ prove that applying rough set theory for feature selection reduces the
 running time when testing the classifiers. Second and based on the
 reduced feature set of data, we want to prove that the accuracies
 remain the same, or even improve in comparison to the original set of
-features. 
+features.
 
-The resulting reduced dataset, from the previous subsection, was used to test the same chosen classifiers, plus JRip. This is a classifier which consists of a propositional rule learner, the so-called Repeated Incremental Pruning to Produce Error Reduction (RIPPER) algorithm. It was proposed by W. Cohen \cite{cohen1995fast} as an improved version of the Incremental Reduced Error Pruning (IREP) algorithm. The reason why this JRip classifier was added to the list, is because we cannot compare the size of the trees for the Random Forest classifier, as the size of the forest is chosen when running it. Then, we added JRip for making the comparison more complete.
+The resulting reduced dataset, from the previous subsection, was used to test the same chosen classifiers, plus JRip. This is a classifier which consists of a propositional rule learner, the so-called Repeated Incremental Pruning to Produce Error Reduction (RIPPER) algorithm. It was proposed in \cite{cohen1995fast} as an improved version of the Incremental Reduced Error Pruning (IREP) algorithm. The reason why this JRip classifier was added to the list, is because we cannot compare the size of the trees for the Random Forest classifier, as the size of the forest is chosen when running it. Then, we added JRip for making the comparison more complete.
 
 All the experiments were made with the same computer, in the following
 conditions: Toshiba Laptop with Intel\texttrademark  Core i7-3630QM,
@@ -849,12 +847,12 @@ comparison between performance before and after applying feature
 selection. Though the complexity of the trees generated by the
 classifiers grows after applying feature selection, even obtaining
 more rules for PART classifiers, the running time lowers by an average
-of 40\%.  
+of 40\%.
 
- 
+
 \begin{table}[htpb]
 \centering
- \caption{\label{tab_runningtimes} Comparison between rule/tree complexity and running times for the initial data set, which had 12 features, and the resulting one, having 9 features, after applying Rough Set Theory for feature selection.} 
+ \caption{\label{tab_runningtimes} Comparison between rule/tree complexity and running times for the initial data set, which had 12 features, and the resulting one, having 9 features, after applying Rough Set Theory for feature selection.}
 {\small
 \begin{tabular}{|l|c|c|}
 \cline{2-3}
@@ -904,9 +902,9 @@ JRip & 92.95 & 91.66 \\
 }
 \end{table}
 
-Moreover, results in Table \ref{tab_featselect} show the same behaviour as for previous experiments. Actually, results from this table are compared to those obtained from Table \ref{tabresults_nobalan}. This is because both tables are sharing nearly the same conditions, except that each one has a specific number of features. 
+Moreover, results in Table \ref{tab_featselect} show the same behaviour as for previous experiments. Actually, results from this table are compared to those obtained from Table \ref{tabresults_nobalan}. This is because both tables are sharing nearly the same conditions, except that each one has a specific number of features.
 
-We can see that, for example, for a division of 80\% training - 20\% test, the results after feature selection are better for the \textit{Random Forest} and \textit{PART} classifiers. Only \textit{NNge} seems to generate lower classification results, but still considered as interesting as it is higher than 96\%.  
+We can see that, for example, for a division of 80\% training - 20\% test, the results after feature selection are better for the \textit{Random Forest} and \textit{PART} classifiers. Only \textit{NNge} seems to generate lower classification results, but still considered as interesting as it is higher than 96\%.
 
 \begin{table*}[htpb]
 \centering
@@ -964,19 +962,19 @@ THEN ALLOW
 \end{verbatim}
 \end{small}
 
-In their presented format, these rules are considered adequate to fulfill our purposes, since they are somehow independent of the URL to which the client requests to access. Thus, it would be potentially possible to allow or deny the access to unknown URLs just taking into account some parameters of the request. 
+In their presented format, these rules are considered adequate to fulfill our purposes, since they are somehow independent of the URL to which the client requests to access. Thus, it would be potentially possible to allow or deny the access to unknown URLs just taking into account some parameters of the request.
 
 When the features considered in the rule can be known in advance, such as \texttt{http\_method}, or \texttt{server\_or\_cache\_address}, for instance, the decision could be made in real-time, and thus, a granted URL (whitelisted) could be DENIED, or the other way round.
 
 Tree-based classifiers also yield to several useful branches in this sense, but they have not been plotted here because of the difficulty for showing/visualizing them properly.
 
-Focusing on the presented rules, it can be noticed that almost all of them also depend on very determining features/values, such as \texttt{server\_or\_cache\_address}, or even on the \texttt{client\_address} (not presented here). These features create several non-useful rules, mainly in the case of the client IP address, because it will not be correct to settle that a specific IP cannot access to some URLs. Thus, we have conducted additional experiments in this line by removing these three features (\texttt{url}, \texttt{server\_or\_cache\_address}, \texttt{client\_address}) from the dataset and training again the classifiers. These have been performed over the unbalanced data, considering a 10-fold cross validation test. 
+Focusing on the presented rules, it can be noticed that almost all of them also depend on very determining features/values, such as \texttt{server\_or\_cache\_address}, or even on the \texttt{client\_address} (not presented here). These features create several non-useful rules, mainly in the case of the client IP address, because it will not be correct to settle that a specific IP cannot access to some URLs. Thus, we have conducted additional experiments in this line by removing these three features (\texttt{url}, \texttt{server\_or\_cache\_address}, \texttt{client\_address}) from the dataset and training again the classifiers. These have been performed over the unbalanced data, considering a 10-fold cross validation test.
 
 The results of classification accuracies are shown in Table \ref{tab_rules_study_classification}.
- 
+
 \begin{table}[htpb]
 \centering
- \caption{\label{tab_rules_study_classification} Percentage of correctly classified patterns for the unbalanced dataset without the set of critical features, namely \texttt{URL}, \texttt{server\_or\_cache\_address}, and \texttt{client\_address}.} 
+ \caption{\label{tab_rules_study_classification} Percentage of correctly classified patterns for the unbalanced dataset without the set of critical features, namely \texttt{URL}, \texttt{server\_or\_cache\_address}, and \texttt{client\_address}.}
 {\small
 \begin{tabular}{|l|c|c|}
 \cline{2-3}
@@ -1058,50 +1056,50 @@ Moreover, some of these features depend on the session itself, i.e. they will be
 %
 \section{Conclusions and future work}
 \label{sec:conclusions}
-In this paper various classification methods have been applied in order to perform a decision process inside a company, 
-according to some predefined corporate security policies. This decision is focused on allowing or denying URL access 
-requests by considering previous decisions on similar requests, and not having specific rules in an already defined 
-white/black list for those URLs. Thus, the proposed method would allow or deny an access to a URL based on additional 
-features rather than the specific URL string, only. This could be very useful since new URLs could be 
-automatically 'whitelisted' or 'blacklisted' depending on some of the connection parameters, 
+In this paper various classification methods have been applied in order to perform a decision process inside a company,
+according to some predefined corporate security policies. This decision is focused on allowing or denying URL access
+requests by considering previous decisions on similar requests, and not having specific rules in an already defined
+white/black list for those URLs. Thus, the proposed method would allow or deny an access to a URL based on additional
+features rather than the specific URL string, only. This could be very useful since new URLs could be
+automatically 'whitelisted' or 'blacklisted' depending on some of the connection parameters,
 such as the \texttt{content\_type} of the access or the \texttt{IP} of the client which makes the request.
 
-To this aim, we have started from a big dataset (100000 patterns) with employees' URL requests information, 
-and by considering a set of URL access permissions, we have composed a labelled dataset (57000 patterns). 
-Over that set of data, we have tested several classification methods, after some data balancing techniques 
-have been applied. Then, the best five classifiers have been deeply proved over several training and test divisions, 
+To this aim, we have started from a big dataset (100000 patterns) with employees' URL requests information,
+and by considering a set of URL access permissions, we have composed a labelled dataset (57000 patterns).
+Over that set of data, we have tested several classification methods, after some data balancing techniques
+have been applied. Then, the best five classifiers have been deeply proved over several training and test divisions,
 and with two methods: by leaving the order in time when the URL were requested, and by taking them in a random way.
 
-The results show that classification accuracies are between 95\% and 97\%, even when using the unbalanced datasets. 
-However, they have been diminished because of the possible loss of data that comes from performing an undersampling 
-(removing patterns) method; or taking the training and the datasets in a sequential way from the main log file, 
+The results show that classification accuracies are between 95\% and 97\%, even when using the unbalanced datasets.
+However, they have been diminished because of the possible loss of data that comes from performing an undersampling
+(removing patterns) method; or taking the training and the datasets in a sequential way from the main log file,
 due to the fact that certain URL requests can be made only at a certain time.
 
-After that, we have shown that maintaining the dataset is crucial in order to improve the performance of 
-the system, mainly, in terms of classification accuracy. We have shown that by erasing the duplicated data, 
-the accuracies remain inside the range of 96\% - 97\%, which means that indeed there was redundant information 
+After that, we have shown that maintaining the dataset is crucial in order to improve the performance of
+the system, mainly, in terms of classification accuracy. We have shown that by erasing the duplicated data,
+the accuracies remain inside the range of 96\% - 97\%, which means that indeed there was redundant information
 in the dataset.
 
-Actually, the resulting dataset was the one over which we have performed feature selection by means of rough sets, 
-and we have proved that by selecting the most interesting features we could improve the classification accuracy of 
-the system while being lightweight in terms of running time. In this way, we can conclude that our proposed approach 
+Actually, the resulting dataset was the one over which we have performed feature selection by means of rough sets,
+and we have proved that by selecting the most interesting features we could improve the classification accuracy of
+the system while being lightweight in terms of running time. In this way, we can conclude that our proposed approach
 has been successful and it would be a useful tool in an enterprise.
 
 
-Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method, 
-maybe by considering bigger data divisions, bigger data sets (from a whole day, or a week), or by adding some kind 
+Future lines of work include conducting a deeper set of experiments trying to test the generalisation power of the method,
+maybe by considering bigger data divisions, bigger data sets (from a whole day, or a week), or by adding some kind
 of `noise' to the dataset.
-Moreover, considering the good classification results obtained in this work, the next step could be the application 
-of our methodology in the real system from which data was gathered, counting with the opinion of expert CSOs, in order 
+Moreover, considering the good classification results obtained in this work, the next step could be the application
+of our methodology in the real system from which data was gathered, counting with the opinion of expert CSOs, in order
 to know the real value of the proposal.
 
-The study of other classification methods could be another research branch, along with the implementation of a Genetic 
-Programming approach, which could deal with the unbalance problem. This can be done by using a modification of the 
+The study of other classification methods could be another research branch, along with the implementation of a Genetic
+Programming approach, which could deal with the unbalance problem. This can be done by using a modification of the
 cost associated to misclassifying patterns as done  in \cite{cost_adjustment_07}.
 
-Finally, we also aim at extracting additional information from the URL string. This information could be transformed 
-into additional features that could be more discriminative than the current set of obtained rules. Moreover, a data 
-process involving grouping data into sessions (such as number of requests per client, or average time connection) 
+Finally, we also aim at extracting additional information from the URL string. This information could be transformed
+into additional features that could be more discriminative than the current set of obtained rules. Moreover, a data
+process involving grouping data into sessions (such as number of requests per client, or average time connection)
 will be also considered.
 
 
