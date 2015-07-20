@@ -952,9 +952,10 @@ THEN ALLOW
 IF server_or_cache_address = "173.194.78.103"
 THEN ALLOW
 
-IF content_type =
- "application/vnd.google.safebrowsing-update"
-THEN DENY
+IF content_type = "application/octet-stream" 
+AND server_or_cache_address = 192.168.4.4 
+AND client_address = 10.159.86.22
+THEN ALLOW
 
 IF server_or_cache_address = "173.194.78.94"
 AND content_type_MCT = "text"
@@ -971,9 +972,11 @@ When the features considered in the rule can be known in advance, such as \textt
 
 Tree-based classifiers also yield to several useful branches in this sense, but they have not been plotted here because of the difficulty for showing/visualizing them properly.
 
-Focusing on the presented rules, it can be noticed that almost all of them also depend on very determining features/values, such as \texttt{server\_or\_cache\_address}, or even on the \texttt{client\_address} (not presented here). These features create several non-useful rules, mainly in the case of the client IP address, because it will not be correct to settle that a specific IP cannot access to some URLs. Thus, we have conducted additional experiments in this line by removing these three features (\texttt{url}, \texttt{server\_or\_cache\_address}, \texttt{client\_address}) from the dataset and training again the classifiers. These have been performed over the unbalanced data, considering a 10-fold cross validation test.
+Focusing on the presented rules, it can be noticed that almost all of them also depend on very determining features/values, such as \texttt{server\_or\_cache\_address}, or even on the \texttt{client\_address}, what we have called `critical features'. These features create several non-useful rules, mainly in the case of the client IP address, because it will not be correct to settle that a specific IP can or cannot access to some URLs. 
 
-The results of classification accuracies are shown in Table \ref{tab_rules_study_classification}.
+Thus, we have conducted two additional experiments in this line by removing, first, the \texttt{url} feature in a new dataset, and second, erasing the three critical features: \texttt{url}, \texttt{server\_or\_cache\_address} and \texttt{client\_address} from the dataset. Then we have trained again the classifiers. These experiments have been performed over the unbalanced data, considering a 10-fold cross validation test.
+
+The results of classification accuracies in each of the two tests are shown in Table \ref{tab_rules_study_classification}.
 
 \begin{table}[htpb]
 \centering
@@ -981,7 +984,7 @@ The results of classification accuracies are shown in Table \ref{tab_rules_study
 {\small
 \begin{tabular}{|l|c|c|}
 \cline{2-3}
-\multicolumn{1}{l|}{} & Without URL feature & Without URL-IPs features\\
+\multicolumn{1}{l|}{} & Without URL feature & Without URL and IP addresses features\\
 \hline
 J48 & 93.62 & 90.53 \\
 \cline{1-1}
@@ -997,7 +1000,9 @@ JRip & 87.45 & 85.60 \\
 }
 \end{table}
 
-As expected, and as it can be seen in Table \ref{tab_rules_study_classification}, the percentages of accuracies have been decreased. Results are more influenced and decrease  in the case where three features have been discarded. However, the results are still quite good, having in mind that the remaining features are more general than these. In addition, it is worth to analyse the set of rules that the classifiers\footnote{Trees can be deployed as rules.} have generated as models. Thus, having a look at these other rules, in the case without \texttt{url} (i.e. 11 features), the rules are pretty similar to those presented before. Thus, we can find, among the most important rules (in the sense that the classification accuracy depends in a big part on them) the following ones:
+As expected, and as it can be seen in Table \ref{tab_rules_study_classification}, the percentages of accuracy have been decreased. Results are more influenced and decrease in the case where three features have been discarded. However, the results are still quite good, having in mind that the remaining features are more general than those removed. 
+
+In addition, it is worth to analyse the set of rules that the classifiers\footnote{Trees can be deployed as rules.} have generated as models. Thus, having a look at these other rules, in the case without \texttt{url} (i.e. 11 features), the rules are pretty similar to those presented before. Thus, we can find, among the most important rules (in the sense that the classification accuracy depends in a big part on them) the following ones:
 
 \begin{small}
 \begin{verbatim}
@@ -1021,7 +1026,8 @@ THEN ALLOW
 \end{verbatim}
 \end{small}
 
-These rules depend on the so-called `critical features' and almost all the important rules depend on them. Due to this reason, we have performed another experiment omitting these variables, in addition to the \texttt{URL}, as it was mentioned before. The generated rules by some of the classifiers, tree and rule-based, are closer to what we aim to obtain. Some examples of relevant rules are the following:
+These rules, actually most of them in the generated model, still depend on the rest of critical features (server and client IP addresses). Due to this reason, we conducted the second experiment omitting these variables. 
+In this case the generated rules by all the classifiers are closer to what we aimed to obtain. Some examples of relevant rules (those with high influence in the obtained accuracy) are the following:
 
 %[J48], [REP Tree], [PART] and [PART]
 \begin{small}
