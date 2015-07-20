@@ -583,7 +583,7 @@ Section \ref{subsec:dataanalysis}:
 
 \begin{itemize}
 \item Undersampling: we will randomly remove samples of the majority class until the amount in both classes are similar. In other words, we will reduce the amount of `denied' patterns by a half.
-\item Oversampling: we will introduce random samples in the minority class, in order to get a closer number of patterns in both classes. This has to be done due to the impossibility of creating synthetic data when dealing with categorical values (there is not a proper distance measure between two values in a category). Actually, since the number of samples in the majority class is almost twice the minority one, we have just duplicated all of those belonging to the minority class.
+\item Oversampling: we will introduce more samples in the minority class, in order to get a closer number of patterns in both classes. This has to be done due to the impossibility of creating synthetic data when dealing with categorical values, given that there is not a proper distance measure between two values in a category. Actually, since the number of samples in the majority class is almost twice the minority one, we have just duplicated all of those belonging to the minority class.
 \end{itemize}
 
 % ------------------------------------------------------------------
