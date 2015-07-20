@@ -660,7 +660,9 @@ This section presents the obtained results for the different configurations of t
 \subsection{Results about classification}
 \label{subsec:firstresults}
 
-\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.
+\noindent Several experiments have been conducted, once a subset of classification methods has been chosen (see Section \ref{subsec:methods}). In order to better test the methods, two different divisions (training-test) have been done; namely 90\%-10\% and 80\%-20\%. 
+These files have been built considering that similar patterns of the whole dataset, are placed in the same file, in order to avoid biasing the classification.
+Also, it is worth mentioning that we have included Na\"ive Bayes in the result tables, as it is normally used as a reference classifier in classification problems \cite{Frank2011}.
 
 Moreover, the way in which those divisions were built has been considered as: randomly built, or sequentially built. We say that the training and test files were randomly built when the patterns are taken from the original dataset and, by generating a random number, they have a certain probability to belong to the training file, and another to belong to the test file. On the contrary, the training and test files are built sequentially when the patterns inside them strictly follow the same order in time as the original dataset, before being divided. The aim of the sequential division is to compare if the online activity of the employees, considering URL sessions, could be somehow ``predicted'', just using data from previous minutes or hours.
 
