@@ -539,35 +539,10 @@ in Figure \ref{fig:drools_hash}.
 \caption{(a) Structure of a rule in Drools Expert. (b) Resulting rule, after the parsing, in a global hash of rules. \label{fig:drools_hash}}
 \end{figure}
 
-Then, the log file is analysed. Usually, the instances of a log file have a number of fields (which will be later referred as features/attributes of a connection pattern), in order to have a registration of the client who asks for a resource, the time of the day when the request is made, and so on. In this case, we have worked with an \textit{access.log} (see Section \ref{sec:problemDescription}) file, converted into a CSV format file so it could be parsed and transformed in another hash of data. All ten fields of the Squid log yield a hash like the one depicted in Figure \ref{fig:data_hash}. Once the two hashes of data were created, they were compared in such a way that for each rule in the hash of rules, it was determined how many entries in the data log hash are covered by the rule, and so they were applied the label that appears as `action' in the rule.
+Then, the log file is analysed. Usually, the instances of a log file have a number of fields (which will be later referred as features/attributes of a connection pattern), in order to have a registration of the client who asks for a resource, the time of the day when the request is made, and so on. In this case, we have worked with an \textit{access.log} (see Section \ref{sec:problemDescription}) file, converted into a CSV format file so it could be parsed and transformed in another hash of data. Also, all ten fields of the Squid log yield another hash. Once the two hashes of data were created, they were compared in such a way that for each rule in the hash of rules, it was determined how many entries in the data log hash are covered by the rule, and so they were applied the label that appears as `action' in the rule.
 
 Among the tasks to be performed, is the one to extract from a whole URL the part that was more interesting for our defined purposes. It is important to point out that in a log with thousands of entries, an enormous variety of URLs can be found, since some can belong to advertisements, images, videos, or even some others does not have a domain name but are given directly by an IP address. For this reason, we have taken into account that for a domain name, many subdomains (separated by dots) could be considered, and their hierarchy grows from the right towards the left. The highest level of the domain name space is the Top-Level Domain (TLD) at the right-most part of the domain name, divided itself in country code TLDs and generic TLDs. Then, a domain and a number of subdomains follow the TLD (again, from right to left). In this way, the URLs in the
 used log are such as \textit{http://subdomain...subdomain.domain.TLD/} \textit{other\_subdirectories}. However, for the ARFF\footnote{Format of Weka files} file to be created, only the domain (without the subdomains and the TLD) should be considered, because there are too many different URLs to take into consideration. Hence, applying another regular expression, the data parser obtains all the core domains of the URLs, which makes 976 domains in total.
-
-\begin{figure}[htb]
-\centering
-\begin{tabular}{ p{0.1cm} p{0.1cm} p{6cm} }
-  \texttt{\%logdata~=~(} & & \\
-   & \texttt{entry~=>\{} & \\
-   & & \texttt{http\_reply\_code => xxx} \\
-   & & \texttt{http\_method => xxx} \\
-   & & \texttt{duration\_miliseconds => xxx} \\
-   & & \texttt{content\_type\_MCT => xxx} \\
-   & & \texttt{content\_type => xxx} \\
-   & & \texttt{server\_or\_cache\_address => xxx} \\
-   & & \texttt{time => xxx} \\
-   & & \texttt{squid\_hierarchy => xxx} \\
-   & & \texttt{bytes => xxx} \\
-   & & \texttt{url => xxx} \\
-   & & \texttt{client\_address => xxx} \\
-   & \texttt{\},} & \\
-  \texttt{);} & & \\
-\end{tabular}
-\caption{Hash in Perl with an example entry. The actual hash used for
-  this work has a total of 100000 entries, with more than a half
-  labelled as \textit{ALLOW} or \textit{DENY} after the comparing
-  process. \label{fig:data_hash}}
-\end{figure}
 
 % ------------------------------------------------------------------
 %
