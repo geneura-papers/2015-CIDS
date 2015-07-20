@@ -614,25 +614,26 @@ D =\{Allow, Deny\}
 
 For feature selection, we apply the rough \emph{``QuickReduct"} algorithm which was previously explained in Section \ref{subsec:quickreduct} . First of all, the dependency of the entire database $\gamma_{C}(D)$ is calculated. To do so, the algorithm has to calculate the positive region for the whole attribute set $C$: $POS_{C}(D)$. Once the consistency of the database is measured, the feature selection process starts off with an empty set and moves to calculate the dependency of each attribute $c$ apart: $\gamma_{c}(D)$. The attribute $c$ having the greatest value of dependency is added to the empty set. Once the first attribute $c$ is selected, the algorithm adds, in turn, one attribute to the selected first attribute and computes the dependency of each obtained attributes couple $\gamma_{\{c, c_{i}\}}(D)$. The algorithm chooses the couple having the greatest dependency degree. The process of adding each time one attribute to the subset of the selected features continues until the dependency of the obtained subset equals the consistency of the entire database already calculated; i.e., $\gamma_{C}(D)$.
 
-From the initial dataset containing 12 features and after applying the rough feature selection technique, we obtained a list of 9 features. These selected features are displayed in Figure \ref{fig:data_9features}.
+From the initial dataset containing 12 features and after applying the rough feature selection technique, we obtained a list of 9 features. The features kept after the feature selection process are the following:
 
-\begin{figure}[htb]
-\centering
-\begin{tabular}{ p{6cm} }
-  \texttt{http\_reply\_code} \\
-  \texttt{\st{http\_method}} \\
-  \texttt{duration\_miliseconds} \\
-  \texttt{\st{content\_type\_MCT}} \\
-  \texttt{content\_type} \\
-  \texttt{server\_or\_cache\_address} \\
-  \texttt{time} \\
-  \texttt{\st{squid\_hierarchy}} \\
-  \texttt{bytes} \\
-  \texttt{url} \\
-  \texttt{client\_address} \\
-\end{tabular}
-\caption{Resulting list of features after applying Rough Set for feature selection.\label{fig:data_9features}}
-\end{figure}
+\begin{itemize}
+  \item http\_reply\_code
+  \item duration\_miliseconds
+  \item content\_type
+  \item server\_or\_cache\_address
+  \item time
+  \item bytes
+  \item url
+  \item client\_address
+\end{itemize}
+
+On the contrary, the following features were erased by applying Rough Set for feature selection:
+
+\begin{itemize}
+  \item http\_method
+  \item content\_type\_MCT
+  \item squid\_hierarchy
+\end{itemize}
 
 In Section \ref{subsec:RSTresults}, we will show that by applying rough set theory for selecting the most important features is a good way of maintaining the good quality of the database, and the system performance will improve significantly.
 
